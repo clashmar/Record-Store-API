@@ -17,8 +17,8 @@ namespace RecordStoreAPI.Controllers
         [HttpGet]
         public IActionResult GetAllAlbums()
         {
-            var result = _albumService.GetAllAlbums();
-            if (result.Boolean) return Ok(result.Value);
+            var result = _albumService.FindAllAlbums();
+            if (result != null && result.Count > 0) return Ok(result);
             return BadRequest("There are no albums.");
         }
     }

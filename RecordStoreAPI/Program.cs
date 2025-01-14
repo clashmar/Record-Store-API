@@ -6,21 +6,16 @@ using Microsoft.EntityFrameworkCore.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
-
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=sqlite.db"));
-
-//if (builder.Environment.IsDevelopment())
-//{
-//    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(
-//    builder.Configuration.GetConnectionString("Development")));
-//} 
-//else
-//{
-//    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-//    builder.Configuration.GetConnectionString("DefaultConnection")));
-//}
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(
+    builder.Configuration.GetConnectionString("Development")));
+}
+else
+{
+    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("DefaultConnection")));
+}
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -38,7 +33,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 
 app.UseHttpsRedirection();
 

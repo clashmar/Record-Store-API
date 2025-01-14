@@ -5,7 +5,7 @@ namespace RecordStoreAPI.Repositories
 {
     public interface IAlbumRepository
     {
-        IEnumerable<Album>? GetAllAlbums();
+        IEnumerable<Album> FindAllAlbums();
     }
     public class AlbumRepository : IAlbumRepository
     {
@@ -16,7 +16,7 @@ namespace RecordStoreAPI.Repositories
             _db = db;
         }
 
-        public IEnumerable<Album>? GetAllAlbums()
+        public IEnumerable<Album> FindAllAlbums()
         {
             return _db.Albums;
         }
