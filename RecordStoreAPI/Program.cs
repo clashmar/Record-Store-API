@@ -1,6 +1,16 @@
+using RecordStoreAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+string connectionStringKey;
+if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development") connectionStringKey = "Development";
+else connectionStringKey = "DefaultConnection";
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(
+    builder.Configuration.GetConnectionString(connectionStringKey)));
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,0 +1,14 @@
+﻿using Microsoft.EntityFrameworkCore;
+using RecordStoreAPI.Models;
+
+namespace RecordStoreAPI.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> option) : base(option) 
+        {
+        }
+
+        public DbSet<Album> Albums { get; set; }
+    }
+}
