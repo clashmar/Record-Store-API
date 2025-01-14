@@ -5,11 +5,11 @@ namespace RecordStoreAPI.Controllers
 {
     [ApiController]
     [Route("/[controller]")]
-    public class AlbumsController : ControllerBase
+    public class AlbumController : ControllerBase
     {
         private readonly IAlbumService _albumService;
 
-        public AlbumsController(IAlbumService albumService)
+        public AlbumController(IAlbumService albumService)
         {
             _albumService = albumService;
         }
@@ -18,8 +18,8 @@ namespace RecordStoreAPI.Controllers
         public IActionResult GetAllAlbums()
         {
             var result = _albumService.GetAllAlbums();
-            if(result.Boolean) return Ok(result.Value);
-            return BadRequest();
+            if (result.Boolean) return Ok(result.Value);
+            return BadRequest("There are no albums.");
         }
     }
 }

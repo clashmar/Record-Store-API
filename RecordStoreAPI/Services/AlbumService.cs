@@ -5,7 +5,7 @@ namespace RecordStoreAPI.Services
 {
     public interface IAlbumService
     {
-        (bool Boolean, IEnumerable<Album>? Value) GetAllAlbums();
+        (bool Boolean, List<Album>? Value) GetAllAlbums();
     }
     public class AlbumService : IAlbumService
     {
@@ -16,9 +16,9 @@ namespace RecordStoreAPI.Services
             _albumRepository = albumRepository;
         }
 
-        public (bool Boolean, IEnumerable<Album>? Value) GetAllAlbums()
+        public (bool Boolean, List<Album>? Value) GetAllAlbums()
         {
-            IEnumerable<Album>? alllAlbums = _albumRepository.GetAllAlbums();
+            List<Album>? alllAlbums = _albumRepository.GetAllAlbums()!.ToList();
             if(alllAlbums != null) return (true, alllAlbums);
             return (false, alllAlbums);
         }
