@@ -10,8 +10,8 @@ using RecordStoreAPI.Data;
 namespace RecordStoreAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250114124038_AddAlbumsTable")]
-    partial class AddAlbumsTable
+    [Migration("20250114162010_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,9 +29,6 @@ namespace RecordStoreAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Genre")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Information")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")

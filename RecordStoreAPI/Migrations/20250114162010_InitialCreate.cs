@@ -5,7 +5,7 @@
 namespace RecordStoreAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAlbumsTable : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,6 @@ namespace RecordStoreAPI.Migrations
                     Artist = table.Column<string>(type: "TEXT", nullable: true),
                     ReleaseYear = table.Column<int>(type: "INTEGER", nullable: false),
                     Genre = table.Column<string>(type: "TEXT", nullable: true),
-                    Information = table.Column<string>(type: "TEXT", nullable: true),
                     StockQuantity = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

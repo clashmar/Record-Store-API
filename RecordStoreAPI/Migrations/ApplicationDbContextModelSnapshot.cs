@@ -28,9 +28,6 @@ namespace RecordStoreAPI.Migrations
                     b.Property<string>("Genre")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Information")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
