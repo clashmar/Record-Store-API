@@ -1,0 +1,6 @@
+@RecordStoreAPI_HostAddress = http://localhost:5099
+
+GET {{RecordStoreAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

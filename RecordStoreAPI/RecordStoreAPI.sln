@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordStoreAPI", "RecordStoreAPI.csproj", "{F16AEF40-1F0C-43B7-B5CC-5600E89A874C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordStoreAPI.Tests", "..\..\RecordStoreAPI.Tests\RecordStoreAPI.Tests.csproj", "{270660F6-731C-4DC7-9012-A18C5C33F883}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F16AEF40-1F0C-43B7-B5CC-5600E89A874C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F16AEF40-1F0C-43B7-B5CC-5600E89A874C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F16AEF40-1F0C-43B7-B5CC-5600E89A874C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F16AEF40-1F0C-43B7-B5CC-5600E89A874C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{270660F6-731C-4DC7-9012-A18C5C33F883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{270660F6-731C-4DC7-9012-A18C5C33F883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{270660F6-731C-4DC7-9012-A18C5C33F883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{270660F6-731C-4DC7-9012-A18C5C33F883}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC69D255-ADA4-426C-BFA9-C9506E80E5E1}
+	EndGlobalSection
+EndGlobal
