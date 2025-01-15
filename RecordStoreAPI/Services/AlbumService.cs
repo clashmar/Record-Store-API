@@ -8,6 +8,7 @@ namespace RecordStoreAPI.Services
         List<AlbumDto> FindAllAlbums();
         AlbumDto? FindAlbumById(int id);
         AlbumDto? AddNewAlbum(Album album);
+        AlbumDto? UpdateAlbum(int id, Album album);
     }
     public class AlbumService : IAlbumService
     {
@@ -33,7 +34,13 @@ namespace RecordStoreAPI.Services
 
         public AlbumDto? AddNewAlbum(Album album)
         {
-            return _albumRepository.AddNewAlbum(album) ? ModelExtensions.ToAlbumDto(album) : null;
+            return _albumRepository.AddNewAlbum(album) != null ? ModelExtensions.ToAlbumDto(album) : null;
+        }
+
+        public AlbumDto? UpdateAlbum(int id, Album album)
+        {
+            Album? updatedAlbum = _albumRepository.UpdateAlbum(id, album);
+            return updatedAlbum != null ? ModelExtensions.ToAlbumDto(updatedAlbum!) : null;
         }
     }
 }

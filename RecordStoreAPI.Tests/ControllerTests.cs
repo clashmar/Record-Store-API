@@ -108,5 +108,55 @@ namespace RecordStoreAPI.Tests
                 Assert.Fail();
             }
         }
+
+        [Test]
+        public void PutAlbumById_Calls_Correct_Service_Method()
+        {
+            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+
+            _albumController.PutAlbumById(1, album);
+
+            _albumServiceMock.Verify(s => s.UpdateAlbum(1, album), Times.Once());
+        }
+
+        [Test]
+        public void PutAlbumById_Returns_Correct_AlbumDto()
+        {
+            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            AlbumDto? albumDto = new(1, "Name1", "Artist1", 2001, "Folk", 1);
+
+            _albumServiceMock.Setup(s => s.UpdateAlbum(1, album)).Returns(albumDto);
+
+            var result = _albumController.PutAlbumById(1, album);
+
+            if (result is OkObjectResult okObjectResult)
+            {
+                Assert.That(okObjectResult.Value, Is.EqualTo(albumDto));
+            }
+            else
+            {
+                Assert.Fail();
+            }
+        }
+
+        [Test]
+        public void PutAlbumById_Returns_Not_Found_If_Not_Updated()
+        {
+            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            AlbumDto? albumDto = null;
+
+            _albumServiceMock.Setup(s => s.UpdateAlbum(1, album)).Returns(albumDto);
+
+            var result = _albumController.PostNewAlbum(album);
+
+            if (result is ObjectResult objectResult)
+            {
+                Assert.That(objectResult.Value, Is.EqualTo("Could not process the request."));
+            }
+            else
+            {
+                Assert.Fail();
+            }
+        }
     }
 }

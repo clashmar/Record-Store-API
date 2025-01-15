@@ -81,12 +81,22 @@ namespace RecordStoreAPI.Tests
         }
 
         [Test]
+        public void AddNewAlbum_Calls_Correct_Repo_Method()
+        {
+            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+
+            _albumService.AddNewAlbum(album);
+
+            _albumRepositoryMock.Verify(s => s.AddNewAlbum(album), Times.Once());
+        }
+
+        [Test]
         public void AddNewAlbum_Returns_Correct_Album_Dto()
         {
             Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
             AlbumDto? albumDto = new(1, "Name1", "Artist1", 2001, "Folk", 1);
 
-            _albumRepositoryMock.Setup(s => s.AddNewAlbum(album)).Returns(true);
+            _albumRepositoryMock.Setup(s => s.AddNewAlbum(album)).Returns(album);
 
             var result = _albumService.AddNewAlbum(album);
 
@@ -97,11 +107,49 @@ namespace RecordStoreAPI.Tests
         public void AddNewAlbum_Returns_Null_If_Not_Added()
         {
             Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            Album? nullAlbum = null;
             AlbumDto? albumDto = null;
 
-            _albumRepositoryMock.Setup(s => s.AddNewAlbum(album)).Returns(false);
+            _albumRepositoryMock.Setup(s => s.AddNewAlbum(album)).Returns(nullAlbum);
 
             var result = _albumService.AddNewAlbum(album);
+
+            Assert.That(result, Is.EqualTo(albumDto));
+        }
+
+        [Test]
+        public void UpdateAlbum_Calls_Correct_Repo_Method()
+        {
+            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+
+            _albumService.UpdateAlbum(1, album);
+
+            _albumRepositoryMock.Verify(s => s.UpdateAlbum(1, album), Times.Once());
+        }
+
+        [Test]
+        public void UpdateAlbum_Returns_Correct_Album()
+        {
+            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            AlbumDto? albumDto = new(1, "Name1", "Artist1", 2001, "Folk", 1);
+
+            _albumRepositoryMock.Setup(s => s.UpdateAlbum(1, album)).Returns(album);
+
+            var result = _albumService.UpdateAlbum(1, album);
+
+            Assert.That(result, Is.EqualTo(albumDto));
+        }
+
+        [Test]
+        public void UpdateAlbum_Returns_Null_If_Not_Updated()
+        {
+            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            Album? nullAlbum = null;
+            AlbumDto? albumDto = null;
+
+            _albumRepositoryMock.Setup(s => s.UpdateAlbum(1, album)).Returns(nullAlbum);
+
+            var result = _albumService.UpdateAlbum(1,album);
 
             Assert.That(result, Is.EqualTo(albumDto));
         }

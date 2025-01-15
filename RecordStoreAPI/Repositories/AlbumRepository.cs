@@ -1,4 +1,6 @@
-﻿using RecordStoreAPI.Data;
+﻿using Azure;
+using Microsoft.AspNetCore.JsonPatch;
+using RecordStoreAPI.Data;
 using RecordStoreAPI.Models;
 
 namespace RecordStoreAPI.Repositories
@@ -7,7 +9,8 @@ namespace RecordStoreAPI.Repositories
     {
         IEnumerable<Album> FindAllAlbums();
         Album? FindAlbumById(int id);
-        bool AddNewAlbum(Album album);
+        Album? AddNewAlbum(Album album);
+        Album? UpdateAlbum(int id, Album album);
     }
     public class AlbumRepository : IAlbumRepository
     {
@@ -28,18 +31,30 @@ namespace RecordStoreAPI.Repositories
             return _db.Albums.FirstOrDefault(a => a.Id == id);
         }
 
-        public bool AddNewAlbum(Album album)
+        public Album? AddNewAlbum(Album album)
         {
             try
             {
                 _db.Albums.Add(album);
                 _db.SaveChanges();
-                return true;
+                return album;
             }
             catch
             {
-                return false;
+                return null;
             }
+        }
+
+        public Album? UpdateAlbum(int id, Album album)
+        {
+            var albumToUpdate = FindAlbumById(id);
+            if (albumToUpdate == null) return null;
+
+            ModelExtensions.MapAlbumProperties(albumToUpdate, album);
+
+            _db.Update(albumToUpdate);
+            _db.SaveChanges();
+            return albumToUpdate;
         }
     }
 }
