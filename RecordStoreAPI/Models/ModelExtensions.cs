@@ -14,7 +14,7 @@
                 );
         }
 
-        public static void MapAlbumProperties(Album target, Album source)
+        public static void MapAlbumProperties(Album target, AlbumPutDto source)
         {
             target.Name = source.Name;
             target.Artist = source.Artist;

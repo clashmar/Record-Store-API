@@ -10,7 +10,7 @@ namespace RecordStoreAPI.Repositories
         IEnumerable<Album> FindAllAlbums();
         Album? FindAlbumById(int id);
         Album? AddNewAlbum(Album album);
-        Album? UpdateAlbum(int id, Album album);
+        Album? UpdateAlbum(int id, AlbumPutDto album);
         bool TryRemoveAlbumById(int id);
     }
     public class AlbumRepository : IAlbumRepository
@@ -46,7 +46,7 @@ namespace RecordStoreAPI.Repositories
             }
         }
 
-        public Album? UpdateAlbum(int id, Album album)
+        public Album? UpdateAlbum(int id, AlbumPutDto album)
         {
             var albumToUpdate = FindAlbumById(id);
             if (albumToUpdate == null) return null;

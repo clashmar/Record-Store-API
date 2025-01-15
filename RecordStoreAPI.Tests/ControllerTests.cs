@@ -94,22 +94,22 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PutAlbumById_Calls_Correct_Service_Method()
         {
-            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            AlbumPutDto? albumPutDto = new("Name1", "Artist1", 2001, Genres.Folk, 1);
 
-            _albumController.PutAlbumById(1, album);
+            _albumController.PutAlbumById(1, albumPutDto);
 
-            _albumServiceMock.Verify(s => s.UpdateAlbum(1, album), Times.Once());
+            _albumServiceMock.Verify(s => s.UpdateAlbum(1, albumPutDto), Times.Once());
         }
 
         [Test]
         public void PutAlbumById_Returns_Correct_AlbumDto()
         {
-            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            AlbumPutDto? albumPutDto = new("Name1", "Artist1", 2001, Genres.Folk, 1);
             AlbumDto? albumDto = new(1, "Name1", "Artist1", 2001, "Folk", 1);
 
-            _albumServiceMock.Setup(s => s.UpdateAlbum(1, album)).Returns(albumDto);
+            _albumServiceMock.Setup(s => s.UpdateAlbum(1, albumPutDto)).Returns(albumDto);
 
-            var result = _albumController.PutAlbumById(1, album);
+            var result = _albumController.PutAlbumById(1, albumPutDto);
 
             if (result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(albumDto));
             else Assert.Fail();
@@ -118,12 +118,12 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PutAlbumById_Returns_Not_Found_If_Not_Updated()
         {
-            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            AlbumPutDto? albumPutDto = new("Name1", "Artist1", 2001, Genres.Folk, 1);
             AlbumDto? albumDto = null;
 
-            _albumServiceMock.Setup(s => s.UpdateAlbum(1, album)).Returns(albumDto);
+            _albumServiceMock.Setup(s => s.UpdateAlbum(1, albumPutDto)).Returns(albumDto);
 
-            var result = _albumController.PostNewAlbum(album);
+            var result = _albumController.PutAlbumById(1, albumPutDto);
 
             if (result is NotFoundObjectResult) Assert.Pass();
             else Assert.Fail();

@@ -120,22 +120,23 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void UpdateAlbum_Calls_Correct_Repo_Method()
         {
-            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            AlbumPutDto? albumPutDto = new("Name1", "Artist1", 2001, Genres.Folk, 1);
 
-            _albumService.UpdateAlbum(1, album);
+            _albumService.UpdateAlbum(1, albumPutDto);
 
-            _albumRepositoryMock.Verify(s => s.UpdateAlbum(1, album), Times.Once());
+            _albumRepositoryMock.Verify(s => s.UpdateAlbum(1, albumPutDto), Times.Once());
         }
 
         [Test]
         public void UpdateAlbum_Returns_Correct_Album()
         {
             Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            AlbumPutDto? albumPutDto = new("Name1", "Artist1", 2001, Genres.Folk, 1);
             AlbumDto? albumDto = new(1, "Name1", "Artist1", 2001, "Folk", 1);
 
-            _albumRepositoryMock.Setup(s => s.UpdateAlbum(1, album)).Returns(album);
+            _albumRepositoryMock.Setup(s => s.UpdateAlbum(1, albumPutDto)).Returns(album);
 
-            var result = _albumService.UpdateAlbum(1, album);
+            var result = _albumService.UpdateAlbum(1, albumPutDto);
 
             Assert.That(result, Is.EqualTo(albumDto));
         }
@@ -143,13 +144,13 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void UpdateAlbum_Returns_Null_If_Not_Updated()
         {
-            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            AlbumPutDto? albumPutDto = new("Name1", "Artist1", 2001, Genres.Folk, 1);
             Album? nullAlbum = null;
             AlbumDto? albumDto = null;
 
-            _albumRepositoryMock.Setup(s => s.UpdateAlbum(1, album)).Returns(nullAlbum);
+            _albumRepositoryMock.Setup(s => s.UpdateAlbum(1, albumPutDto)).Returns(nullAlbum);
 
-            var result = _albumService.UpdateAlbum(1,album);
+            var result = _albumService.UpdateAlbum(1, albumPutDto);
 
             Assert.That(result, Is.EqualTo(albumDto));
         }

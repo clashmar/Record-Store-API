@@ -31,5 +31,13 @@ namespace RecordStoreAPI.Models
         int StockQuantity
         );
 
+    public record AlbumPutDto(
+        string Name,
+        string Artist,
+        int ReleaseYear,
+        Genres Genre,
+        int StockQuantity
+        );
+
     
 }

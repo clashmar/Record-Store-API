@@ -40,7 +40,7 @@ namespace RecordStoreAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutAlbumById(int id, Album album)
+        public IActionResult PutAlbumById(int id, AlbumPutDto album)
         {
             if (album == null || !ModelState.IsValid) return BadRequest("Invalid input.");
             var result = _albumService.UpdateAlbum(id, album);
