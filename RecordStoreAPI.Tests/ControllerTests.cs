@@ -29,10 +29,10 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAllAlbums_Returns_All_Albums()
         {
-            List<Album> albums = new List<Album>
+            List<AlbumDto> albums = new List<AlbumDto>
             {
-                new Album() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = "Genre1", StockQuantity = 1 },
-                new Album() { Id = 2, Name = "Name2", Artist = "Artist2", ReleaseYear = 2002, Genre = "Genre2", StockQuantity = 2 }
+                new AlbumDto(1, "Name1", "Artist1", 2001, "Genre1", 1),
+                new AlbumDto(2, "Name2", "Artist2", 2002, "Genre2", 2)
             };
 
             _albumServiceMock.Setup(s => s.FindAllAlbums()).Returns(albums);
@@ -45,7 +45,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAllAlbums_Returns_Bad_Request_If_Empty()
         {
-            _albumServiceMock.Setup(s => s.FindAllAlbums()).Returns(new List<Album> { });
+            _albumServiceMock.Setup(s => s.FindAllAlbums()).Returns(new List<AlbumDto> { });
 
             var result = _albumController.GetAllAlbums();
 

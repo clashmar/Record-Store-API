@@ -5,7 +5,7 @@ namespace RecordStoreAPI.Services
 {
     public interface IAlbumService
     {
-        List<Album> FindAllAlbums();
+        List<AlbumDto> FindAllAlbums();
     }
     public class AlbumService : IAlbumService
     {
@@ -16,9 +16,11 @@ namespace RecordStoreAPI.Services
             _albumRepository = albumRepository;
         }
 
-        public List<Album> FindAllAlbums()
+        public List<AlbumDto> FindAllAlbums()
         {
-            return _albumRepository.FindAllAlbums().ToList();
+            return _albumRepository.FindAllAlbums()
+                .Select(a => ModelExtensions.ToAlbumDto(a))
+                .ToList();
         }
     }
 }

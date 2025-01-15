@@ -16,9 +16,20 @@ namespace RecordStoreAPI.Models
         [DisplayName("Release Year")]
         public int ReleaseYear { get; set; }
 
-        public string? Genre { get; set; }
+        public Genres Genre { get; set; }
 
         [DisplayName("Stock Quantity")]
         public int StockQuantity { get; set; }
     }
+
+    public record AlbumDto(
+        int Id,
+        string Name,
+        string Artist,
+        int ReleaseYear,
+        string Genre,
+        int StockQuantity
+        );
+
+    
 }
