@@ -6,6 +6,7 @@ namespace RecordStoreAPI.Repositories
     public interface IAlbumRepository
     {
         IEnumerable<Album> FindAllAlbums();
+        Album? FindAlbumById(int id);
     }
     public class AlbumRepository : IAlbumRepository
     {
@@ -19,6 +20,11 @@ namespace RecordStoreAPI.Repositories
         public IEnumerable<Album> FindAllAlbums()
         {
             return _db.Albums;
+        }
+
+        public Album? FindAlbumById(int id)
+        {
+            return _db.Albums.FirstOrDefault(a => a.Id == id);
         }
     }
 }

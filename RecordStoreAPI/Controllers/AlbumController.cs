@@ -14,14 +14,19 @@ namespace RecordStoreAPI.Controllers
             _albumService = albumService;
         }
 
-        
-
         [HttpGet]
         public IActionResult GetAllAlbums()
         {
             var result = _albumService.FindAllAlbums();
-            if (result != null && result.Count > 0) return Ok(result);
-            return BadRequest("There are no albums.");
+            return result.Count > 0 || result != null ? Ok(result) : NotFound("There are no albums.");
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult GetAlbumById(int id)
+        {
+            var result = _albumService.FindAlbumById(id);
+            return result != null ? Ok(result) : BadRequest("No album was found with that Id.");
         }
     }
 }

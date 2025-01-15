@@ -49,9 +49,9 @@ namespace RecordStoreAPI.Tests
 
             var result = _albumController.GetAllAlbums();
 
-            if(result is BadRequestObjectResult badRequestObjectResult)
+            if(result is NotFoundObjectResult notFoundObjectResult)
             {
-                Assert.That(badRequestObjectResult.Value, Is.EqualTo("There are no albums."));
+                Assert.That(notFoundObjectResult.Value, Is.EqualTo("There are no albums."));
             }
             else
             {
