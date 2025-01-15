@@ -6,16 +6,16 @@ using RecordStoreAPI.Services;
 
 namespace RecordStoreAPI.Tests
 {
-    public class ControllerTests
+    public class AlbumsControllerTests
     {
         private Mock<IAlbumService> _albumServiceMock;
-        private AlbumController _albumController;
+        private AlbumsController _albumController;
 
         [SetUp]
         public void Setup()
         {
             _albumServiceMock = new Mock<IAlbumService>();
-            _albumController = new AlbumController(_albumServiceMock.Object);
+            _albumController = new AlbumsController(_albumServiceMock.Object);
         }
 
         [Test]

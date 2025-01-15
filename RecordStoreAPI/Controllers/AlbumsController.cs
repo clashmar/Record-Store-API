@@ -8,11 +8,11 @@ namespace RecordStoreAPI.Controllers
 {
     [ApiController]
     [Route("/[controller]")]
-    public class AlbumController : ControllerBase
+    public class AlbumsController : ControllerBase
     {
         private readonly IAlbumService _albumService;
 
-        public AlbumController(IAlbumService albumService)
+        public AlbumsController(IAlbumService albumService)
         {
             _albumService = albumService;
         }

@@ -5,7 +5,7 @@ using RecordStoreAPI.Services;
 
 namespace RecordStoreAPI.Tests
 {
-    public class ServiceTests
+    public class AlbumsServiceTests
     {
         private Mock<IAlbumRepository> _albumRepositoryMock;
         private AlbumService _albumService;
