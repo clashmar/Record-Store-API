@@ -20,5 +20,12 @@ namespace RecordStoreAPI.Services
         {
             return _artistRepository.FindAllArtists().ToList();
         }
+        //public List<AlbumDto>? FindAlbumsByArtistId(int id)
+        //{
+        //    return _artistRepository.FindAlbumsByArtistId()
+        //        .Select(a => ModelExtensions.ToAlbumDto(a))
+        //        .ToList();
+        //}
+
     }
 }

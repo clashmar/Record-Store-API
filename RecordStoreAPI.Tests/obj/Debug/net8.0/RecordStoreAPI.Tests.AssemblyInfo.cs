@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RecordStoreAPI.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+88c80ddd6ad2dd352d32149f2a825d54522c54cb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67c80cb37afb3f817cf8c015a366a06d3759640d")]
 [assembly: System.Reflection.AssemblyProductAttribute("RecordStoreAPI.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RecordStoreAPI.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

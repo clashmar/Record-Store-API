@@ -1,5 +1,6 @@
 ﻿using Azure;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.EntityFrameworkCore;
 using RecordStoreAPI.Data;
 using RecordStoreAPI.Models;
 
@@ -7,10 +8,10 @@ namespace RecordStoreAPI.Repositories
 {
     public interface IAlbumRepository
     {
-        IEnumerable<Album> FindAllAlbums();
-        Album? FindAlbumById(int id);
-        Album? AddNewAlbum(Album album);
-        Album? UpdateAlbum(int id, AlbumPutDto album);
+        List<AlbumReturnDto> FindAllAlbums();
+        AlbumReturnDto? FindAlbumById(int id);
+        AlbumReturnDto? AddNewAlbum(AlbumPutDto albumDto);
+        AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album);
         bool TryRemoveAlbumById(int id);
     }
     public class AlbumRepository : IAlbumRepository
@@ -21,47 +22,49 @@ namespace RecordStoreAPI.Repositories
         {
             _db = db;
         }
-
-        public IEnumerable<Album> FindAllAlbums()
+        public List<AlbumReturnDto> FindAllAlbums()
         {
-            return _db.Albums;
-        }
 
-        public Album? FindAlbumById(int id)
+            return _db.Albums
+                .Select(album =>
+                    ModelExtensions.AlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!)  
+                ).ToList();
+        }
+        public AlbumReturnDto? FindAlbumById(int id)
         {
-            return _db.Albums.FirstOrDefault(a => a.Id == id);
+            Album? album = _db.Albums.FirstOrDefault(a => a.Id == id);
+            if(album == null) return null;
+            return ModelExtensions.AlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!);
         }
-
-        public Album? AddNewAlbum(Album album)
+        public AlbumReturnDto? AddNewAlbum(AlbumPutDto albumDto)
         {
             try
             {
+                Album album = ModelExtensions.PutDtoToAlbum(albumDto);
                 _db.Albums.Add(album);
                 _db.SaveChanges();
-                return album;
+                return ModelExtensions.AlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!);
             }
             catch
             {
                 return null;
             }
         }
-
-        public Album? UpdateAlbum(int id, AlbumPutDto album)
+        public AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto albumPutDto)
         {
-            var albumToUpdate = FindAlbumById(id);
+            var albumToUpdate = _db.Albums.FirstOrDefault(a => a.Id == id);
             if (albumToUpdate == null) return null;
 
-            ModelExtensions.MapAlbumProperties(albumToUpdate, album);
+            ModelExtensions.MapAlbumProperties(albumToUpdate, albumPutDto);
 
             _db.Update(albumToUpdate);
             _db.SaveChanges();
-            return albumToUpdate;
+            return ModelExtensions.AlbumReturnDto(albumToUpdate, _db.Artists.Where(x => x.ArtistID == albumToUpdate.ArtistID).FirstOrDefault()!.Name!);
         }
-
         public bool TryRemoveAlbumById(int id)
         {
-            Album? album = FindAlbumById(id);
-            if(album == null) return false;
+            Album? album = _db.Albums.FirstOrDefault(a => a.Id == id);
+            if (album == null) return false;
             _db.Remove(album);
             _db.SaveChanges();
             return true;

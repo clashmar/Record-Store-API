@@ -1,6 +1,4 @@
-﻿using Azure;
-using Microsoft.AspNetCore.JsonPatch;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RecordStoreAPI.Models;
 using RecordStoreAPI.Services;
 
@@ -28,11 +26,11 @@ namespace RecordStoreAPI.Controllers
         public IActionResult GetAlbumById(int id)
         {
             var result = _albumService.FindAlbumById(id);
-            return result != null ? Ok(result) : BadRequest("No album was found with that Id.");
+            return result != null ? Ok(result) : BadRequest("No albums were found with that Id.");
         }
 
         [HttpPost]
-        public IActionResult PostNewAlbum(Album album)
+        public IActionResult PostNewAlbum(AlbumPutDto album)
         {
             if (album == null || !ModelState.IsValid) return BadRequest("Invalid input.");
             var result = _albumService.AddNewAlbum(album);

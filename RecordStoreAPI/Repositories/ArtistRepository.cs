@@ -20,5 +20,9 @@ namespace RecordStoreAPI.Repositories
         {
             return _db.Artists;
         }
+        //public List<Album>? FindAlbumsByArtistId(int id)
+        //{
+        //    return _db.Albums.Find(a => a.Id == id);
+        //}
     }
 }

@@ -16,7 +16,7 @@ namespace RecordStoreAPI.Models
     public class Genre
     {
         [Key]
-        public Genres Id { get; set; }
+        public Genres GenreID { get; set; }
 
         [Required]
         public string? Name { get; set; }
