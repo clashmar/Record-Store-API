@@ -2,8 +2,10 @@
 {
     public enum Genres
     {
-        Industrial_Hip_Hop,
         Folk,
-        Experimental
+        Hip_Hop,
+        Indie,
+        Experimental,
+        Rap
     }
 }

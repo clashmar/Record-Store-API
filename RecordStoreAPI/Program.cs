@@ -2,7 +2,6 @@ using RecordStoreAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using RecordStoreAPI.Repositories;
 using RecordStoreAPI.Services;
-using Microsoft.EntityFrameworkCore.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 
