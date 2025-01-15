@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RecordStoreAPI.Services;
+using RecordStoreAPI.Data;
 
 namespace RecordStoreAPI.Controllers
 {
@@ -7,11 +7,11 @@ namespace RecordStoreAPI.Controllers
     [Route("/[controller]")]
     public class HealthController : ControllerBase
     {
-        private readonly IAlbumService _albumService;
+        private readonly ApplicationDbContext _db;
 
-        public HealthController(IAlbumService albumService)
+        public HealthController(ApplicationDbContext db)
         {
-            _albumService = albumService;
+            _db = db;
         }
 
         [HttpGet]
@@ -23,8 +23,9 @@ namespace RecordStoreAPI.Controllers
         [HttpGet("Database")]
         public IActionResult DatabaseCheck()
         {
-            if (_albumService.FindAllAlbums() == null) return NotFound("Database is Not Responding");
-            return Ok("Controller is Healthy.");
+            return _db.Albums.FirstOrDefault() != null 
+                ? Ok("Database is Healthy.") 
+                : NotFound("Database is not Healthy.");
         }
     }
 }

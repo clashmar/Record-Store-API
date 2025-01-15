@@ -19,6 +19,11 @@ namespace RecordStoreAPI.Tests
         }
 
         [Test]
+
+
+
+
+        [Test]
         public void GetAllAlbums_Calls_Correct_Service_Method()
         {
             _albumController.GetAllAlbums();
@@ -51,7 +56,7 @@ namespace RecordStoreAPI.Tests
 
             if(result is NotFoundObjectResult notFoundObjectResult)
             {
-                Assert.That(notFoundObjectResult.Value, Is.EqualTo("There are no albums."));
+                Assert.That(notFoundObjectResult.Value, Is.EqualTo("Cannot find albums."));
             }
             else
             {
