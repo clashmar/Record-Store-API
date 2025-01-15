@@ -11,6 +11,7 @@ namespace RecordStoreAPI.Repositories
         Album? FindAlbumById(int id);
         Album? AddNewAlbum(Album album);
         Album? UpdateAlbum(int id, Album album);
+        bool TryRemoveAlbumById(int id);
     }
     public class AlbumRepository : IAlbumRepository
     {
@@ -55,6 +56,15 @@ namespace RecordStoreAPI.Repositories
             _db.Update(albumToUpdate);
             _db.SaveChanges();
             return albumToUpdate;
+        }
+
+        public bool TryRemoveAlbumById(int id)
+        {
+            Album? album = FindAlbumById(id);
+            if(album == null) return false;
+            _db.Remove(album);
+            _db.SaveChanges();
+            return true;
         }
     }
 }

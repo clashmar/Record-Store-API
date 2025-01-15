@@ -46,5 +46,11 @@ namespace RecordStoreAPI.Controllers
             var result = _albumService.UpdateAlbum(id, album);
             return result != null ? Ok(result) : NotFound("Could not process the request.");
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteAlbumById(int id)
+        {
+            return _albumService.TryRemoveAlbumById(id) ? Ok("Album was removed.") : BadRequest("No album was found with that Id.");
+        }
     }
 }
