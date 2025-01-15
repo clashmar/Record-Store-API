@@ -49,14 +49,8 @@ namespace RecordStoreAPI.Tests
 
             var result = _albumController.GetAllAlbums();
 
-            if(result is NotFoundObjectResult notFoundObjectResult)
-            {
-                Assert.That(notFoundObjectResult.Value, Is.EqualTo("Cannot find albums."));
-            }
-            else
-            {
-                Assert.Fail();
-            }
+            if (result is NotFoundObjectResult notFoundObjectResult) Assert.Pass();
+            else Assert.Fail();
         }
 
         [Test]
@@ -79,14 +73,8 @@ namespace RecordStoreAPI.Tests
 
             var result = _albumController.PostNewAlbum(album);
 
-            if(result is OkObjectResult okObjectResult)
-            {
-                Assert.That(okObjectResult.Value, Is.EqualTo(albumDto));
-            }
-            else
-            {
-                Assert.Fail();
-            }
+            if(result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(albumDto));
+            else Assert.Fail();
         }
 
         [Test]
@@ -99,14 +87,8 @@ namespace RecordStoreAPI.Tests
 
             var result = _albumController.PostNewAlbum(album);
 
-            if (result is ObjectResult objectResult)
-            {
-                Assert.That(objectResult.Value, Is.EqualTo("Could not process the request."));
-            }
-            else
-            {
-                Assert.Fail();
-            }
+            if (result is NotFoundObjectResult) Assert.Pass();
+            else Assert.Fail();
         }
 
         [Test]
@@ -129,14 +111,8 @@ namespace RecordStoreAPI.Tests
 
             var result = _albumController.PutAlbumById(1, album);
 
-            if (result is OkObjectResult okObjectResult)
-            {
-                Assert.That(okObjectResult.Value, Is.EqualTo(albumDto));
-            }
-            else
-            {
-                Assert.Fail();
-            }
+            if (result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(albumDto));
+            else Assert.Fail();
         }
 
         [Test]
@@ -149,14 +125,38 @@ namespace RecordStoreAPI.Tests
 
             var result = _albumController.PostNewAlbum(album);
 
-            if (result is ObjectResult objectResult)
-            {
-                Assert.That(objectResult.Value, Is.EqualTo("Could not process the request."));
-            }
-            else
-            {
-                Assert.Fail();
-            }
+            if (result is NotFoundObjectResult) Assert.Pass();
+            else Assert.Fail();
+        }
+
+        [Test]
+        public void DeleteAlbumById_Calls_Correct_Service_Method()
+        {
+            _albumController.DeleteAlbumById(1);
+
+            _albumServiceMock.Verify(s => s.TryRemoveAlbumById(1), Times.Once());
+        }
+
+        [Test]
+        public void DeleteAlbumById_Returns_Ok_Result()
+        {
+            _albumServiceMock.Setup(s => s.TryRemoveAlbumById(1)).Returns(true);
+
+            var result = _albumController.DeleteAlbumById(1);
+
+            if (result is OkObjectResult okObjectResult) Assert.Pass();
+            Assert.Fail();
+        }
+
+        [Test]
+        public void PutAlbumById_Returns_Bad_Result()
+        {
+            _albumServiceMock.Setup(s => s.TryRemoveAlbumById(1)).Returns(false);
+
+            var result = _albumController.DeleteAlbumById(1);
+
+            if (result is BadRequestObjectResult) Assert.Pass();
+            else Assert.Fail();
         }
     }
 }

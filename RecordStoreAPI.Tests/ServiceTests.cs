@@ -153,5 +153,33 @@ namespace RecordStoreAPI.Tests
 
             Assert.That(result, Is.EqualTo(albumDto));
         }
+
+        [Test]
+        public void TryRemoveAlbumById_Calls_Correct_Repo_Method()
+        {
+            _albumService.TryRemoveAlbumById(1);
+
+            _albumRepositoryMock.Verify(s => s.TryRemoveAlbumById(1), Times.Once());
+        }
+
+        [Test]
+        public void TryRemoveAlbumById_Returns_True()
+        {
+            _albumRepositoryMock.Setup(s => s.TryRemoveAlbumById(1)).Returns(true);
+
+            var result = _albumService.TryRemoveAlbumById(1);
+
+            Assert.That(result, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void TryRemoveAlbumById_Returns_False()
+        {
+            _albumRepositoryMock.Setup(s => s.TryRemoveAlbumById(1)).Returns(false);
+
+            var result = _albumService.TryRemoveAlbumById(1);
+
+            Assert.That(result, Is.EqualTo(false));
+        }
     }
 }
