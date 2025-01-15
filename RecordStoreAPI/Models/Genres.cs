@@ -1,4 +1,7 @@
-﻿namespace RecordStoreAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+
+namespace RecordStoreAPI.Models
 {
     public enum Genres
     {
@@ -7,5 +10,14 @@
         Indie,
         Experimental,
         Rap
+    }
+
+    public class Genre
+    {
+        [Key]
+        public Genres Id { get; set; }
+
+        [Required]
+        public string? Name { get; set; }
     }
 }
