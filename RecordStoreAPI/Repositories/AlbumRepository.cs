@@ -7,6 +7,7 @@ namespace RecordStoreAPI.Repositories
     {
         IEnumerable<Album> FindAllAlbums();
         Album? FindAlbumById(int id);
+        bool AddNewAlbum(Album album);
     }
     public class AlbumRepository : IAlbumRepository
     {
@@ -25,6 +26,20 @@ namespace RecordStoreAPI.Repositories
         public Album? FindAlbumById(int id)
         {
             return _db.Albums.FirstOrDefault(a => a.Id == id);
+        }
+
+        public bool AddNewAlbum(Album album)
+        {
+            try
+            {
+                _db.Albums.Add(album);
+                _db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RecordStoreAPI.Models;
 using RecordStoreAPI.Services;
 
 namespace RecordStoreAPI.Controllers
@@ -27,6 +28,14 @@ namespace RecordStoreAPI.Controllers
         {
             var result = _albumService.FindAlbumById(id);
             return result != null ? Ok(result) : BadRequest("No album was found with that Id.");
+        }
+
+        [HttpPost]
+        public IActionResult PostNewAlbum(Album album)
+        {
+            if (album == null || !ModelState.IsValid) return BadRequest("Invalid input.");
+            var result = _albumService.AddNewAlbum(album);
+            return result != null ? Ok(result) : NotFound("Could not process the request.");
         }
     }
 }
