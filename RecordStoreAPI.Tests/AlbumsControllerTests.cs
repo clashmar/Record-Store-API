@@ -37,19 +37,54 @@ namespace RecordStoreAPI.Tests
 
             _albumServiceMock.Setup(s => s.FindAllAlbums()).Returns(albums);
 
-            var result = _albumController.GetAllAlbums() as ObjectResult;
+            var result = _albumController.GetAllAlbums();
 
-            Assert.That(result!.Value, Is.EquivalentTo(albums));
+            if (result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(albums));
+            else Assert.Fail();
         }
 
         [Test]
         public void GetAllAlbums_Returns_Bad_Request_If_Empty()
         {
-            _albumServiceMock.Setup(s => s.FindAllAlbums()).Returns(new List<AlbumReturnDto> { });
+            _albumServiceMock.Setup(s => s.FindAllAlbums()).Returns([]);
 
             var result = _albumController.GetAllAlbums();
 
             if (result is NotFoundObjectResult notFoundObjectResult) Assert.Pass();
+            else Assert.Fail();
+        }
+
+        [Test]
+        public void GetAlbumById_Calls_Correct_Service_Method()
+        {
+            _albumController.GetAlbumById(1);
+
+            _albumServiceMock.Verify(s => s.FindAlbumById(1), Times.Once());
+        }
+
+        [Test]
+        public void GetAlbumById_Returns_Correct_AlbumDto()
+        {
+            AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1);
+
+            _albumServiceMock.Setup(s => s.FindAlbumById(1)).Returns(returnDto);
+
+            var result = _albumController.GetAlbumById(1);
+
+            if (result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(returnDto));
+            else Assert.Fail();
+        }
+
+        [Test]
+        public void GetAlbumById_Returns_Not_Found_If_Not_Added()
+        {
+            AlbumReturnDto? returnDto = null;
+
+            _albumServiceMock.Setup(s => s.FindAlbumById(1)).Returns(returnDto);
+
+            var result = _albumController.GetAlbumById(1);
+
+            if (result is BadRequestObjectResult) Assert.Pass();
             else Assert.Fail();
         }
 
@@ -64,7 +99,7 @@ namespace RecordStoreAPI.Tests
         }
 
         [Test]
-        public void PostNewAlbum_Returns_New_AlbumDto()
+        public void PostNewAlbum_Returns_Correct_AlbumDto()
         {
             AlbumPutDto putDto = new("Album1", 1, 2001, Genres.Folk, "Information", 1);
             AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, "Folk", "Information", 1);

@@ -21,7 +21,6 @@ namespace RecordStoreAPI.Repositories
         }
         public List<AlbumReturnDto> FindAllAlbums()
         {
-
             return _db.Albums
                 .Select(album =>
                     ModelExtensions.ToAlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!)  
