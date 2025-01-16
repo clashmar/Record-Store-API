@@ -29,10 +29,10 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAllAlbums_Returns_All_Albums()
         {
-            List<AlbumDto> albums = new List<AlbumDto>
+            List<AlbumReturnDto> albums = new List<AlbumReturnDto>
             {
-                new(1, "Name1", "Artist1", 2001, "Genre1", 1),
-                new(2, "Name2", "Artist2", 2002, "Genre2", 2)
+                new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
+                new(2, "Name2", "Artist2", 2002, "Genre2", "Information", 2)
             };
 
             _albumServiceMock.Setup(s => s.FindAllAlbums()).Returns(albums);
@@ -45,7 +45,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAllAlbums_Returns_Bad_Request_If_Empty()
         {
-            _albumServiceMock.Setup(s => s.FindAllAlbums()).Returns(new List<AlbumDto> { });
+            _albumServiceMock.Setup(s => s.FindAllAlbums()).Returns(new List<AlbumReturnDto> { });
 
             var result = _albumController.GetAllAlbums();
 
@@ -56,7 +56,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PostNewAlbum_Calls_Correct_Service_Method()
         {
-            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
+            AlbumPutDto album = new("Album1", 1, 2001, Genres.Folk, "Informtion", 1);
 
             _albumController.PostNewAlbum(album);
 
@@ -66,26 +66,26 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PostNewAlbum_Returns_New_AlbumDto()
         {
-            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
-            AlbumDto? albumDto = new(1, "Name1", "Artist1", 2001, "Folk", 1);
+            AlbumPutDto putDto = new("Album1", 1, 2001, Genres.Folk, "Information", 1);
+            AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, "Folk", "Information", 1);
 
-            _albumServiceMock.Setup(s => s.AddNewAlbum(album)).Returns(albumDto);
+            _albumServiceMock.Setup(s => s.AddNewAlbum(putDto)).Returns(returnDto);
 
-            var result = _albumController.PostNewAlbum(album);
+            var result = _albumController.PostNewAlbum(putDto);
 
-            if(result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(albumDto));
+            if(result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(returnDto));
             else Assert.Fail();
         }
 
         [Test]
         public void PostNewAlbum_Returns_Not_Found_If_Not_Added()
         {
-            Album album = new() { Id = 1, Name = "Name1", Artist = "Artist1", ReleaseYear = 2001, Genre = Genres.Folk, StockQuantity = 1 };
-            AlbumDto? albumDto = null;
+            AlbumPutDto putDto = new("Album1", 1, 2001, Genres.Folk, "Information", 1);
+            AlbumReturnDto? returnDto = null;
 
-            _albumServiceMock.Setup(s => s.AddNewAlbum(album)).Returns(albumDto);
+            _albumServiceMock.Setup(s => s.AddNewAlbum(putDto)).Returns(returnDto);
 
-            var result = _albumController.PostNewAlbum(album);
+            var result = _albumController.PostNewAlbum(putDto);
 
             if (result is NotFoundObjectResult) Assert.Pass();
             else Assert.Fail();
@@ -94,36 +94,36 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PutAlbumById_Calls_Correct_Service_Method()
         {
-            AlbumPutDto? albumPutDto = new("Name1", "Artist1", 2001, Genres.Folk, 1);
+            AlbumPutDto putDto = new("Album1", 1, 2001, Genres.Folk, "Informtion", 1);
 
-            _albumController.PutAlbumById(1, albumPutDto);
+            _albumController.PutAlbumById(1, putDto);
 
-            _albumServiceMock.Verify(s => s.UpdateAlbum(1, albumPutDto), Times.Once());
+            _albumServiceMock.Verify(s => s.UpdateAlbum(1, putDto), Times.Once());
         }
 
         [Test]
         public void PutAlbumById_Returns_Correct_AlbumDto()
         {
-            AlbumPutDto? albumPutDto = new("Name1", "Artist1", 2001, Genres.Folk, 1);
-            AlbumDto? albumDto = new(1, "Name1", "Artist1", 2001, "Folk", 1);
+            AlbumPutDto putDto = new("Album1", 1, 2001, Genres.Folk, "Informtion", 1);
+            AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, "Folk", "Information", 1);
 
-            _albumServiceMock.Setup(s => s.UpdateAlbum(1, albumPutDto)).Returns(albumDto);
+            _albumServiceMock.Setup(s => s.UpdateAlbum(1, putDto)).Returns(returnDto);
 
-            var result = _albumController.PutAlbumById(1, albumPutDto);
+            var result = _albumController.PutAlbumById(1, putDto);
 
-            if (result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(albumDto));
+            if (result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(returnDto));
             else Assert.Fail();
         }
 
         [Test]
         public void PutAlbumById_Returns_Not_Found_If_Not_Updated()
         {
-            AlbumPutDto? albumPutDto = new("Name1", "Artist1", 2001, Genres.Folk, 1);
-            AlbumDto? albumDto = null;
+            AlbumPutDto putDto = new("Album1", 1, 2001, Genres.Folk, "Informtion", 1);
+            AlbumReturnDto? returnDto = null;
 
-            _albumServiceMock.Setup(s => s.UpdateAlbum(1, albumPutDto)).Returns(albumDto);
+            _albumServiceMock.Setup(s => s.UpdateAlbum(1, putDto)).Returns(returnDto);
 
-            var result = _albumController.PutAlbumById(1, albumPutDto);
+            var result = _albumController.PutAlbumById(1, putDto);
 
             if (result is NotFoundObjectResult) Assert.Pass();
             else Assert.Fail();
