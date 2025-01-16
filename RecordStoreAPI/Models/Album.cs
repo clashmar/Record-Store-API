@@ -24,16 +24,6 @@ namespace RecordStoreAPI.Models
         public int StockQuantity { get; set; }
     }
 
-    public record AlbumDto(
-        int Id,
-        string Name,
-        int ArtistID,
-        int ReleaseYear,
-        string Genre,
-        string Information,
-        int StockQuantity
-        );
-
     public record AlbumReturnDto(
         int Id,
         string Name,

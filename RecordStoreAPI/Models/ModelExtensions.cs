@@ -15,18 +15,6 @@
                         );
         }
 
-        public static AlbumDto ToAlbumDto(Album album)
-        {
-            return new AlbumDto(
-                album.Id,
-                album.Name!,
-                album.ArtistID!,
-                album.ReleaseYear,
-                album.GenreID.ToString().Replace('_', '-'),
-                album.Information,
-                album.StockQuantity
-                );
-        }
         public static Album PutDtoToAlbum(AlbumPutDto albumPutDto)
         {
             return new Album()
