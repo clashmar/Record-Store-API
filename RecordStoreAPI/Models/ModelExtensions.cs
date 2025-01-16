@@ -1,11 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RecordStoreAPI.Data;
-
-namespace RecordStoreAPI.Models
+﻿namespace RecordStoreAPI.Models
 {
     public class ModelExtensions
     {
-        public static AlbumReturnDto AlbumReturnDto(Album album, string artistName)
+        public static AlbumReturnDto ToAlbumReturnDto(Album album, string artistName)
         {
             return new AlbumReturnDto(
                         album.Id,
@@ -17,6 +14,7 @@ namespace RecordStoreAPI.Models
                         album.StockQuantity
                         );
         }
+
         public static AlbumDto ToAlbumDto(Album album)
         {
             return new AlbumDto(
