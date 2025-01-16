@@ -1,7 +1,7 @@
 # Record Store API
 This is an ASP.NET web API built using the MVC design pattern. The application contains an embedded SQLite database.
 
-##
+## Features
 The user can perform all CRUD operations on the database, to view and 'purchase' records from the store. Endpoints can be accessed based on criterion such as genre, artist and release year.
 
 ## Instructions
