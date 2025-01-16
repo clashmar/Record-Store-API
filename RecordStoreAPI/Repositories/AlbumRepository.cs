@@ -57,12 +57,15 @@ namespace RecordStoreAPI.Repositories
             Artist? artist = CheckArtistExists(albumPutDto.ArtistID);
             if (artist == null) return null;
 
+            if(!CheckGenreExists(albumPutDto.GenreID)) return null;
+
             ModelExtensions.MapAlbumProperties(albumToUpdate, albumPutDto);
 
             _db.Update(albumToUpdate);
             _db.SaveChanges();
             return ModelExtensions.ToAlbumReturnDto(albumToUpdate, artist.Name!);
         }
+
         public bool TryRemoveAlbumById(int id)
         {
             Album? album = _db.Albums.FirstOrDefault(a => a.Id == id);
@@ -76,6 +79,11 @@ namespace RecordStoreAPI.Repositories
         {
             Artist? artist = _db.Artists.Where(a => a.ArtistID == artistID).FirstOrDefault();
             return artist ?? null;
+        }
+
+        public bool CheckGenreExists(Genres genreID)
+        {
+            return _db.Genres.FirstOrDefault(g => g.GenreID == genreID) != null;
         }
     }
 }
