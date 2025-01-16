@@ -5,11 +5,11 @@ namespace RecordStoreAPI.Controllers
 {
     [ApiController]
     [Route("/[controller]")]
-    public class GenreController : ControllerBase
+    public class GenresController : ControllerBase
     {
         private readonly IGenreService _genreService;
 
-        public GenreController(IGenreService genreService)
+        public GenresController(IGenreService genreService)
         {
             _genreService = genreService;
         }
@@ -19,7 +19,7 @@ namespace RecordStoreAPI.Controllers
         {
             var result = _genreService.FindAllGenres();
             if (result != null && result.Count > 0) return Ok(result);
-            return BadRequest("There are no genres.");
+            return BadRequest("There are currenty no genres.");
         }
     }
 }

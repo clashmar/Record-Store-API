@@ -5,10 +5,10 @@ namespace RecordStoreAPI.Services
 {
     public interface IAlbumService
     {
-        List<AlbumDto> FindAllAlbums();
-        AlbumDto? FindAlbumById(int id);
-        AlbumDto? AddNewAlbum(Album album);
-        AlbumDto? UpdateAlbum(int id, AlbumPutDto album);
+        List<AlbumReturnDto> FindAllAlbums();
+        AlbumReturnDto? FindAlbumById(int id);
+        AlbumReturnDto? AddNewAlbum(AlbumPutDto album);
+        AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album);
         bool TryRemoveAlbumById(int id);
     }
     public class AlbumService : IAlbumService
@@ -20,28 +20,27 @@ namespace RecordStoreAPI.Services
             _albumRepository = albumRepository;
         }
 
-        public List<AlbumDto> FindAllAlbums()
+        public List<AlbumReturnDto> FindAllAlbums()
         {
-            return _albumRepository.FindAllAlbums()
-                .Select(a => ModelExtensions.ToAlbumDto(a))
-                .ToList();
+            return _albumRepository.FindAllAlbums();
         }
 
-        public AlbumDto? FindAlbumById(int id)
+        public AlbumReturnDto? FindAlbumById(int id)
         {
-            Album? album = _albumRepository.FindAlbumById(id);
-            return album != null ? ModelExtensions.ToAlbumDto(album) : null;
+            AlbumReturnDto? album = _albumRepository.FindAlbumById(id);
+            return album ?? null;
         }
 
-        public AlbumDto? AddNewAlbum(Album album)
+        public AlbumReturnDto? AddNewAlbum(AlbumPutDto newAlbum)
         {
-            return _albumRepository.AddNewAlbum(album) != null ? ModelExtensions.ToAlbumDto(album) : null;
+            AlbumReturnDto? album = _albumRepository.AddNewAlbum(newAlbum);
+            return album ?? null;
         }
 
-        public AlbumDto? UpdateAlbum(int id, AlbumPutDto album)
+        public AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album)
         {
-            Album? updatedAlbum = _albumRepository.UpdateAlbum(id, album);
-            return updatedAlbum != null ? ModelExtensions.ToAlbumDto(updatedAlbum!) : null;
+            AlbumReturnDto? updatedAlbum = _albumRepository.UpdateAlbum(id, album);
+            return updatedAlbum ?? null;
         }
 
         public bool TryRemoveAlbumById(int id)
