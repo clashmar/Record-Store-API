@@ -1,7 +1,4 @@
-﻿using Azure;
-using Microsoft.AspNetCore.JsonPatch;
-using Microsoft.EntityFrameworkCore;
-using RecordStoreAPI.Data;
+﻿using RecordStoreAPI.Data;
 using RecordStoreAPI.Models;
 
 namespace RecordStoreAPI.Repositories
@@ -27,14 +24,14 @@ namespace RecordStoreAPI.Repositories
 
             return _db.Albums
                 .Select(album =>
-                    ModelExtensions.AlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!)  
+                    ModelExtensions.ToAlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!)  
                 ).ToList();
         }
         public AlbumReturnDto? FindAlbumById(int id)
         {
             Album? album = _db.Albums.FirstOrDefault(a => a.Id == id);
             if(album == null) return null;
-            return ModelExtensions.AlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!);
+            return ModelExtensions.ToAlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!);
         }
         public AlbumReturnDto? AddNewAlbum(AlbumPutDto albumDto)
         {
@@ -43,7 +40,7 @@ namespace RecordStoreAPI.Repositories
                 Album album = ModelExtensions.PutDtoToAlbum(albumDto);
                 _db.Albums.Add(album);
                 _db.SaveChanges();
-                return ModelExtensions.AlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!);
+                return ModelExtensions.ToAlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!);
             }
             catch
             {
@@ -59,7 +56,7 @@ namespace RecordStoreAPI.Repositories
 
             _db.Update(albumToUpdate);
             _db.SaveChanges();
-            return ModelExtensions.AlbumReturnDto(albumToUpdate, _db.Artists.Where(x => x.ArtistID == albumToUpdate.ArtistID).FirstOrDefault()!.Name!);
+            return ModelExtensions.ToAlbumReturnDto(albumToUpdate, _db.Artists.Where(x => x.ArtistID == albumToUpdate.ArtistID).FirstOrDefault()!.Name!);
         }
         public bool TryRemoveAlbumById(int id)
         {

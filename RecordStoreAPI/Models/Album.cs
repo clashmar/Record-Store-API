@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecordStoreAPI.Models
@@ -14,7 +13,7 @@ namespace RecordStoreAPI.Models
 
         [ForeignKey("ArtistID")]
         public int ArtistID { get; set; }
-
+        
         public int ReleaseYear { get; set; }
 
         [ForeignKey("GenreID")]

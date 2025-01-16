@@ -6,6 +6,7 @@ namespace RecordStoreAPI.Services
     public interface IArtistService
     {
         List<Artist>? FindAllArtists();
+        List<AlbumReturnDto>? FindAlbumsByArtistId(int id);
     }
     public class ArtistService : IArtistService
     {
@@ -20,12 +21,9 @@ namespace RecordStoreAPI.Services
         {
             return _artistRepository.FindAllArtists().ToList();
         }
-        //public List<AlbumDto>? FindAlbumsByArtistId(int id)
-        //{
-        //    return _artistRepository.FindAlbumsByArtistId()
-        //        .Select(a => ModelExtensions.ToAlbumDto(a))
-        //        .ToList();
-        //}
-
+        public List<AlbumReturnDto>? FindAlbumsByArtistId(int id)
+        {
+            return _artistRepository.FindAlbumsByArtistId(id);
+        }
     }
 }
