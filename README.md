@@ -10,7 +10,4 @@ The user can perform all CRUD operations on the database, to view and 'purchase'
 * Run the program
 
 ## Upcoming Features
-* Mission objectives
-* Obstructing terrain
-* Enemies and combat
-* Secrets to discover
+
