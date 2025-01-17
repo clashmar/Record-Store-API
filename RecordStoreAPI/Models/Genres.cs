@@ -11,7 +11,8 @@ namespace RecordStoreAPI.Models
         Rap,
         Art_Rock,
         Electronic,
-        Alternative
+        Alternative,
+        Emo
     }
 
     public class Genre

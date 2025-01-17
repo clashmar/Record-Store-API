@@ -11,6 +11,7 @@ namespace RecordStoreAPI.Services
         AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album);
         bool TryRemoveAlbumById(int id);
         List<AlbumReturnDto>? FindAlbumsByReleaseYear(int releaseYear);
+        List<AlbumReturnDto>? FindAlbumsByGenre(Genres genre);
     }
     public class AlbumService : IAlbumService
     {
@@ -51,7 +52,16 @@ namespace RecordStoreAPI.Services
 
         public List<AlbumReturnDto>? FindAlbumsByReleaseYear(int releaseYear)
         {
-            return _albumRepository.FindAlbumsByReleaseYear(releaseYear);
+            return _albumRepository.FindAllAlbums()
+                .Where(a => a.ReleaseYear == releaseYear)
+                .ToList(); ;
+        }
+
+        public List<AlbumReturnDto>? FindAlbumsByGenre(Genres genre)
+        {
+            return _albumRepository.FindAllAlbums()
+                .Where(a => a.Genre == genre.ToString().Replace('_', '-'))
+                .ToList(); ;
         }
     }
 }

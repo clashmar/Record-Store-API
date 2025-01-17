@@ -10,7 +10,6 @@ namespace RecordStoreAPI.Repositories
         AlbumReturnDto? AddNewAlbum(AlbumPutDto albumDto);
         AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album);
         bool TryRemoveAlbumById(int id);
-        List<AlbumReturnDto>? FindAlbumsByReleaseYear(int releaseYear);
     }
     public class AlbumRepository : IAlbumRepository
     {
@@ -83,13 +82,6 @@ namespace RecordStoreAPI.Repositories
             _db.Remove(album);
             _db.SaveChanges();
             return true;
-        }
-
-        public List<AlbumReturnDto>? FindAlbumsByReleaseYear(int releaseYear)
-        {
-            return FindAllAlbums()
-                .Where(a => a.ReleaseYear == releaseYear)
-                .ToList();
         }
 
         public Artist? CheckArtistExists(int artistID)

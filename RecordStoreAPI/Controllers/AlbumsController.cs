@@ -51,11 +51,18 @@ namespace RecordStoreAPI.Controllers
             return _albumService.TryRemoveAlbumById(id) ? Ok("Album was removed.") : BadRequest("No album was found with that Id.");
         }
 
-        [HttpGet("/Year/{releaseYear}")]
+        [HttpGet("Year/{releaseYear}")]
         public IActionResult GetAlbumsByReleaseYear(int releaseYear)
         {
             var result = _albumService.FindAlbumsByReleaseYear(releaseYear);
-            return result != null && result.Count > 0 ? Ok(result) : BadRequest("We don't have any albums from that year.");
+            return result != null && result.Count > 0 ? Ok(result) : NotFound("We don't have any albums from that year.");
+        }
+
+        [HttpGet("Genre/{genre}")]
+        public IActionResult GetAlbumsByGenre(Genres genre)
+        {
+            var result = _albumService.FindAlbumsByGenre(genre);
+            return result != null && result.Count > 0 ? Ok(result) : NotFound($"We don't have any {genre.ToString().Replace('_', '-')} albums in stock.");
         }
     }
 }

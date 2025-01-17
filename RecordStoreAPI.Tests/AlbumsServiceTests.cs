@@ -173,5 +173,41 @@ namespace RecordStoreAPI.Tests
 
             Assert.That(result, Is.EqualTo(false));
         }
+
+        [Test]
+        public void FindAlbumsByReleaseYear_Calls_Correct_Repo_Method()
+        {
+            _albumService.FindAlbumsByReleaseYear(2025);
+
+            _albumRepositoryMock.Verify(s => s.FindAlbumsByReleaseYear(2025), Times.Once());
+        }
+
+        [Test]
+        public void FindAlbumsByReleaseYear_Returns_Correct_AlbumDtos()
+        {
+            List<AlbumReturnDto> albums =
+            [
+                new(1, "Name1", "Artist1", 2025, "Genre1", "Information", 1),
+                new(2, "Name2", "Artist2", 2025, "Genre2", "Information", 2)
+            ];
+
+            _albumRepositoryMock.Setup(s => s.FindAlbumsByReleaseYear(2025)).Returns(albums);
+
+            var result = _albumService.FindAlbumsByReleaseYear(2025);
+
+            Assert.That(result, Is.EqualTo(albums));
+        }
+
+        [Test]
+        public void FindAlbumsByReleaseYear_Returns_Empty_List_If_Not_Found()
+        {
+            List<AlbumReturnDto> albums = [];
+
+            _albumRepositoryMock.Setup(s => s.FindAlbumsByReleaseYear(2025)).Returns(albums);
+
+            var result = _albumService.FindAlbumsByReleaseYear(2025);
+
+            Assert.That(result, Is.EqualTo(albums));
+        }
     }
 }

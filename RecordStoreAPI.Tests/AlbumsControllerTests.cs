@@ -29,11 +29,11 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAllAlbums_Returns_All_Albums()
         {
-            List<AlbumReturnDto> albums = new List<AlbumReturnDto>
-            {
+            List<AlbumReturnDto> albums =
+            [
                 new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
                 new(2, "Name2", "Artist2", 2002, "Genre2", "Information", 2)
-            };
+            ];
 
             _albumServiceMock.Setup(s => s.FindAllAlbums()).Returns(albums);
 
@@ -44,7 +44,7 @@ namespace RecordStoreAPI.Tests
         }
 
         [Test]
-        public void GetAllAlbums_Returns_Bad_Request_If_Empty()
+        public void GetAllAlbums_Returns_Not_Found_If_Empty()
         {
             _albumServiceMock.Setup(s => s.FindAllAlbums()).Returns([]);
 
@@ -76,7 +76,7 @@ namespace RecordStoreAPI.Tests
         }
 
         [Test]
-        public void GetAlbumById_Returns_Not_Found_If_Not_Added()
+        public void GetAlbumById_Returns_Bad_Request_If_Not_Added()
         {
             AlbumReturnDto? returnDto = null;
 
@@ -191,6 +191,44 @@ namespace RecordStoreAPI.Tests
             var result = _albumController.DeleteAlbumById(1);
 
             if (result is BadRequestObjectResult) Assert.Pass();
+            else Assert.Fail();
+        }
+
+        [Test]
+        public void GetAlbumsByReleaseYear_Calls_Correct_Service_Method()
+        {
+            _albumController.GetAlbumsByReleaseYear(2025);
+
+            _albumServiceMock.Verify(s => s.FindAlbumsByReleaseYear(2025), Times.Once());
+        }
+
+        [Test]
+        public void GetAlbumsByReleaseYear_Returns_Correct_AlbumDtos()
+        {
+            List<AlbumReturnDto> albums =
+            [
+                new(1, "Name1", "Artist1", 2025, "Genre1", "Information", 1),
+                new(2, "Name2", "Artist2", 2025, "Genre2", "Information", 2)
+            ];
+
+            _albumServiceMock.Setup(s => s.FindAlbumsByReleaseYear(2025)).Returns(albums);
+
+            var result = _albumController.GetAlbumsByReleaseYear(2025);
+
+            if (result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(albums));
+            else Assert.Fail();
+        }
+
+        [Test]
+        public void GetAlbumsByReleaseYear_Returns_Not_Found_If_Not_Found()
+        {
+            List<AlbumReturnDto> albums = [];
+
+            _albumServiceMock.Setup(s => s.FindAlbumsByReleaseYear(2025)).Returns(albums);
+
+            var result = _albumController.GetAlbumsByReleaseYear(2025);
+
+            if (result is NotFoundObjectResult) Assert.Pass();
             else Assert.Fail();
         }
     }
