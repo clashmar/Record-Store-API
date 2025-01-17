@@ -177,9 +177,9 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void FindAlbumsByReleaseYear_Calls_Correct_Repo_Method()
         {
-            _albumService.FindAlbumsByReleaseYear(2025);
+            _albumService.FindAllAlbums();
 
-            _albumRepositoryMock.Verify(s => s.FindAlbumsByReleaseYear(2025), Times.Once());
+            _albumRepositoryMock.Verify(s => s.FindAllAlbums(), Times.Once());
         }
 
         [Test]
@@ -187,13 +187,13 @@ namespace RecordStoreAPI.Tests
         {
             List<AlbumReturnDto> albums =
             [
-                new(1, "Name1", "Artist1", 2025, "Genre1", "Information", 1),
-                new(2, "Name2", "Artist2", 2025, "Genre2", "Information", 2)
+                new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
+                new(2, "Name2", "Artist2", 2002, "Genre2", "Information", 2)
             ];
 
-            _albumRepositoryMock.Setup(s => s.FindAlbumsByReleaseYear(2025)).Returns(albums);
+            _albumRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(albums);
 
-            var result = _albumService.FindAlbumsByReleaseYear(2025);
+            var result = _albumService.FindAllAlbums();
 
             Assert.That(result, Is.EqualTo(albums));
         }
@@ -203,9 +203,9 @@ namespace RecordStoreAPI.Tests
         {
             List<AlbumReturnDto> albums = [];
 
-            _albumRepositoryMock.Setup(s => s.FindAlbumsByReleaseYear(2025)).Returns(albums);
+            _albumRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(albums);
 
-            var result = _albumService.FindAlbumsByReleaseYear(2025);
+            var result = _albumService.FindAllAlbums();
 
             Assert.That(result, Is.EqualTo(albums));
         }

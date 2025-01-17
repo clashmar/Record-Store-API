@@ -231,5 +231,43 @@ namespace RecordStoreAPI.Tests
             if (result is NotFoundObjectResult) Assert.Pass();
             else Assert.Fail();
         }
+
+        [Test]
+        public void GetAlbumsByGenre_Calls_Correct_Service_Method()
+        {
+            _albumController.GetAlbumsByGenre(Genres.Folk);
+
+            _albumServiceMock.Verify(s => s.FindAlbumsByGenre(Genres.Folk), Times.Once());
+        }
+
+        [Test]
+        public void GetAlbumsByGenre_Returns_Correct_AlbumDtos()
+        {
+            List<AlbumReturnDto> albums =
+            [
+                new(1, "Name1", "Artist1", 2025, "Folk", "Information", 1),
+                new(2, "Name2", "Artist2", 2025, "Folk", "Information", 2)
+            ];
+
+            _albumServiceMock.Setup(s => s.FindAlbumsByGenre(Genres.Folk)).Returns(albums);
+
+            var result = _albumController.GetAlbumsByGenre(Genres.Folk);
+
+            if (result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(albums));
+            else Assert.Fail();
+        }
+
+        [Test]
+        public void GetAlbumsByGenre_Returns_Not_Found_If_Not_Found()
+        {
+            List<AlbumReturnDto> albums = [];
+
+            _albumServiceMock.Setup(s => s.FindAlbumsByGenre(Genres.Folk)).Returns(albums);
+
+            var result = _albumController.GetAlbumsByGenre(Genres.Folk);
+
+            if (result is NotFoundObjectResult) Assert.Pass();
+            else Assert.Fail();
+        }
     }
 }
