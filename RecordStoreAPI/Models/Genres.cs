@@ -9,7 +9,9 @@ namespace RecordStoreAPI.Models
         Indie,
         Experimental,
         Rap,
-        Art_Rock
+        Art_Rock,
+        Electronic,
+        Alternative
     }
 
     public class Genre

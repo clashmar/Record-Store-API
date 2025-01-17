@@ -50,5 +50,12 @@ namespace RecordStoreAPI.Controllers
         {
             return _albumService.TryRemoveAlbumById(id) ? Ok("Album was removed.") : BadRequest("No album was found with that Id.");
         }
+
+        [HttpGet("/Year/{releaseYear}")]
+        public IActionResult GetAlbumsByReleaseYear(int releaseYear)
+        {
+            var result = _albumService.FindAlbumsByReleaseYear(releaseYear);
+            return result != null && result.Count > 0 ? Ok(result) : BadRequest("We don't have any albums from that year.");
+        }
     }
 }

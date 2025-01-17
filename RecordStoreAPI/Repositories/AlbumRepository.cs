@@ -10,6 +10,7 @@ namespace RecordStoreAPI.Repositories
         AlbumReturnDto? AddNewAlbum(AlbumPutDto albumDto);
         AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album);
         bool TryRemoveAlbumById(int id);
+        List<AlbumReturnDto>? FindAlbumsByReleaseYear(int releaseYear);
     }
     public class AlbumRepository : IAlbumRepository
     {
@@ -19,25 +20,33 @@ namespace RecordStoreAPI.Repositories
         {
             _db = db;
         }
+
         public List<AlbumReturnDto> FindAllAlbums()
         {
             return _db.Albums
-                .Select(album =>
-                    ModelExtensions.ToAlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!)  
-                ).ToList();
+                .Join(_db.Artists,
+                album => album.ArtistID,
+                artist => artist.ArtistID,
+                (albums, artist) => new {Album = albums, ArtistName = artist.Name}
+                )
+                .Select(q => ModelExtensions.ToAlbumReturnDto(q.Album, q.ArtistName!))
+                .ToList();
         }
+
         public AlbumReturnDto? FindAlbumById(int id)
         {
-            Album? album = _db.Albums.FirstOrDefault(a => a.Id == id);
-            if(album == null) return null;
-            return ModelExtensions.ToAlbumReturnDto(album, _db.Artists.Where(x => x.ArtistID == album.ArtistID).FirstOrDefault()!.Name!);
+            return FindAllAlbums()
+                .FirstOrDefault(a => a.Id == id);
         }
+
         public AlbumReturnDto? AddNewAlbum(AlbumPutDto albumPutDto)
         {
             try
             {
                 Artist? artist = CheckArtistExists(albumPutDto.ArtistID);
                 if(artist == null) return null;
+
+                if (!CheckGenreExists(albumPutDto.GenreID)) return null;
 
                 Album album = ModelExtensions.PutDtoToAlbum(albumPutDto);
                 _db.Albums.Add(album);
@@ -49,6 +58,7 @@ namespace RecordStoreAPI.Repositories
                 return null;
             }
         }
+
         public AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto albumPutDto)
         {
             var albumToUpdate = _db.Albums.FirstOrDefault(a => a.Id == id);
@@ -73,6 +83,13 @@ namespace RecordStoreAPI.Repositories
             _db.Remove(album);
             _db.SaveChanges();
             return true;
+        }
+
+        public List<AlbumReturnDto>? FindAlbumsByReleaseYear(int releaseYear)
+        {
+            return FindAllAlbums()
+                .Where(a => a.ReleaseYear == releaseYear)
+                .ToList();
         }
 
         public Artist? CheckArtistExists(int artistID)
