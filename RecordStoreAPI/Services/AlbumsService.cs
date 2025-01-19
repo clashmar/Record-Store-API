@@ -5,14 +5,14 @@ namespace RecordStoreAPI.Services
 {
     public interface IAlbumsService
     {
-        List<AlbumReturnDto> FindAllAlbums();
-        AlbumReturnDto? FindAlbumById(int id);
+        List<Album> FindAllAlbums();
+        Album? FindAlbumById(int id);
         AlbumReturnDto? AddNewAlbum(AlbumPutDto album);
         AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album);
         bool TryRemoveAlbumById(int id);
-        List<AlbumReturnDto>? FindAlbumsByReleaseYear(int releaseYear);
-        List<AlbumReturnDto>? FindAlbumsByGenre(Genres genre);
-        List<AlbumReturnDto>? FindAlbumByName(string name);
+        List<Album>? FindAlbumsByReleaseYear(int releaseYear);
+        List<Album>? FindAlbumsByGenre(Genres genre);
+        List<Album>? FindAlbumByName(string name);
     }
     public class AlbumsService : IAlbumsService
     {
@@ -23,14 +23,14 @@ namespace RecordStoreAPI.Services
             _albumsRepository = albumsRepository;
         }
 
-        public List<AlbumReturnDto> FindAllAlbums()
+        public List<Album> FindAllAlbums()
         {
             return _albumsRepository.FindAllAlbums();
         }
 
-        public AlbumReturnDto? FindAlbumById(int id)
+        public Album? FindAlbumById(int id)
         {
-            AlbumReturnDto? album = _albumsRepository.FindAlbumById(id);
+            Album? album = _albumsRepository.FindAlbumById(id);
             return album ?? null;
         }
 
@@ -51,21 +51,21 @@ namespace RecordStoreAPI.Services
             return _albumsRepository.TryRemoveAlbumById(id);
         }
 
-        public List<AlbumReturnDto>? FindAlbumsByReleaseYear(int releaseYear)
+        public List<Album>? FindAlbumsByReleaseYear(int releaseYear)
         {
             return _albumsRepository.FindAllAlbums()
                 .Where(a => a.ReleaseYear == releaseYear)
-                .ToList(); ;
+                .ToList();
         }
 
-        public List<AlbumReturnDto>? FindAlbumsByGenre(Genres genre)
+        public List<Album>? FindAlbumsByGenre(Genres genre)
         {
             return _albumsRepository.FindAllAlbums()
-                .Where(a => a.Genre == Genre.ToString(genre))
+                .Where(a => a.GenreID == genre)
                 .ToList(); ;
         }
 
-        public List<AlbumReturnDto>? FindAlbumByName(string name)
+        public List<Album>? FindAlbumByName(string name)
         {
             return _albumsRepository.FindAllAlbums()
                 .Where(a => a.Name.ToLower().Contains(name.ToLower()))

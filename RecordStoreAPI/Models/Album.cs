@@ -13,6 +13,8 @@ namespace RecordStoreAPI.Models
 
         [ForeignKey("ArtistID")]
         public int ArtistID { get; set; }
+
+        public Artist Artist { get; set; } = null!;
         
         public int ReleaseYear { get; set; }
 

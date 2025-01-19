@@ -1,12 +1,14 @@
-﻿using RecordStoreAPI.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using RecordStoreAPI.Data;
 using RecordStoreAPI.Models;
 
 namespace RecordStoreAPI.Repositories
 {
     public interface IAlbumsRepository
     {
-        List<AlbumReturnDto> FindAllAlbums();
-        AlbumReturnDto? FindAlbumById(int id);
+        List<Album> FindAllAlbums();
+        Album? FindAlbumById(int id);
         AlbumReturnDto? AddNewAlbum(AlbumPutDto albumDto);
         AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album);
         bool TryRemoveAlbumById(int id);
@@ -20,19 +22,25 @@ namespace RecordStoreAPI.Repositories
             _db = db;
         }
 
-        public List<AlbumReturnDto> FindAllAlbums()
+        public List<Album> FindAllAlbums()
         {
             return _db.Albums
-                .Join(_db.Artists,
-                album => album.ArtistID,
-                artist => artist.ArtistID,
-                (albums, artist) => new {Album = albums, ArtistName = artist.Name}
-                )
-                .Select(q => DTOExtensions.ToAlbumReturnDto(q.Album, q.ArtistName!))
+                .Include(a => a.Artist)
                 .ToList();
         }
 
-        public AlbumReturnDto? FindAlbumById(int id)
+        //public List<AlbumReturnDto> FindAllAlbums()
+        //{
+        //    return _db.Albums
+        //        .Join(_db.Artists,
+        //        album => album.ArtistID,
+        //        artist => artist.ArtistID,
+        //        (album, artist) => new { Album = album, ArtistName = artist.Name }
+        //        )
+        //        .Select(q => DTOExtensions.ToAlbumReturnDto(q.Album, q.ArtistName!))
+        //        .ToList();
+        //}
+        public Album? FindAlbumById(int id)
         {
             return FindAllAlbums()
                 .FirstOrDefault(a => a.Id == id);
@@ -43,7 +51,7 @@ namespace RecordStoreAPI.Repositories
             try
             {
                 Artist? artist = CheckArtistExists(albumPutDto.ArtistID);
-                if(artist == null) return null;
+                if (artist == null) return null;
 
                 if (!CheckGenreExists(albumPutDto.GenreID)) return null;
 
@@ -66,7 +74,7 @@ namespace RecordStoreAPI.Repositories
             Artist? artist = CheckArtistExists(albumPutDto.ArtistID);
             if (artist == null) return null;
 
-            if(!CheckGenreExists(albumPutDto.GenreID)) return null;
+            if (!CheckGenreExists(albumPutDto.GenreID)) return null;
 
             DTOExtensions.MapAlbumProperties(albumToUpdate, albumPutDto);
 
@@ -78,7 +86,7 @@ namespace RecordStoreAPI.Repositories
         public bool TryRemoveAlbumById(int id)
         {
             Album? album = _db.Albums.FirstOrDefault(a => a.Id == id);
-            if(album == null) return false;
+            if (album == null) return false;
             _db.Remove(album);
             _db.SaveChanges();
             return true;
@@ -89,7 +97,6 @@ namespace RecordStoreAPI.Repositories
             Artist? artist = _db.Artists.Where(a => a.ArtistID == artistID).FirstOrDefault();
             return artist ?? null;
         }
-
         public bool CheckGenreExists(Genres genreID)
         {
             return _db.Genres.FirstOrDefault(g => g.GenreID == genreID) != null;
