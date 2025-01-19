@@ -1,7 +1,11 @@
-Name,ArtistID,ReleaseYear,GenreID,Information,StockQuantity
-Blue,1,1971,0,Information,1
-The Money Store,2,2014,1,Information,2
-Merriweather Post Pavillion,3,2008,3,Information,3
-Skinty Fia,5,2022,2,Information,2
-good kid m.A.A.d city,6,2012,4,Information,3
-To Pimp A Butterfly,6,2015,4,Information,2
+Name;ArtistID;ReleaseYear;GenreID;Information;StockQuantity
+Blue;1;197;,0;10 songs, 36min;1
+The Money Store;2;2014;1;13 songs, 41min;2
+Merriweather Post Pavillion;3;2008;3;11 songs, 54min;3
+Skinty Fia;5;2022;2;10 songs 44min;2
+good kid, m.A.A.d city;6;2012;4;17 songs, 92min;3
+To Pimp A Butterfly;6;2015;4;16 songs, 79min;2
+Remain in Light; 7; 1980; 5; 8 songs, 40min; 1
+Vespertine; 9; 2001; 6; 12 songs, 55min; 2
+Illinois; 10; 2005; 7; 22 songs, 74min; 1
+Silent Alarm; 11; 2005; 2; 13 songs, 58min; 1

@@ -14,7 +14,6 @@
                         album.StockQuantity
                         );
         }
-
         public static Album PutDtoToAlbum(AlbumPutDto albumPutDto)
         {
             return new Album()
