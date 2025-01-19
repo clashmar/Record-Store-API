@@ -15,7 +15,6 @@ namespace RecordStoreAPI.Models
         Emo
 
     }
-
     public class Genre
     {
         [Key]
@@ -23,5 +22,10 @@ namespace RecordStoreAPI.Models
 
         [Required]
         public string? Name { get; set; }
+
+        public static string ToString(Genres genre)
+        {
+            return genre.ToString().Replace('_', '-');
+        }
     }
 }

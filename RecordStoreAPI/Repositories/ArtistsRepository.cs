@@ -21,13 +21,14 @@ namespace RecordStoreAPI.Repositories
         {
             return _db.Artists;
         }
+
         public List<AlbumReturnDto>? FindAlbumsByArtistId(int id)
         {
             Artist? artist = _db.Artists.FirstOrDefault(a => a.ArtistID == id)!;
             if(artist == null) return null;
 
             return _db.Albums.Where(album => album.ArtistID == id)
-                .Select(album => ModelExtensions.ToAlbumReturnDto(album, artist.Name!))
+                .Select(album => DTOExtensions.ToAlbumReturnDto(album, artist.Name!))
                 .ToList();
         }
     }

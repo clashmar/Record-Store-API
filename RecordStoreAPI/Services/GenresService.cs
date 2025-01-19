@@ -19,7 +19,7 @@ namespace RecordStoreAPI.Services
         public List<Genre> FindAllGenres()
         {
             return _genresRepository.FindAllGenres()
-                .Select(g => { g.Name = g.Name!.Replace('_', '-'); return g; })
+                .Select(g => { g.Name = Genre.ToString(g.GenreID); return g; })
                 .ToList();
         }
     }

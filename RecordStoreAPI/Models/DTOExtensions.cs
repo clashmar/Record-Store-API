@@ -1,6 +1,6 @@
 ﻿namespace RecordStoreAPI.Models
 {
-    public class ModelExtensions
+    public class DTOExtensions
     {
         public static AlbumReturnDto ToAlbumReturnDto(Album album, string artistName)
         {
@@ -9,7 +9,7 @@
                         album.Name,
                         artistName,
                         album.ReleaseYear,
-                        album.GenreID.ToString().Replace('_', '-'),
+                        Genre.ToString(album.GenreID),
                         album.Information,
                         album.StockQuantity
                         );

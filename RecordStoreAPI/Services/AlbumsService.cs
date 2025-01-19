@@ -61,7 +61,7 @@ namespace RecordStoreAPI.Services
         public List<AlbumReturnDto>? FindAlbumsByGenre(Genres genre)
         {
             return _albumsRepository.FindAllAlbums()
-                .Where(a => a.Genre == genre.ToString().Replace('_', '-'))
+                .Where(a => a.Genre == Genre.ToString(genre))
                 .ToList(); ;
         }
 

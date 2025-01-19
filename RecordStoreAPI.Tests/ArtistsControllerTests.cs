@@ -68,7 +68,7 @@ namespace RecordStoreAPI.Tests
             List<AlbumReturnDto> albums = new List<AlbumReturnDto>
             {
                 new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
-                new(2, "Name2", "Artist2", 2002, "Genre2", "Information", 2)
+                new(2, "Name2", "Artist1", 2002, "Genre2", "Information", 2)
             };
 
             _artistsServiceMock.Setup(s => s.FindAlbumsByArtistId(1)).Returns(albums);

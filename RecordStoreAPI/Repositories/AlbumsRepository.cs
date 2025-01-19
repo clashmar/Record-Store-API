@@ -28,7 +28,7 @@ namespace RecordStoreAPI.Repositories
                 artist => artist.ArtistID,
                 (albums, artist) => new {Album = albums, ArtistName = artist.Name}
                 )
-                .Select(q => ModelExtensions.ToAlbumReturnDto(q.Album, q.ArtistName!))
+                .Select(q => DTOExtensions.ToAlbumReturnDto(q.Album, q.ArtistName!))
                 .ToList();
         }
 
@@ -47,10 +47,10 @@ namespace RecordStoreAPI.Repositories
 
                 if (!CheckGenreExists(albumPutDto.GenreID)) return null;
 
-                Album album = ModelExtensions.PutDtoToAlbum(albumPutDto);
+                Album album = DTOExtensions.PutDtoToAlbum(albumPutDto);
                 _db.Albums.Add(album);
                 _db.SaveChanges();
-                return ModelExtensions.ToAlbumReturnDto(album, artist!.Name!);
+                return DTOExtensions.ToAlbumReturnDto(album, artist!.Name!);
             }
             catch
             {
@@ -68,11 +68,11 @@ namespace RecordStoreAPI.Repositories
 
             if(!CheckGenreExists(albumPutDto.GenreID)) return null;
 
-            ModelExtensions.MapAlbumProperties(albumToUpdate, albumPutDto);
+            DTOExtensions.MapAlbumProperties(albumToUpdate, albumPutDto);
 
             _db.Update(albumToUpdate);
             _db.SaveChanges();
-            return ModelExtensions.ToAlbumReturnDto(albumToUpdate, artist.Name!);
+            return DTOExtensions.ToAlbumReturnDto(albumToUpdate, artist.Name!);
         }
 
         public bool TryRemoveAlbumById(int id)
