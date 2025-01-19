@@ -222,9 +222,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAlbumsByReleaseYear_Returns_Not_Found_If_Not_Found()
         {
-            List<AlbumReturnDto> albums = [];
-
-            _albumsServiceMock.Setup(s => s.FindAlbumsByReleaseYear(2025)).Returns(albums);
+            _albumsServiceMock.Setup(s => s.FindAlbumsByReleaseYear(2025)).Returns([]);
 
             var result = _albumsController.GetAlbumsByReleaseYear(2025);
 
@@ -260,9 +258,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAlbumsByGenre_Returns_Not_Found_If_Not_Found()
         {
-            List<AlbumReturnDto> albums = [];
-
-            _albumsServiceMock.Setup(s => s.FindAlbumsByGenre(Genres.Folk)).Returns(albums);
+            _albumsServiceMock.Setup(s => s.FindAlbumsByGenre(Genres.Folk)).Returns([]);
 
             var result = _albumsController.GetAlbumsByGenre(Genres.Folk);
 
@@ -297,9 +293,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAlbumByName_Returns_Not_Found_If_Not_Found()
         {
-            List<AlbumReturnDto> albums = [];
-
-            _albumsServiceMock.Setup(s => s.FindAlbumByName("Name1")).Returns(albums);
+            _albumsServiceMock.Setup(s => s.FindAlbumByName("Name1")).Returns([]);
 
             var result = _albumsController.GetAlbumByName("Name1");
 
