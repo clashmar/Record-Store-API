@@ -15,5 +15,7 @@ namespace RecordStoreAPI.Data
         public DbSet<Genre> Genres { get; set; }
 
         public DbSet<Artist> Artists { get; set; }
+
+        public DbSet<AlbumGenre> AlbumGenre { get; set; }
     }
 }

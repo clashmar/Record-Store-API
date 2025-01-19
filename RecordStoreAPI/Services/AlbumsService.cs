@@ -38,14 +38,14 @@ namespace RecordStoreAPI.Services
 
         public AlbumReturnDto? AddNewAlbum(AlbumPutDto newAlbum)
         {
-            AlbumReturnDto? album = _albumsRepository.AddNewAlbum(newAlbum);
-            return album ?? null;
+            Album? album = _albumsRepository.AddNewAlbum(newAlbum);
+            return album != null ? DTOExtensions.ToAlbumReturnDto(album) : null;
         }
 
         public AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album)
         {
-            AlbumReturnDto? updatedAlbum = _albumsRepository.UpdateAlbum(id, album);
-            return updatedAlbum ?? null;
+            Album? updatedAlbum = _albumsRepository.UpdateAlbum(id, album);
+            return updatedAlbum != null ? DTOExtensions.ToAlbumReturnDto(updatedAlbum) : null;
         }
 
         public bool TryRemoveAlbumById(int id)

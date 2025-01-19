@@ -21,9 +21,8 @@
                 Name = albumPutDto.Name,
                 ArtistID = albumPutDto.ArtistID,
                 ReleaseYear = albumPutDto.ReleaseYear,
-                GenreID = albumPutDto.GenreID,
                 Information = albumPutDto.Information,
-                StockQuantity = albumPutDto.StockQuantity
+                StockQuantity = albumPutDto.StockQuantity,
             };
         }
         public static void MapAlbumProperties(Album target, AlbumPutDto source)
@@ -31,7 +30,9 @@
             target.Name = source.Name;
             target.ArtistID = source.ArtistID;
             target.ReleaseYear = source.ReleaseYear;
-            target.GenreID = source.GenreID;
+            target.Genres = source.Genres
+                .Select(g => new AlbumGenre() { AlbumID = target.Id, GenreID = g })
+                .ToList();
             target.Information = source.Information;
             target.StockQuantity = source.StockQuantity;
         }

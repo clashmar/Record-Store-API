@@ -6,7 +6,7 @@ namespace RecordStoreAPI.Models
     public class Album
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; } 
 
         [Required]
         public string Name { get; set; }
@@ -17,9 +17,6 @@ namespace RecordStoreAPI.Models
         public Artist Artist { get; set; } = null!;
         
         public int ReleaseYear { get; set; }
-
-        [ForeignKey("GenreID")]
-        public Genres GenreID { get; set; }
 
         public List<AlbumGenre>? Genres { get; set; }
 
@@ -42,7 +39,7 @@ namespace RecordStoreAPI.Models
         string Name,
         int ArtistID,
         int ReleaseYear,
-        Genres GenreID,
+        List<Genres> Genres,
         string Information,
         int StockQuantity
         );
