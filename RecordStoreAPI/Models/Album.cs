@@ -21,6 +21,8 @@ namespace RecordStoreAPI.Models
         [ForeignKey("GenreID")]
         public Genres GenreID { get; set; }
 
+        public List<AlbumGenre>? Genres { get; set; }
+
         public string Information { get; set; } = "No information available.";
 
         public int StockQuantity { get; set; }

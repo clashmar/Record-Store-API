@@ -60,9 +60,7 @@ namespace RecordStoreAPI.Services
 
         public List<Album>? FindAlbumsByGenre(Genres genre)
         {
-            return _albumsRepository.FindAllAlbums()
-                .Where(a => a.GenreID == genre)
-                .ToList(); ;
+            return _albumsRepository.FindAlbumsByGenre(genre);
         }
 
         public List<Album>? FindAlbumByName(string name)

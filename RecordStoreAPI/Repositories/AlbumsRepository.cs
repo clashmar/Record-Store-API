@@ -12,6 +12,7 @@ namespace RecordStoreAPI.Repositories
         AlbumReturnDto? AddNewAlbum(AlbumPutDto albumDto);
         AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album);
         bool TryRemoveAlbumById(int id);
+        List<Album>? FindAlbumsByGenre(Genres genre);
     }
     public class AlbumsRepository : IAlbumsRepository
     {
@@ -99,7 +100,16 @@ namespace RecordStoreAPI.Repositories
         }
         public bool CheckGenreExists(Genres genreID)
         {
-            return _db.Genres.FirstOrDefault(g => g.GenreID == genreID) != null;
+            return _db.Genres.FirstOrDefault(g => g.GenreID == Convert.ToInt32(genreID)) != null;
+        }
+
+        public List<Album>? FindAlbumsByGenre(Genres genre)
+        {
+            return _db.Albums
+                .Include(a => a.Artist)
+                .Include(a => a.Genres)
+                .Where(a => a.Genres!.Any(g => g.GenreID == Convert.ToInt32(genre)))
+                .ToList();
         }
     }
 }
