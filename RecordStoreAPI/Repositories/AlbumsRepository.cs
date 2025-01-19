@@ -3,7 +3,7 @@ using RecordStoreAPI.Models;
 
 namespace RecordStoreAPI.Repositories
 {
-    public interface IAlbumRepository
+    public interface IAlbumsRepository
     {
         List<AlbumReturnDto> FindAllAlbums();
         AlbumReturnDto? FindAlbumById(int id);
@@ -11,11 +11,11 @@ namespace RecordStoreAPI.Repositories
         AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album);
         bool TryRemoveAlbumById(int id);
     }
-    public class AlbumRepository : IAlbumRepository
+    public class AlbumsRepository : IAlbumsRepository
     {
         private readonly ApplicationDbContext _db;
 
-        public AlbumRepository(ApplicationDbContext db)
+        public AlbumsRepository(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -78,7 +78,7 @@ namespace RecordStoreAPI.Repositories
         public bool TryRemoveAlbumById(int id)
         {
             Album? album = _db.Albums.FirstOrDefault(a => a.Id == id);
-            if (album == null) return false;
+            if(album == null) return false;
             _db.Remove(album);
             _db.SaveChanges();
             return true;

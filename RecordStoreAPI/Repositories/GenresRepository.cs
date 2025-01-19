@@ -3,14 +3,14 @@ using RecordStoreAPI.Models;
 
 namespace RecordStoreAPI.Repositories
 {
-    public interface IGenreRepository
+    public interface IGenresRepository
     {
         IEnumerable<Genre> FindAllGenres();
     }
-    public class GenreRepository : IGenreRepository
+    public class GenresRepository : IGenresRepository
     {
         private readonly ApplicationDbContext _db;
-        public GenreRepository(ApplicationDbContext db)
+        public GenresRepository(ApplicationDbContext db)
         {
             _db = db;
         }

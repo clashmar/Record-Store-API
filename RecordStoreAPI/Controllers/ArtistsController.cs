@@ -7,10 +7,10 @@ namespace RecordStoreAPI.Controllers
     [Route("/[controller]")]
     public class ArtistsController : ControllerBase
     {
-        private readonly IArtistService _artistService;
-        public ArtistsController(IArtistService artistService)
+        private readonly IArtistsService _artistService;
+        public ArtistsController(IArtistsService artistsService)
         {
-            _artistService = artistService;
+            _artistService = artistsService;
         }
 
         [HttpGet]

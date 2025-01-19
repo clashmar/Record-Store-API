@@ -13,6 +13,7 @@ namespace RecordStoreAPI.Models
         Electronic,
         Alternative,
         Emo
+
     }
 
     public class Genre

@@ -8,14 +8,14 @@ namespace RecordStoreAPI.Tests
 {
     public class ArtistsControllerTests
     {
-        private Mock<IArtistService> _artistServiceMock;
+        private Mock<IArtistsService> _artistsServiceMock;
         private ArtistsController _artistsController;
 
         [SetUp]
         public void Setup()
         {
-            _artistServiceMock = new Mock<IArtistService>();
-            _artistsController = new ArtistsController(_artistServiceMock.Object);
+            _artistsServiceMock = new Mock<IArtistsService>();
+            _artistsController = new ArtistsController(_artistsServiceMock.Object);
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace RecordStoreAPI.Tests
         {
             _artistsController.GetAllArtists();
 
-            _artistServiceMock.Verify(s => s.FindAllArtists(), Times.Once());
+            _artistsServiceMock.Verify(s => s.FindAllArtists(), Times.Once());
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace RecordStoreAPI.Tests
                 new() { ArtistID = 2, Name = "Artist2"}
             ];
 
-            _artistServiceMock.Setup(s => s.FindAllArtists()).Returns(artists);
+            _artistsServiceMock.Setup(s => s.FindAllArtists()).Returns(artists);
 
             var result = _artistsController.GetAllArtists() as ObjectResult;
 
@@ -46,7 +46,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAllArtists_Returns_Bad_Request_If_Empty()
         {
-            _artistServiceMock.Setup(s => s.FindAllArtists()).Returns([]);
+            _artistsServiceMock.Setup(s => s.FindAllArtists()).Returns([]);
 
             var result = _artistsController.GetAllArtists();
 
@@ -59,7 +59,7 @@ namespace RecordStoreAPI.Tests
         {
             _artistsController.GetAlbumsByArtistId(1);
 
-            _artistServiceMock.Verify(s => s.FindAlbumsByArtistId(1), Times.Once());
+            _artistsServiceMock.Verify(s => s.FindAlbumsByArtistId(1), Times.Once());
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace RecordStoreAPI.Tests
                 new(2, "Name2", "Artist2", 2002, "Genre2", "Information", 2)
             };
 
-            _artistServiceMock.Setup(s => s.FindAlbumsByArtistId(1)).Returns(albums);
+            _artistsServiceMock.Setup(s => s.FindAlbumsByArtistId(1)).Returns(albums);
 
             var result = _artistsController.GetAlbumsByArtistId(1) as ObjectResult;
 

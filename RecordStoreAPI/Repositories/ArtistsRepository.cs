@@ -3,16 +3,16 @@ using RecordStoreAPI.Models;
 
 namespace RecordStoreAPI.Repositories
 {
-    public interface IArtistRepository
+    public interface IArtistsRepository
     {
         IEnumerable<Artist> FindAllArtists();
         List<AlbumReturnDto>? FindAlbumsByArtistId(int id);
     }
-    public class ArtistRepository : IArtistRepository
+    public class ArtistsRepository : IArtistsRepository
     {
         private readonly ApplicationDbContext _db;
 
-        public ArtistRepository(ApplicationDbContext db)
+        public ArtistsRepository(ApplicationDbContext db)
         {
             _db = db;
         }

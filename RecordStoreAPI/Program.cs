@@ -23,12 +23,12 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
-builder.Services.AddScoped<IAlbumService, AlbumService>();
-builder.Services.AddScoped<IGenreRepository, GenreRepository>();
-builder.Services.AddScoped<IGenreService, GenreService>();
-builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
-builder.Services.AddScoped<IArtistService, ArtistService>();
+builder.Services.AddScoped<IAlbumsRepository, AlbumsRepository>();
+builder.Services.AddScoped<IAlbumsService, AlbumsService>();
+builder.Services.AddScoped<IGenresRepository, GenresRepository>();
+builder.Services.AddScoped<IGenresService, GenresService>();
+builder.Services.AddScoped<IArtistsRepository, ArtistsRepository>();
+builder.Services.AddScoped<IArtistsService, ArtistsService>();
 
 var app = builder.Build();
 

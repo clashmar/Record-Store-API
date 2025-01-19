@@ -3,22 +3,22 @@ using RecordStoreAPI.Repositories;
 
 namespace RecordStoreAPI.Services
 {
-    public interface IGenreService
+    public interface IGenresService
     {
         List<Genre> FindAllGenres();
     }
-    public class GenreService : IGenreService
+    public class GenresService : IGenresService
     {
-        private readonly IGenreRepository _genreRepository;
+        private readonly IGenresRepository _genresRepository;
 
-        public GenreService(IGenreRepository genreRepository)
+        public GenresService(IGenresRepository genresRepository)
         {
-            _genreRepository = genreRepository;
+            _genresRepository = genresRepository;
         }
 
         public List<Genre> FindAllGenres()
         {
-            return _genreRepository.FindAllGenres()
+            return _genresRepository.FindAllGenres()
                 .Select(g => { g.Name = g.Name!.Replace('_', '-'); return g; })
                 .ToList();
         }
