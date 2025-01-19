@@ -3,27 +3,27 @@ using RecordStoreAPI.Repositories;
 
 namespace RecordStoreAPI.Services
 {
-    public interface IArtistService
+    public interface IArtistsService
     {
         List<Artist>? FindAllArtists();
         List<AlbumReturnDto>? FindAlbumsByArtistId(int id);
     }
-    public class ArtistService : IArtistService
+    public class ArtistsService : IArtistsService
     {
-        private readonly IArtistRepository _artistRepository;
+        private readonly IArtistsRepository _artistsRepository;
 
-        public ArtistService(IArtistRepository artistRepository)
+        public ArtistsService(IArtistsRepository artistsRepository)
         {
-            _artistRepository = artistRepository;
+            _artistsRepository = artistsRepository;
         }
 
         public List<Artist>? FindAllArtists()
         {
-            return _artistRepository.FindAllArtists().ToList();
+            return _artistsRepository.FindAllArtists().ToList();
         }
         public List<AlbumReturnDto>? FindAlbumsByArtistId(int id)
         {
-            return _artistRepository.FindAlbumsByArtistId(id);
+            return _artistsRepository.FindAlbumsByArtistId(id);
         }
     }
 }

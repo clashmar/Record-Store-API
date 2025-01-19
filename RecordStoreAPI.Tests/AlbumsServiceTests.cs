@@ -7,47 +7,47 @@ namespace RecordStoreAPI.Tests
 {
     public class AlbumsServiceTests
     {
-        private Mock<IAlbumRepository> _albumRepositoryMock;
-        private AlbumService _albumService;
+        private Mock<IAlbumsRepository> _albumsRepositoryMock;
+        private AlbumsService _albumsService;
 
         [SetUp]
         public void Setup()
         {
-            _albumRepositoryMock = new Mock<IAlbumRepository>();
-            _albumService = new AlbumService(_albumRepositoryMock.Object);
+            _albumsRepositoryMock = new Mock<IAlbumsRepository>();
+            _albumsService = new AlbumsService(_albumsRepositoryMock.Object);
         }
 
         [Test]
         public void FindAllAlbums_Calls_Correct_Repo_Method()
         {
-            _albumService.FindAllAlbums();
+            _albumsService.FindAllAlbums();
 
-            _albumRepositoryMock.Verify(s => s.FindAllAlbums(), Times.Once());
+            _albumsRepositoryMock.Verify(s => s.FindAllAlbums(), Times.Once());
         }
 
         [Test]
         public void FindAllAlbums_Returns_All_Albums()
         {
-            List<AlbumReturnDto> dtoList =
+            List<AlbumReturnDto> allAlbumDtos =
             [
                 new(1, "Name1", "Artist1", 2001, "Folk", "Information", 1),
                 new(2, "Name2", "Artist2", 2002, "Folk", "Information", 2)
                 
             ];
 
-            _albumRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(dtoList);
+            _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(allAlbumDtos);
 
-            var result = _albumService.FindAllAlbums();
+            var result = _albumsService.FindAllAlbums();
 
-            Assert.That(result, Is.EquivalentTo(dtoList));
+            Assert.That(result, Is.EquivalentTo(allAlbumDtos));
         }
 
         [Test]
         public void FindAlbumById_Calls_Correct_Repo_Method()
         {
-            _albumService.FindAlbumById(1);
+            _albumsService.FindAlbumById(1);
 
-            _albumRepositoryMock.Verify(s => s.FindAlbumById(1), Times.Once());
+            _albumsRepositoryMock.Verify(s => s.FindAlbumById(1), Times.Once());
         }
 
         [Test]
@@ -55,9 +55,9 @@ namespace RecordStoreAPI.Tests
         {
             AlbumReturnDto returnDto = new(1, "Name1", "Artist1", 2001, "Folk", "Information", 1);
 
-            _albumRepositoryMock.Setup(s => s.FindAlbumById(1)).Returns(returnDto);
+            _albumsRepositoryMock.Setup(s => s.FindAlbumById(1)).Returns(returnDto);
 
-            var result = _albumService.FindAlbumById(1);
+            var result = _albumsService.FindAlbumById(1);
 
             Assert.That(result, Is.EqualTo(returnDto));
         }
@@ -67,9 +67,9 @@ namespace RecordStoreAPI.Tests
         {
             AlbumReturnDto? album = null;
 
-            _albumRepositoryMock.Setup(s => s.FindAlbumById(1)).Returns(album);
+            _albumsRepositoryMock.Setup(s => s.FindAlbumById(1)).Returns(album);
 
-            var result = _albumService.FindAlbumById(1);
+            var result = _albumsService.FindAlbumById(1);
 
             Assert.That(result, Is.EqualTo(null));
         }
@@ -79,9 +79,9 @@ namespace RecordStoreAPI.Tests
         {
             AlbumPutDto putDto = new("Name1", 1, 2001, 0, "Information", 1);
 
-            _albumService.AddNewAlbum(putDto);
+            _albumsService.AddNewAlbum(putDto);
 
-            _albumRepositoryMock.Verify(s => s.AddNewAlbum(putDto), Times.Once());
+            _albumsRepositoryMock.Verify(s => s.AddNewAlbum(putDto), Times.Once());
         }
 
         [Test]
@@ -90,9 +90,9 @@ namespace RecordStoreAPI.Tests
             AlbumPutDto putDto = new("Name1", 1, 2001, 0, "Information", 1);
             AlbumReturnDto returnDto = new(1, "Name1", "Artist1", 2001, "Folk", "Information", 1);
 
-            _albumRepositoryMock.Setup(s => s.AddNewAlbum(putDto)).Returns(returnDto);
+            _albumsRepositoryMock.Setup(s => s.AddNewAlbum(putDto)).Returns(returnDto);
 
-            var result = _albumService.AddNewAlbum(putDto);
+            var result = _albumsService.AddNewAlbum(putDto);
 
             Assert.That(result, Is.EqualTo(returnDto));
         }
@@ -103,9 +103,9 @@ namespace RecordStoreAPI.Tests
             AlbumPutDto putDto = new("Name1", 1, 2001, 0, "Information", 1);
             AlbumReturnDto? returnDto = null;
 
-            _albumRepositoryMock.Setup(s => s.AddNewAlbum(putDto)).Returns(returnDto);
+            _albumsRepositoryMock.Setup(s => s.AddNewAlbum(putDto)).Returns(returnDto);
 
-            var result = _albumService.AddNewAlbum(putDto);
+            var result = _albumsService.AddNewAlbum(putDto);
 
             Assert.That(result, Is.EqualTo(returnDto));
         }
@@ -115,9 +115,9 @@ namespace RecordStoreAPI.Tests
         {
             AlbumPutDto putDto = new("Name1", 1, 2001, 0, "Information", 1);
 
-            _albumService.UpdateAlbum(1, putDto);
+            _albumsService.UpdateAlbum(1, putDto);
 
-            _albumRepositoryMock.Verify(s => s.UpdateAlbum(1, putDto), Times.Once());
+            _albumsRepositoryMock.Verify(s => s.UpdateAlbum(1, putDto), Times.Once());
         }
 
         [Test]
@@ -126,9 +126,9 @@ namespace RecordStoreAPI.Tests
             AlbumPutDto putDto = new("Name1", 1, 2001, 0, "Information", 1);
             AlbumReturnDto returnDto = new(1, "Name1", "Artist1", 2001, "Folk", "Information", 1);
 
-            _albumRepositoryMock.Setup(s => s.UpdateAlbum(1, putDto)).Returns(returnDto);
+            _albumsRepositoryMock.Setup(s => s.UpdateAlbum(1, putDto)).Returns(returnDto);
 
-            var result = _albumService.UpdateAlbum(1, putDto);
+            var result = _albumsService.UpdateAlbum(1, putDto);
 
             Assert.That(result, Is.EqualTo(returnDto));
         }
@@ -139,9 +139,9 @@ namespace RecordStoreAPI.Tests
             AlbumPutDto putDto = new("Name1", 1, 2001, 0, "Information", 1);
             AlbumReturnDto? returnDto = null;
 
-            _albumRepositoryMock.Setup(s => s.UpdateAlbum(1, putDto)).Returns(returnDto);
+            _albumsRepositoryMock.Setup(s => s.UpdateAlbum(1, putDto)).Returns(returnDto);
 
-            var result = _albumService.UpdateAlbum(1, putDto);
+            var result = _albumsService.UpdateAlbum(1, putDto);
 
             Assert.That(result, Is.EqualTo(returnDto));
         }
@@ -149,17 +149,17 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void TryRemoveAlbumById_Calls_Correct_Repo_Method()
         {
-            _albumService.TryRemoveAlbumById(1);
+            _albumsService.TryRemoveAlbumById(1);
 
-            _albumRepositoryMock.Verify(s => s.TryRemoveAlbumById(1), Times.Once());
+            _albumsRepositoryMock.Verify(s => s.TryRemoveAlbumById(1), Times.Once());
         }
 
         [Test]
         public void TryRemoveAlbumById_Returns_True()
         {
-            _albumRepositoryMock.Setup(s => s.TryRemoveAlbumById(1)).Returns(true);
+            _albumsRepositoryMock.Setup(s => s.TryRemoveAlbumById(1)).Returns(true);
 
-            var result = _albumService.TryRemoveAlbumById(1);
+            var result = _albumsService.TryRemoveAlbumById(1);
 
             Assert.That(result, Is.EqualTo(true));
         }
@@ -167,11 +167,155 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void TryRemoveAlbumById_Returns_False()
         {
-            _albumRepositoryMock.Setup(s => s.TryRemoveAlbumById(1)).Returns(false);
+            _albumsRepositoryMock.Setup(s => s.TryRemoveAlbumById(1)).Returns(false);
 
-            var result = _albumService.TryRemoveAlbumById(1);
+            var result = _albumsService.TryRemoveAlbumById(1);
 
             Assert.That(result, Is.EqualTo(false));
+        }
+
+        [Test]
+        public void FindAlbumsByReleaseYear_Calls_Correct_Repo_Method()
+        {
+            List<AlbumReturnDto> allAlbumDtos =
+            [
+                new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
+            ];
+
+            _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(allAlbumDtos);
+
+            _albumsService.FindAlbumsByReleaseYear(2025);
+
+            _albumsRepositoryMock.Verify(s => s.FindAllAlbums(), Times.Once());
+        }
+
+        [Test]
+        public void FindAlbumsByReleaseYear_Returns_Correct_AlbumDtos()
+        {
+            List<AlbumReturnDto> allAlbumDtos =
+            [
+                new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
+                new(1, "Name2", "Artist1", 2002, "Genre1", "Information", 1)
+            ];
+
+            List<AlbumReturnDto> albumsWithYear =
+            [
+                new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
+            ];
+
+            _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(allAlbumDtos);
+
+            var result = _albumsService.FindAlbumsByReleaseYear(2001);
+
+            Assert.That(result, Is.EqualTo(albumsWithYear));
+        }
+
+        [Test]
+        public void FindAlbumsByReleaseYear_Returns_Empty_List_If_Not_Found()
+        {
+            List<AlbumReturnDto> emptyList = [];
+
+            _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(emptyList);
+
+            var result = _albumsService.FindAlbumsByReleaseYear(2025);
+
+            Assert.That(result, Is.EqualTo(emptyList));
+        }
+
+        [Test]
+        public void FindAlbumsByGenre_Calls_Correct_Repo_Method()
+        {
+            List<AlbumReturnDto> allAlbumDtos =
+            [
+                new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
+            ];
+
+            _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(allAlbumDtos);
+
+            _albumsService.FindAlbumsByGenre(Genres.Folk);
+
+            _albumsRepositoryMock.Verify(s => s.FindAllAlbums(), Times.Once());
+        }
+
+        [Test]
+        public void FindAlbumsByGenre_Returns_Correct_AlbumDtos()
+        {
+            List<AlbumReturnDto> allAlbumDtos =
+            [
+                new(1, "Name1", "Artist1", 2001, "Folk", "Information", 1),
+                new(1, "Name2", "Artist1", 2002, "Genre2", "Information", 1)
+            ];
+
+            List<AlbumReturnDto> albumsWithGenre =
+            [
+                new(1, "Name1", "Artist1", 2001, "Folk", "Information", 1),
+            ];
+
+            _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(allAlbumDtos);
+
+            var result = _albumsService.FindAlbumsByGenre(Genres.Folk);
+
+            Assert.That(result, Is.EqualTo(albumsWithGenre));
+        }
+
+        [Test]
+        public void FindAlbumsByGenre_Returns_Empty_List_If_Not_Found()
+        {
+            List<AlbumReturnDto> emptyList = [];
+
+            _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(emptyList);
+
+            var result = _albumsService.FindAlbumsByGenre(Genres.Folk);
+
+            Assert.That(result, Is.EqualTo(emptyList));
+        }
+
+        [Test]
+        public void FindAlbumByName_Calls_Correct_Repo_Method()
+        {
+            List<AlbumReturnDto> allAlbumDtos =
+            [
+                new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
+            ];
+
+            _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(allAlbumDtos);
+
+            _albumsService.FindAlbumByName("Name1");
+
+            _albumsRepositoryMock.Verify(s => s.FindAllAlbums(), Times.Once());
+        }
+
+        [Test]
+        public void FindAlbumByName_Returns_Correct_AlbumDtos()
+        {
+            List<AlbumReturnDto> allAlbumDtos =
+            [
+                new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
+                new(1, "Name2", "Artist1", 2001, "Genre1", "Information", 1)
+            ];
+
+            List<AlbumReturnDto> albumsWithName =
+            [
+                new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
+            ];
+
+            _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(allAlbumDtos);
+
+            var result = _albumsService.FindAlbumByName("Name1");
+
+            Assert.That(result, Is.EqualTo(albumsWithName));
+        }
+
+        [Test]
+        public void FindAlbumByName_Returns_Empty_List_If_Not_Found()
+        {
+            List<AlbumReturnDto> emptyList = [];
+
+            _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(emptyList);
+
+            var result = _albumsService.FindAlbumByName("Name");
+
+            Assert.That(result, Is.EqualTo(emptyList));
         }
     }
 }

@@ -7,11 +7,11 @@ namespace RecordStoreAPI.Controllers
     [Route("/[controller]")]
     public class GenresController : ControllerBase
     {
-        private readonly IGenreService _genreService;
+        private readonly IGenresService _genreService;
 
-        public GenresController(IGenreService genreService)
+        public GenresController(IGenresService genresService)
         {
-            _genreService = genreService;
+            _genreService = genresService;
         }
 
         [HttpGet]

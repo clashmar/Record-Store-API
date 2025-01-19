@@ -9,22 +9,22 @@ namespace RecordStoreAPI.Tests
 {
     public class ArtistServiceTests
     {
-        private Mock<IArtistRepository> _artistRepositoryMock;
-        private ArtistService _artistService;
+        private Mock<IArtistsRepository> _artistsRepositoryMock;
+        private ArtistsService _artistsService;
 
         [SetUp]
         public void Setup()
         {
-            _artistRepositoryMock = new Mock<IArtistRepository>();
-            _artistService = new ArtistService(_artistRepositoryMock.Object);
+            _artistsRepositoryMock = new Mock<IArtistsRepository>();
+            _artistsService = new ArtistsService(_artistsRepositoryMock.Object);
         }
 
         [Test]
         public void FindAllArtists_Calls_Correct_Service_Method()
         {
-            _artistService.FindAllArtists();
+            _artistsService.FindAllArtists();
 
-            _artistRepositoryMock.Verify(s => s.FindAllArtists(), Times.Once());
+            _artistsRepositoryMock.Verify(s => s.FindAllArtists(), Times.Once());
         }
 
         [Test]
@@ -36,9 +36,9 @@ namespace RecordStoreAPI.Tests
                 new() { ArtistID = 2, Name = "Artist2"}
             ];
 
-            _artistRepositoryMock.Setup(s => s.FindAllArtists()).Returns(artists as IEnumerable<Artist>);
+            _artistsRepositoryMock.Setup(s => s.FindAllArtists()).Returns(artists as IEnumerable<Artist>);
 
-            var result = _artistService.FindAllArtists();
+            var result = _artistsService.FindAllArtists();
 
             Assert.That(result, Is.EquivalentTo(artists));
         }
@@ -46,9 +46,9 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void FindAlbumsByArtistId_Calls_Correct_Service_Method()
         {
-            _artistService.FindAlbumsByArtistId(1);
+            _artistsService.FindAlbumsByArtistId(1);
 
-            _artistRepositoryMock.Verify(s => s.FindAlbumsByArtistId(1), Times.Once());
+            _artistsRepositoryMock.Verify(s => s.FindAlbumsByArtistId(1), Times.Once());
         }
 
         [Test]
@@ -60,9 +60,9 @@ namespace RecordStoreAPI.Tests
                 new(2, "Name2", "Artist2", 2002, "Genre2", "Information", 2)
             };
 
-            _artistRepositoryMock.Setup(s => s.FindAlbumsByArtistId(1)).Returns(albums);
+            _artistsRepositoryMock.Setup(s => s.FindAlbumsByArtistId(1)).Returns(albums);
 
-            var result = _artistService.FindAlbumsByArtistId(1);
+            var result = _artistsService.FindAlbumsByArtistId(1);
 
             Assert.That(result, Is.EquivalentTo(albums));
         }
