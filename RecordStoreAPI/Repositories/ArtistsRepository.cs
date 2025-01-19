@@ -1,4 +1,5 @@
-﻿using RecordStoreAPI.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RecordStoreAPI.Data;
 using RecordStoreAPI.Models;
 
 namespace RecordStoreAPI.Repositories
@@ -6,7 +7,7 @@ namespace RecordStoreAPI.Repositories
     public interface IArtistsRepository
     {
         IEnumerable<Artist> FindAllArtists();
-        List<AlbumReturnDto>? FindAlbumsByArtistId(int id);
+        List<Album>? FindAlbumsByArtistId(int id);
     }
     public class ArtistsRepository : IArtistsRepository
     {
@@ -19,17 +20,17 @@ namespace RecordStoreAPI.Repositories
 
         public IEnumerable<Artist> FindAllArtists()
         {
-            return _db.Artists;
+            return _db.Artists
+                .Include(a => a.Albums);
         }
 
-        public List<AlbumReturnDto>? FindAlbumsByArtistId(int id)
+        public List<Album>? FindAlbumsByArtistId(int id)
         {
-            Artist? artist = _db.Artists.FirstOrDefault(a => a.ArtistID == id)!;
-            if(artist == null) return null;
+            Artist? artist = _db.Artists
+                .Include(a => a.Albums)
+                .FirstOrDefault(a => a.ArtistID == id);
 
-            return _db.Albums.Where(album => album.ArtistID == id)
-                .Select(album => DTOExtensions.ToAlbumReturnDto(album, artist.Name!))
-                .ToList();
+            return artist?.Albums;
         }
     }
 }

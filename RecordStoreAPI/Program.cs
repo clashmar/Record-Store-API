@@ -2,6 +2,7 @@ using RecordStoreAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using RecordStoreAPI.Repositories;
 using RecordStoreAPI.Services;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +17,10 @@ else
     builder.Configuration.GetConnectionString("DefaultConnection")));
 }
 
-builder.Services.AddControllers()
-                .AddNewtonsoftJson();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -29,6 +32,7 @@ builder.Services.AddScoped<IGenresRepository, GenresRepository>();
 builder.Services.AddScoped<IGenresService, GenresService>();
 builder.Services.AddScoped<IArtistsRepository, ArtistsRepository>();
 builder.Services.AddScoped<IArtistsService, ArtistsService>();
+
 
 var app = builder.Build();
 
