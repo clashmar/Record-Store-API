@@ -31,9 +31,9 @@ namespace RecordStoreAPI.Models
     public record AlbumReturnDto(
         int Id,
         string Name,
-        string Artist,
+        string? Artist,
         int ReleaseYear,
-        string Genre,
+        List<string>? Genres,
         string Information,
         int StockQuantity
         );

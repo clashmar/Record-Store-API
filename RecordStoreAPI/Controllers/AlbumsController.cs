@@ -15,7 +15,7 @@ namespace RecordStoreAPI.Controllers
             _albumsService = albumsService;
         }
 
-        [HttpGet("Test")]
+        [HttpGet]
         public IActionResult GetAllAlbums()
         {
             var result = _albumsService.FindAllAlbums();

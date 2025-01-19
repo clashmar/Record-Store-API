@@ -14,7 +14,7 @@ namespace RecordStoreAPI.Models
         public Album? Album { get; set; }
 
         [ForeignKey("GenreID")]
-        public int GenreID { get; set; }
+        public Genres GenreID { get; set; }
 
         public Genre? Genre { get; set; }
     }

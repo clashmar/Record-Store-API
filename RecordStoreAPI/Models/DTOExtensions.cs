@@ -2,14 +2,14 @@
 {
     public class DTOExtensions
     {
-        public static AlbumReturnDto ToAlbumReturnDto(Album album, string artistName)
+        public static AlbumReturnDto ToAlbumReturnDto(Album album)
         {
             return new AlbumReturnDto(
                         album.Id,
                         album.Name,
-                        artistName,
+                        album.Artist.Name,
                         album.ReleaseYear,
-                        Genre.ToString(album.GenreID),
+                        album.Genres!.Select(g => Genre.ToString(g.GenreID)).ToList()!,
                         album.Information,
                         album.StockQuantity
                         );

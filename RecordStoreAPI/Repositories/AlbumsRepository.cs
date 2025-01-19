@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RecordStoreAPI.Data;
 using RecordStoreAPI.Models;
 
@@ -12,6 +11,7 @@ namespace RecordStoreAPI.Repositories
         AlbumReturnDto? AddNewAlbum(AlbumPutDto albumDto);
         AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album);
         bool TryRemoveAlbumById(int id);
+        List<Album>? FindAlbumsByReleaseYear(int releaseYear);
         List<Album>? FindAlbumsByGenre(Genres genre);
     }
     public class AlbumsRepository : IAlbumsRepository
@@ -27,23 +27,17 @@ namespace RecordStoreAPI.Repositories
         {
             return _db.Albums
                 .Include(a => a.Artist)
+                .Include(a => a.Genres)!
+                .ThenInclude(ag => ag.Genre)
                 .ToList();
         }
 
-        //public List<AlbumReturnDto> FindAllAlbums()
-        //{
-        //    return _db.Albums
-        //        .Join(_db.Artists,
-        //        album => album.ArtistID,
-        //        artist => artist.ArtistID,
-        //        (album, artist) => new { Album = album, ArtistName = artist.Name }
-        //        )
-        //        .Select(q => DTOExtensions.ToAlbumReturnDto(q.Album, q.ArtistName!))
-        //        .ToList();
-        //}
         public Album? FindAlbumById(int id)
         {
-            return FindAllAlbums()
+            return _db.Albums
+                .Include(a => a.Artist)
+                .Include(a => a.Genres)!
+                .ThenInclude(ag => ag.Genre)
                 .FirstOrDefault(a => a.Id == id);
         }
 
@@ -59,7 +53,7 @@ namespace RecordStoreAPI.Repositories
                 Album album = DTOExtensions.PutDtoToAlbum(albumPutDto);
                 _db.Albums.Add(album);
                 _db.SaveChanges();
-                return DTOExtensions.ToAlbumReturnDto(album, artist!.Name!);
+                return DTOExtensions.ToAlbumReturnDto(album);
             }
             catch
             {
@@ -81,7 +75,7 @@ namespace RecordStoreAPI.Repositories
 
             _db.Update(albumToUpdate);
             _db.SaveChanges();
-            return DTOExtensions.ToAlbumReturnDto(albumToUpdate, artist.Name!);
+            return DTOExtensions.ToAlbumReturnDto(albumToUpdate);
         }
 
         public bool TryRemoveAlbumById(int id)
@@ -92,24 +86,34 @@ namespace RecordStoreAPI.Repositories
             _db.SaveChanges();
             return true;
         }
-
-        public Artist? CheckArtistExists(int artistID)
+        public List<Album>? FindAlbumsByReleaseYear(int releaseYear)
         {
-            Artist? artist = _db.Artists.Where(a => a.ArtistID == artistID).FirstOrDefault();
-            return artist ?? null;
-        }
-        public bool CheckGenreExists(Genres genreID)
-        {
-            return _db.Genres.FirstOrDefault(g => g.GenreID == Convert.ToInt32(genreID)) != null;
+            return _db.Albums
+                .Include(a => a.Artist)
+                .Include(a => a.Genres)!
+                .ThenInclude(ag => ag.Genre)
+                .Where(a => a.ReleaseYear == releaseYear)
+                .ToList();
         }
 
         public List<Album>? FindAlbumsByGenre(Genres genre)
         {
             return _db.Albums
                 .Include(a => a.Artist)
-                .Include(a => a.Genres)
-                .Where(a => a.Genres!.Any(g => g.GenreID == Convert.ToInt32(genre)))
+                .Include(a => a.Genres)!
+                .ThenInclude(ag => ag.Genre)
+                .Where(a => a.Genres!.Any(g => g.GenreID == genre))
                 .ToList();
+        }
+
+        public Artist? CheckArtistExists(int artistID)
+        {
+            Artist? artist = _db.Artists.Where(a => a.ArtistID == artistID).FirstOrDefault();
+            return artist ?? null;
+        }
+        public bool CheckGenreExists(Genres genre)
+        {
+            return _db.Genres.FirstOrDefault(g => g.GenreID == genre) != null;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace RecordStoreAPI.Models
     public class Genre
     {
         [Key]
-        public int GenreID { get; set; }
+        public Genres GenreID { get; set; }
 
         [Required]
         public string? Name { get; set; }
@@ -29,16 +29,10 @@ namespace RecordStoreAPI.Models
         /// </summary>
         /// <param name="genre"></param>
         /// <returns></returns>
-        public static string ToString(int genreID)
-        {
-            Genres genre = (Genres)genreID;
-
-            return genre.ToString().Replace('_', '-');
-        }
-
         public static string ToString(Genres genre)
         {
             return genre.ToString().Replace('_', '-');
         }
+
     }
 }
