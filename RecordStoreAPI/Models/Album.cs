@@ -18,7 +18,7 @@ namespace RecordStoreAPI.Models
         
         public int ReleaseYear { get; set; }
 
-        public List<AlbumGenre>? Genres { get; set; }
+        public List<AlbumGenre>? AlbumGenres { get; set; }
 
         public string Information { get; set; } = "No information available.";
 

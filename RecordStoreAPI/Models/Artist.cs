@@ -11,5 +11,11 @@ namespace RecordStoreAPI.Models
         public string? Name { get; set; }
 
         public List<Album>? Albums { get; set; }
+
+        public record ArtistDto(
+            int ArtistID,
+            string Name,
+            List<AlbumReturnDto> Albums
+            );
     }
 }

@@ -12,7 +12,7 @@ namespace RecordStoreAPI.Services
         bool TryRemoveAlbumById(int id);
         List<AlbumReturnDto>? FindAlbumsByReleaseYear(int releaseYear);
         List<AlbumReturnDto>? FindAlbumsByGenre(Genres genre);
-        List<Album>? FindAlbumByName(string name);
+        List<AlbumReturnDto>? FindAlbumByName(string name);
     }
     public class AlbumsService : IAlbumsService
     {
@@ -65,10 +65,11 @@ namespace RecordStoreAPI.Services
             return albums?.Select(a => DTOExtensions.ToAlbumReturnDto(a)).ToList();
         }
 
-        public List<Album>? FindAlbumByName(string name)
+        public List<AlbumReturnDto>? FindAlbumByName(string name)
         {
             return _albumsRepository.FindAllAlbums()
                 .Where(a => a.Name.ToLower().Contains(name.ToLower()))
+                .Select(a => DTOExtensions.ToAlbumReturnDto(a))
                 .ToList();
         }
     }

@@ -27,7 +27,7 @@ namespace RecordStoreAPI.Repositories
         {
             return _db.Albums
                 .Include(a => a.Artist)
-                .Include(a => a.Genres)!
+                .Include(a => a.AlbumGenres)!
                 .ThenInclude(ag => ag.Genre)
                 .ToList();
         }
@@ -36,7 +36,7 @@ namespace RecordStoreAPI.Repositories
         {
             return _db.Albums
                 .Include(a => a.Artist)
-                .Include(a => a.Genres)!
+                .Include(a => a.AlbumGenres)!
                 .ThenInclude(ag => ag.Genre)
                 .FirstOrDefault(a => a.Id == id);
         }
@@ -48,7 +48,7 @@ namespace RecordStoreAPI.Repositories
 
             Album album = DTOExtensions.PutDtoToAlbum(albumPutDto);
 
-            album.Genres = albumPutDto.Genres
+            album.AlbumGenres = albumPutDto.Genres
                 .Select(g => new AlbumGenre() { AlbumID = album.Id, GenreID = g })
                 .ToList();
 
@@ -88,7 +88,7 @@ namespace RecordStoreAPI.Repositories
         {
             return _db.Albums
                 .Include(a => a.Artist)
-                .Include(a => a.Genres)!
+                .Include(a => a.AlbumGenres)!
                 .ThenInclude(ag => ag.Genre)
                 .Where(a => a.ReleaseYear == releaseYear)
                 .ToList();
@@ -98,9 +98,9 @@ namespace RecordStoreAPI.Repositories
         {
             return _db.Albums
                 .Include(a => a.Artist)
-                .Include(a => a.Genres)!
+                .Include(a => a.AlbumGenres)!
                 .ThenInclude(ag => ag.Genre)
-                .Where(a => a.Genres!.Any(g => g.GenreID == genre))
+                .Where(a => a.AlbumGenres!.Any(g => g.GenreID == genre))
                 .ToList();
         }
 

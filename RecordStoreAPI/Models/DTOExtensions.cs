@@ -1,4 +1,6 @@
-﻿namespace RecordStoreAPI.Models
+﻿using static RecordStoreAPI.Models.Artist;
+
+namespace RecordStoreAPI.Models
 {
     public class DTOExtensions
     {
@@ -9,7 +11,7 @@
                         album.Name,
                         album.Artist.Name,
                         album.ReleaseYear,
-                        album.Genres!.Select(g => Genre.ToString(g.GenreID)).ToList()!,
+                        album.AlbumGenres?.Select(g => Genre.ToString(g.GenreID)).ToList()!,
                         album.Information,
                         album.StockQuantity
                         );
@@ -25,12 +27,22 @@
                 StockQuantity = albumPutDto.StockQuantity,
             };
         }
+
+        public static ArtistDto ToArtistDto(Artist artist)
+        {
+            return new ArtistDto(
+                artist.ArtistID,
+                artist.Name!,
+                artist.Albums!.Select(a => ToAlbumReturnDto(a)).ToList()
+                );
+        }
+        
         public static void MapAlbumProperties(Album target, AlbumPutDto source)
         {
             target.Name = source.Name;
             target.ArtistID = source.ArtistID;
             target.ReleaseYear = source.ReleaseYear;
-            target.Genres = source.Genres
+            target.AlbumGenres = source.Genres
                 .Select(g => new AlbumGenre() { AlbumID = target.Id, GenreID = g })
                 .ToList();
             target.Information = source.Information;

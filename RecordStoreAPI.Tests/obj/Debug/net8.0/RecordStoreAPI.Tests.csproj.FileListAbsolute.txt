@@ -200,3 +200,6 @@ C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreAPI.Tes
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreAPI.Tests\obj\Debug\net8.0\RecordStoreAPI.Tests.pdb
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreAPI.Tests\obj\Debug\net8.0\RecordStoreAPI.Tests.genruntimeconfig.cache
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreAPI.Tests\obj\Debug\net8.0\ref\RecordStoreAPI.Tests.dll
+C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreAPI.Tests\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreAPI.Tests\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreAPI.Tests\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll

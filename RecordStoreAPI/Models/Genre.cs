@@ -24,6 +24,8 @@ namespace RecordStoreAPI.Models
 
         public List<AlbumGenre>? Albums { get; set; }
 
+        public record GenreDto(Genres GenreID, string Name);
+
         /// <summary>
         /// Returns a user friendly value for the given enum.
         /// </summary>

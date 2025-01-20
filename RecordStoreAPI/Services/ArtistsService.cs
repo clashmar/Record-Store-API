@@ -1,12 +1,13 @@
 ﻿using RecordStoreAPI.Models;
 using RecordStoreAPI.Repositories;
+using static RecordStoreAPI.Models.Artist;
 
 namespace RecordStoreAPI.Services
 {
     public interface IArtistsService
     {
-        List<Artist>? FindAllArtists();
-        List<Album>? FindAlbumsByArtistId(int id);
+        List<ArtistDto>? FindAllArtists();
+        List<AlbumReturnDto>? FindAlbumsByArtistId(int id);
     }
     public class ArtistsService : IArtistsService
     {
@@ -17,13 +18,16 @@ namespace RecordStoreAPI.Services
             _artistsRepository = artistsRepository;
         }
 
-        public List<Artist>? FindAllArtists()
+        public List<ArtistDto>? FindAllArtists()
         {
-            return _artistsRepository.FindAllArtists().ToList();
+            return _artistsRepository.FindAllArtists()
+                .Select(a => DTOExtensions.ToArtistDto(a))
+                .ToList();
         }
-        public List<Album>? FindAlbumsByArtistId(int id)
+        public List<AlbumReturnDto>? FindAlbumsByArtistId(int id)
         {
-            return _artistsRepository.FindAlbumsByArtistId(id);
+            List<Album>? albums = _artistsRepository.FindAlbumsByArtistId(id);
+            return albums?.Select(a => DTOExtensions.ToAlbumReturnDto(a)).ToList();
         }
     }
 }

@@ -3,6 +3,7 @@ using Moq;
 using RecordStoreAPI.Controllers;
 using RecordStoreAPI.Models;
 using RecordStoreAPI.Services;
+using static RecordStoreAPI.Models.Artist;
 
 namespace RecordStoreAPI.Tests
 {
@@ -29,10 +30,9 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAllArtists_Returns_All_Artists()
         {
-            List<Artist> artists =
+            List<ArtistDto> artists =
             [
-                new() { ArtistID = 1, Name = "Artist1"},
-                new() { ArtistID = 2, Name = "Artist2"}
+                new(1, "Artist1", [])
             ];
 
             _artistsServiceMock.Setup(s => s.FindAllArtists()).Returns(artists);
@@ -67,8 +67,8 @@ namespace RecordStoreAPI.Tests
         {
             List<AlbumReturnDto> albums = new List<AlbumReturnDto>
             {
-                new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
-                new(2, "Name2", "Artist1", 2002, "Genre2", "Information", 2)
+                new(1, "Name1", "Artist1", 2001, [], "Information", 1),
+                new(2, "Name2", "Artist1", 2002, [], "Information", 2)
             };
 
             _artistsServiceMock.Setup(s => s.FindAlbumsByArtistId(1)).Returns(albums);
