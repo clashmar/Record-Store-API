@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RecordStoreAPI.Models;
 using RecordStoreAPI.Services;
 
 namespace RecordStoreAPI.Controllers
@@ -19,7 +20,7 @@ namespace RecordStoreAPI.Controllers
         {
             var result = _genreService.FindAllGenres();
             if (result != null && result.Count > 0) return Ok(result);
-            return BadRequest("There are currenty no genres.");
+            return NotFound("Could not find genres.");
         }
     }
 }

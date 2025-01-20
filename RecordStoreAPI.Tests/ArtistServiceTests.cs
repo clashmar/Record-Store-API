@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Moq;
-using RecordStoreAPI.Controllers;
+﻿using Moq;
 using RecordStoreAPI.Models;
 using RecordStoreAPI.Repositories;
 using RecordStoreAPI.Services;
+using System.Text.Json;
+using static RecordStoreAPI.Models.Artist;
 
 namespace RecordStoreAPI.Tests
 {
@@ -22,6 +22,13 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void FindAllArtists_Calls_Correct_Service_Method()
         {
+            List<Artist> artists =
+            [
+                new() { ArtistID = 1, Name = "Artist1", Albums = []}
+            ];
+
+            _artistsRepositoryMock.Setup(s => s.FindAllArtists()).Returns(artists);
+
             _artistsService.FindAllArtists();
 
             _artistsRepositoryMock.Verify(s => s.FindAllArtists(), Times.Once());
@@ -32,15 +39,22 @@ namespace RecordStoreAPI.Tests
         {
             List<Artist> artists =
             [
-                new() { ArtistID = 1, Name = "Artist1"},
-                new() { ArtistID = 2, Name = "Artist2"}
+                new() { ArtistID = 1, Name = "Artist1", Albums = []}
             ];
 
-            _artistsRepositoryMock.Setup(s => s.FindAllArtists()).Returns(artists as IEnumerable<Artist>);
+            List<ArtistDto> dtos =
+            [
+                new(1, "Artist1", [])
+            ];
+
+            _artistsRepositoryMock.Setup(s => s.FindAllArtists()).Returns(artists);
 
             var result = _artistsService.FindAllArtists();
 
-            Assert.That(result, Is.EquivalentTo(artists));
+            var jsonResult = JsonSerializer.Serialize(result);
+            var jsonDto = JsonSerializer.Serialize(dtos);
+
+            Assert.That(jsonDto, Is.EqualTo(jsonResult));
         }
 
         [Test]
@@ -54,17 +68,31 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void FindAlbumsByArtistId_Returns_Correct_Albums()
         {
-            List<AlbumReturnDto> albums = new List<AlbumReturnDto>
+            List<Album> albums =
+            [
+                new() {
+                    Id = 1,
+                    Name = "Name1",
+                    Artist = new() { Name = "Artist1" },
+                    ReleaseYear = 2001,
+                    AlbumGenres = [],
+                    Information = "Information",
+                    StockQuantity = 1 },
+            ];
+
+            List<AlbumReturnDto> dtos = new List<AlbumReturnDto>
             {
-                new(1, "Name1", "Artist1", 2001, "Genre1", "Information", 1),
-                new(2, "Name2", "Artist2", 2002, "Genre2", "Information", 2)
+                new(1, "Name1", "Artist1", 2001, [], "Information", 1),
             };
 
             _artistsRepositoryMock.Setup(s => s.FindAlbumsByArtistId(1)).Returns(albums);
 
             var result = _artistsService.FindAlbumsByArtistId(1);
 
-            Assert.That(result, Is.EquivalentTo(albums));
+            var jsonResult = JsonSerializer.Serialize(result);
+            var jsonDto = JsonSerializer.Serialize(dtos);
+
+            Assert.That(jsonDto, Is.EqualTo(jsonResult));
         }
     }
 }

@@ -13,7 +13,6 @@ namespace RecordStoreAPI.Models
         Electronic,
         Alternative,
         Emo
-
     }
     public class Genre
     {
@@ -23,9 +22,19 @@ namespace RecordStoreAPI.Models
         [Required]
         public string? Name { get; set; }
 
+        public List<AlbumGenre>? Albums { get; set; }
+
+        public record GenreDto(Genres GenreID, string Name);
+
+        /// <summary>
+        /// Returns a user friendly value for the given enum.
+        /// </summary>
+        /// <param name="genre"></param>
+        /// <returns></returns>
         public static string ToString(Genres genre)
         {
             return genre.ToString().Replace('_', '-');
         }
+
     }
 }

@@ -1,11 +1,12 @@
 ﻿using RecordStoreAPI.Models;
 using RecordStoreAPI.Repositories;
+using static RecordStoreAPI.Models.Genre;
 
 namespace RecordStoreAPI.Services
 {
     public interface IGenresService
     {
-        List<Genre> FindAllGenres();
+        List<GenreDto> FindAllGenres();
     }
     public class GenresService : IGenresService
     {
@@ -16,10 +17,10 @@ namespace RecordStoreAPI.Services
             _genresRepository = genresRepository;
         }
 
-        public List<Genre> FindAllGenres()
+        public List<GenreDto> FindAllGenres()
         {
             return _genresRepository.FindAllGenres()
-                .Select(g => { g.Name = Genre.ToString(g.GenreID); return g; })
+                .Select(g => new GenreDto(g.GenreID, g.Name = Genre.ToString(g.GenreID)))
                 .ToList();
         }
     }
