@@ -3,7 +3,6 @@ using RecordStoreAPI.Models;
 using RecordStoreAPI.Repositories;
 using RecordStoreAPI.Services;
 using System.Text.Json;
-using static RecordStoreAPI.Models.Artist;
 
 namespace RecordStoreAPI.Tests
 {

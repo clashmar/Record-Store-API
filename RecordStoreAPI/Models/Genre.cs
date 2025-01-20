@@ -20,11 +20,9 @@ namespace RecordStoreAPI.Models
         public Genres GenreID { get; set; }
 
         [Required]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
-        public List<AlbumGenre>? Albums { get; set; }
-
-        public record GenreDto(Genres GenreID, string Name);
+        public List<AlbumGenre> Albums { get; set; } = [];
 
         /// <summary>
         /// Returns a user friendly value for the given enum.
@@ -35,6 +33,6 @@ namespace RecordStoreAPI.Models
         {
             return genre.ToString().Replace('_', '-');
         }
-
     }
+    public record GenreDto(Genres GenreID, string Name);
 }

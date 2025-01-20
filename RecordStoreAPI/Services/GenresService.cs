@@ -1,6 +1,5 @@
 ﻿using RecordStoreAPI.Models;
 using RecordStoreAPI.Repositories;
-using static RecordStoreAPI.Models.Genre;
 
 namespace RecordStoreAPI.Services
 {

@@ -3,7 +3,6 @@ using Moq;
 using RecordStoreAPI.Controllers;
 using RecordStoreAPI.Models;
 using RecordStoreAPI.Services;
-using static RecordStoreAPI.Models.Artist;
 
 namespace RecordStoreAPI.Tests
 {
