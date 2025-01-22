@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RecordStoreAPI.Models
+namespace RecordStoreAPI.Entities
 {
     public class AlbumGenre
     {

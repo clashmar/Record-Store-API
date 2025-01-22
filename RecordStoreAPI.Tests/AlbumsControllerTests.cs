@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using RecordStoreAPI.Controllers;
-using RecordStoreAPI.Models;
+using RecordStoreAPI.Entities;
 using RecordStoreAPI.Services;
 
 namespace RecordStoreAPI.Tests
@@ -31,8 +31,8 @@ namespace RecordStoreAPI.Tests
         {
             List<AlbumReturnDto> albums =
             [
-                new(1, "Name1", "Artist1", 2001, [], "Information", 1),
-                new(2, "Name2", "Artist2", 2002, [], "Information", 2)
+                new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1),
+                new(2, "Name2", "Artist2", 2002, [], "Information", 2, 1)
             ];
 
             _albumsServiceMock.Setup(s => s.FindAllAlbums()).Returns(albums);
@@ -65,7 +65,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAlbumById_Returns_Correct_AlbumDto()
         {
-            AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, [], "Information", 1);
+            AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1);
 
             _albumsServiceMock.Setup(s => s.FindAlbumById(1)).Returns(returnDto);
 

@@ -1,4 +1,4 @@
-﻿using RecordStoreAPI.Models;
+﻿using RecordStoreAPI.Entities;
 using RecordStoreAPI.Repositories;
 
 namespace RecordStoreAPI.Services

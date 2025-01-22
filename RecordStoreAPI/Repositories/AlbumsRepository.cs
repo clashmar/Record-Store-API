@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecordStoreAPI.Data;
-using RecordStoreAPI.Models;
+using RecordStoreAPI.Entities;
 
 namespace RecordStoreAPI.Repositories
 {
@@ -81,7 +81,7 @@ namespace RecordStoreAPI.Repositories
             Album? album = _db.Albums.FirstOrDefault(a => a.Id == id);
             if (album == null) return false;
             _db.Remove(album);
-            _db.SaveChangesAsync();
+            _db.SaveChanges();
             return true;
         }
         public List<Album>? FindAlbumsByReleaseYear(int releaseYear)

@@ -1,11 +1,11 @@
-﻿using RecordStoreAPI.Models;
+﻿using RecordStoreAPI.Entities;
 using RecordStoreAPI.Repositories;
 
 namespace RecordStoreAPI.Services
 {
     public interface IAlbumsService
     {
-        List<AlbumReturnDto>? FindAllAlbums();
+        List<AlbumReturnDto> FindAllAlbums();
         AlbumReturnDto? FindAlbumById(int id);
         AlbumReturnDto? AddNewAlbum(AlbumPutDto album);
         AlbumReturnDto? UpdateAlbum(int id, AlbumPutDto album);
@@ -23,11 +23,11 @@ namespace RecordStoreAPI.Services
             _albumsRepository = albumsRepository;
         }
 
-        public List<AlbumReturnDto>? FindAllAlbums()
+        public List<AlbumReturnDto> FindAllAlbums()
         {
             return _albumsRepository.FindAllAlbums()
                 .Select(a => DTOExtensions.ToAlbumReturnDto(a))
-                .ToList();
+                .ToList()!;
         }
 
         public AlbumReturnDto? FindAlbumById(int id)

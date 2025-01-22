@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using RecordStoreAPI.Controllers;
-using RecordStoreAPI.Models;
+using RecordStoreAPI.Entities;
 using RecordStoreAPI.Services;
 
 namespace RecordStoreAPI.Tests

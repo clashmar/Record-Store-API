@@ -1,6 +1,6 @@
-﻿using RecordStoreAPI.Models;
+﻿using RecordStoreAPI.Entities;
 using RecordStoreAPI.Repositories;
-using static RecordStoreAPI.Models.Artist;
+using static RecordStoreAPI.Entities.Artist;
 
 namespace RecordStoreAPI.Services
 {

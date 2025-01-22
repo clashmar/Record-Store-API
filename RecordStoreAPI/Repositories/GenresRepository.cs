@@ -1,5 +1,5 @@
 ﻿using RecordStoreAPI.Data;
-using RecordStoreAPI.Models;
+using RecordStoreAPI.Entities;
 
 namespace RecordStoreAPI.Repositories
 {

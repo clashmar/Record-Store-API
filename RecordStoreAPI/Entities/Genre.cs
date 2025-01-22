@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RecordStoreAPI.Models
+namespace RecordStoreAPI.Entities
 {
     public enum Genres
     {

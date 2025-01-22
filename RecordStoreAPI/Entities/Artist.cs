@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RecordStoreAPI.Models
+namespace RecordStoreAPI.Entities
 {
     public class Artist
     {
         [Key]
         public int ArtistID { get; set; }
-        
+
         [Required]
         public string? Name { get; set; }
 

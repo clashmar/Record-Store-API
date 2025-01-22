@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RecordStoreAPI.Models;
+using RecordStoreAPI.Entities;
 
 namespace RecordStoreAPI.Data
 {

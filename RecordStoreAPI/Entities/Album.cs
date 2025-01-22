@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RecordStoreAPI.Models
+namespace RecordStoreAPI.Entities
 {
     public class Album
     {
         [Key]
-        public int Id { get; set; } 
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -15,7 +15,7 @@ namespace RecordStoreAPI.Models
         public int ArtistID { get; set; }
 
         public Artist? Artist { get; set; }
-        
+
         public int ReleaseYear { get; set; }
 
         public List<AlbumGenre> AlbumGenres { get; set; } = [];
@@ -23,6 +23,8 @@ namespace RecordStoreAPI.Models
         public string Information { get; set; } = "No information available.";
 
         public int StockQuantity { get; set; }
+
+        public int PriceInPence { get; set; }
     }
 
     public record AlbumReturnDto(
@@ -32,7 +34,8 @@ namespace RecordStoreAPI.Models
         int ReleaseYear,
         List<string>? Genres,
         string Information,
-        int StockQuantity
+        int StockQuantity,
+        int PriceInPence
         );
 
     public record AlbumPutDto(
@@ -41,6 +44,7 @@ namespace RecordStoreAPI.Models
         int ReleaseYear,
         List<Genres> Genres,
         string Information,
-        int StockQuantity
+        int StockQuantity,
+        int PriceInPence
         );
 }

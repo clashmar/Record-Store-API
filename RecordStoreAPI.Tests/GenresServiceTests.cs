@@ -1,5 +1,5 @@
 ﻿using Moq;
-using RecordStoreAPI.Models;
+using RecordStoreAPI.Entities;
 using RecordStoreAPI.Repositories;
 using RecordStoreAPI.Services;
 

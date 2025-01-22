@@ -1,4 +1,4 @@
-﻿namespace RecordStoreAPI.Models
+﻿namespace RecordStoreAPI.Entities
 {
     public class DTOExtensions
     {
@@ -11,7 +11,8 @@
                         album.ReleaseYear,
                         album.AlbumGenres?.Select(g => Genre.ToString(g.GenreID)).ToList()!,
                         album.Information,
-                        album.StockQuantity
+                        album.StockQuantity,
+                        album.PriceInPence
                         );
         }
         public static Album PutDtoToAlbum(AlbumPutDto albumPutDto)
@@ -23,6 +24,7 @@
                 ReleaseYear = albumPutDto.ReleaseYear,
                 Information = albumPutDto.Information,
                 StockQuantity = albumPutDto.StockQuantity,
+                PriceInPence = albumPutDto.PriceInPence
             };
         }
 
@@ -34,7 +36,7 @@
                 artist.Albums?.Select(a => ToAlbumReturnDto(a)).ToList()!
                 );
         }
-        
+
         public static void MapAlbumProperties(Album target, AlbumPutDto source)
         {
             target.Name = source.Name;
@@ -45,6 +47,7 @@
                 .ToList()!;
             target.Information = source.Information;
             target.StockQuantity = source.StockQuantity;
+            target.PriceInPence = source.PriceInPence;
         }
     }
 }

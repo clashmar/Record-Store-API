@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RecordStoreAPI.Models;
+using RecordStoreAPI.Entities;
 using RecordStoreAPI.Services;
 
 namespace RecordStoreAPI.Controllers
