@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecordStoreAPI.Entities
 {
+    [PrimaryKey("AlbumID", "GenreID")]
     public class AlbumGenre
     {
-        [Key]
-        public int Id { get; set; }
-
-        [ForeignKey("ArtistID")]
+        [ForeignKey("AlbumID")]
         public int AlbumID { get; set; }
 
         public Album? Album { get; set; }

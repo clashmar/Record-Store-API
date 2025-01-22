@@ -15,10 +15,11 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2001,
                 AlbumGenres = new([new() { GenreID = Genres.Folk }]),
                 Information = "Information",
-                StockQuantity = 1
+                StockQuantity = 1,
+                PriceInPence = 1
             };
 
-            AlbumReturnDto dto = new(1, "Name1", "Name1", 2001, new(["Folk"]), "Information", 1);
+            AlbumReturnDto dto = new(1, "Name1", "Name1", 2001, new(["Folk"]), "Information", 1, 1);
 
             var result = DTOExtensions.ToAlbumReturnDto(album);
 
@@ -39,10 +40,11 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2001,
                 AlbumGenres = [],
                 Information = "Information",
-                StockQuantity = 1
+                StockQuantity = 1,
+                PriceInPence = 1
             };
 
-            AlbumReturnDto dto = new(1, "Name1", null, 2001, [], "Information", 1);
+            AlbumReturnDto dto = new(1, "Name1", null, 2001, [], "Information", 1, 1);
 
             var result = DTOExtensions.ToAlbumReturnDto(album);
 
@@ -55,7 +57,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PutDtoToAlbum_Returns_Correct_Album()
         {
-            AlbumPutDto dto = new("Name1", 1, 2001, new([Genres.Folk]), "Information", 1);
+            AlbumPutDto dto = new("Name1", 1, 2001, new([Genres.Folk]), "Information", 1, 1);
 
             Album album = new()
             {
@@ -63,7 +65,8 @@ namespace RecordStoreAPI.Tests
                 ArtistID = 1,
                 ReleaseYear = 2001,
                 Information = "Information",
-                StockQuantity = 1
+                StockQuantity = 1,
+                PriceInPence = 1
             };
 
             var result = DTOExtensions.PutDtoToAlbum(dto);
@@ -86,14 +89,15 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2001,
                 AlbumGenres = [],
                 Information = "Information",
-                StockQuantity = 1 },
+                StockQuantity = 1,
+                PriceInPence = 1},
             ];
 
             Artist artist = new() { ArtistID = 1, Name = "Name1", Albums = albums };
 
             List<AlbumReturnDto> dtos =
             [
-                new(1, "Name1", "Artist1", 2001, [], "Information", 1),
+                new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1),
             ];
 
             ArtistDto dto = new(1, "Name1", dtos);
@@ -117,10 +121,11 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2001,
                 AlbumGenres = new([new() { AlbumID = 1, GenreID = Genres.Folk }]),
                 Information = "Information",
-                StockQuantity = 1
+                StockQuantity = 1,
+                PriceInPence = 1
             };
 
-            AlbumPutDto dto = new("Name2", 2, 2002, new([Genres.Indie]), "MoreInformation", 2);
+            AlbumPutDto dto = new("Name2", 2, 2002, new([Genres.Indie]), "MoreInformation", 2, 2);
 
             Album updatedAlbum = new()
             {
@@ -130,7 +135,8 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2002,
                 AlbumGenres = new([new() { AlbumID = 1, GenreID = Genres.Indie }]),
                 Information = "MoreInformation",
-                StockQuantity = 2
+                StockQuantity = 2,
+                PriceInPence = 2
             };
 
             DTOExtensions.MapAlbumProperties(album, dto);
@@ -152,10 +158,11 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2001,
                 AlbumGenres = new([new() { AlbumID = 1, GenreID = Genres.Folk }]),
                 Information = "Information",
-                StockQuantity = 1
+                StockQuantity = 1,
+                PriceInPence = 1
             };
 
-            AlbumPutDto dto = new("Name2", 2, 2002, [], "MoreInformation", 2);
+            AlbumPutDto dto = new("Name2", 2, 2002, [], "MoreInformation", 2, 2);
 
             Album updatedAlbum = new()
             {
@@ -165,7 +172,8 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2002,
                 AlbumGenres = [],
                 Information = "MoreInformation",
-                StockQuantity = 2
+                StockQuantity = 2,
+                PriceInPence = 2
             };
 
             DTOExtensions.MapAlbumProperties(album, dto);

@@ -8,25 +8,26 @@ namespace RecordStoreAPI.Entities
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+        [Required(ErrorMessage = "Please enter a name.")]
+        public string Name { get; set; } = "";
 
         [ForeignKey("ArtistID")]
         public int ArtistID { get; set; }
 
         public Artist? Artist { get; set; }
 
+        [Required(ErrorMessage ="Please enter a year.")]
+        [Range(1860, int.MaxValue, ErrorMessage= "Please enter a release year after 1860.")] 
         public int ReleaseYear { get; set; }
 
         public List<AlbumGenre> AlbumGenres { get; set; } = [];
 
         public string Information { get; set; } = "No information available.";
 
-        public int StockQuantity { get; set; }
+        public int StockQuantity { get; set; } = 0;
 
-        public int PriceInPence { get; set; }
+        public int PriceInPence { get; set; } = 2000;
     }
-
     public record AlbumReturnDto(
         int Id,
         string Name,
@@ -39,12 +40,17 @@ namespace RecordStoreAPI.Entities
         );
 
     public record AlbumPutDto(
+        [Required(ErrorMessage = "Please enter a name.")]
         string Name,
         int ArtistID,
+        [Required(ErrorMessage ="Please enter a year.")]
+        [Range(1860, int.MaxValue, ErrorMessage="Please enter a release year after 1860.")]
         int ReleaseYear,
         List<Genres> Genres,
         string Information,
+        [Range(1, int.MaxValue, ErrorMessage="Please enter a value more than zero.")]
         int StockQuantity,
+        [Range(1, int.MaxValue, ErrorMessage="Please enter a value more than zero.")]
         int PriceInPence
         );
 }

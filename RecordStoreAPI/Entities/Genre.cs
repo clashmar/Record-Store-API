@@ -20,7 +20,7 @@ namespace RecordStoreAPI.Entities
         public Genres GenreID { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public List<AlbumGenre> Albums { get; set; } = [];
 

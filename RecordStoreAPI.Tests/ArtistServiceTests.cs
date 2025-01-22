@@ -70,18 +70,19 @@ namespace RecordStoreAPI.Tests
             List<Album> albums =
             [
                 new() {
-                    Id = 1,
-                    Name = "Name1",
-                    Artist = new() { Name = "Artist1" },
-                    ReleaseYear = 2001,
-                    AlbumGenres = [],
-                    Information = "Information",
-                    StockQuantity = 1 },
+                Id = 1,
+                Name = "Name1",
+                Artist = new() { Name = "Artist1" },
+                ReleaseYear = 2001,
+                AlbumGenres = [],
+                Information = "Information",
+                StockQuantity = 1,
+                PriceInPence = 1 },
             ];
 
             List<AlbumReturnDto> dtos = new List<AlbumReturnDto>
             {
-                new(1, "Name1", "Artist1", 2001, [], "Information", 1),
+                new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1),
             };
 
             _artistsRepositoryMock.Setup(s => s.FindAlbumsByArtistId(1)).Returns(albums);

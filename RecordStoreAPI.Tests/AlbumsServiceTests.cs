@@ -52,12 +52,13 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2001,
                 AlbumGenres = [],
                 Information = "Information",
-                StockQuantity = 1 },
+                StockQuantity = 1,
+                PriceInPence = 1 }
             ];
 
             List<AlbumReturnDto> dtos =
             [
-                new(1, "Name1", "Artist1", 2001, [], "Information", 1),
+                new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1),
             ];
 
             _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(albums);
@@ -89,10 +90,11 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2001,
                 AlbumGenres = [],
                 Information = "Information",
-                StockQuantity = 1
+                StockQuantity = 1,
+                PriceInPence = 1
             };
 
-            AlbumReturnDto dto = new(1, "Name1", "Artist1", 2001, [], "Information", 1);
+            AlbumReturnDto dto = new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1);
 
             _albumsRepositoryMock.Setup(s => s.FindAlbumById(1)).Returns(album);
 
@@ -119,7 +121,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void AddNewAlbum_Calls_Correct_Repo_Method()
         {
-            AlbumPutDto dto = new("Name1", 1, 2001, [], "Information", 1);
+            AlbumPutDto dto = new("Name1", 1, 2001, [], "Information", 1, 1);
 
             _albumsService.AddNewAlbum(dto);
 
@@ -129,7 +131,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void AddNewAlbum_Returns_Correct_Album_Dto()
         {
-            AlbumPutDto putDto = new("Name1", 1, 2001, [], "Information", 1);
+            AlbumPutDto putDto = new("Name1", 1, 2001, [], "Information", 1, 1);
 
             Album album = new()
             {
@@ -139,10 +141,11 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2001,
                 AlbumGenres = [],
                 Information = "Information",
-                StockQuantity = 1
+                StockQuantity = 1,
+                PriceInPence = 1
             };
 
-            AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, [], "Information", 1);
+            AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1);
 
             _albumsRepositoryMock.Setup(s => s.AddNewAlbum(putDto)).Returns(album);
 
@@ -157,7 +160,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void AddNewAlbum_Returns_Null_If_Not_Added()
         {
-            AlbumPutDto putDto = new("Name1", 1, 2001, [], "Information", 1);
+            AlbumPutDto putDto = new("Name1", 1, 2001, [], "Information", 1, 1);
             Album? album = null;
             AlbumReturnDto? returnDto = null;
 
@@ -171,7 +174,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void UpdateAlbum_Calls_Correct_Repo_Method()
         {
-            AlbumPutDto putDto = new("Name1", 1, 2001, [], "Information", 1);
+            AlbumPutDto putDto = new("Name1", 1, 2001, [], "Information", 1, 1);
 
             _albumsService.UpdateAlbum(1, putDto);
 
@@ -181,7 +184,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void UpdateAlbum_Returns_Correct_Album()
         {
-            AlbumPutDto putDto = new("Name1", 1, 2001, [], "Information", 1);
+            AlbumPutDto putDto = new("Name1", 1, 2001, [], "Information", 1, 1);
 
             Album album = new()
             {
@@ -191,10 +194,11 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2001,
                 AlbumGenres = [],
                 Information = "Information",
-                StockQuantity = 1
+                StockQuantity = 1,
+                PriceInPence = 1
             };
 
-            AlbumReturnDto returnDto = new(1, "Name1", "Artist1", 2001, [], "Information", 1);
+            AlbumReturnDto returnDto = new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1);
 
             _albumsRepositoryMock.Setup(s => s.UpdateAlbum(1, putDto)).Returns(album);
 
@@ -209,7 +213,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void UpdateAlbum_Returns_Null_If_Not_Updated()
         {
-            AlbumPutDto putDto = new("Name1", 1, 2001, [], "Information", 1);
+            AlbumPutDto putDto = new("Name1", 1, 2001, [], "Information", 1, 1);
             Album? album = null;
             AlbumReturnDto? returnDto = null;
 
@@ -260,7 +264,8 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2001,
                 AlbumGenres = [],
                 Information = "Information",
-                StockQuantity = 1 },
+                StockQuantity = 1,
+                PriceInPence = 1 },
             ];
 
             _albumsRepositoryMock.Setup(s => s.FindAlbumsByReleaseYear(2001)).Returns(albums);
@@ -282,12 +287,13 @@ namespace RecordStoreAPI.Tests
                 ReleaseYear = 2001,
                 AlbumGenres = [],
                 Information = "Information",
-                StockQuantity = 1 },
+                StockQuantity = 1,
+                PriceInPence = 1 },
             ];
 
             List<AlbumReturnDto> dtos =
             [
-                new(1, "Name1", "Artist1", 2001, [], "Information", 1),
+                new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1),
             ];
 
             _albumsRepositoryMock.Setup(s => s.FindAlbumsByReleaseYear(2001)).Returns(albums);
@@ -318,13 +324,14 @@ namespace RecordStoreAPI.Tests
             List<Album> albums =
             [
                 new() {
-                    Id = 1,
-                    Name = "Name1",
-                    Artist = new() { Name = "Artist1" },
-                    ReleaseYear = 2001,
-                    AlbumGenres = [new() { GenreID = Genres.Folk }],
-                    Information = "Information",
-                    StockQuantity = 1 },
+                Id = 1,
+                Name = "Name1",
+                Artist = new() { Name = "Artist1" },
+                ReleaseYear = 2001,
+                AlbumGenres = [new() { GenreID = Genres.Folk }],
+                Information = "Information",
+                StockQuantity = 1,
+                PriceInPence = 1 },
             ];
 
             _albumsRepositoryMock.Setup(s => s.FindAlbumsByGenre(Genres.Folk)).Returns(albums);
@@ -340,18 +347,19 @@ namespace RecordStoreAPI.Tests
             List<Album> albums =
             [
                 new() {
-                    Id = 1,
-                    Name = "Name1",
-                    Artist = new() { Name = "Artist1" },
-                    ReleaseYear = 2001,
-                    AlbumGenres = [new() { GenreID = Genres.Folk }],
-                    Information = "Information",
-                    StockQuantity = 1 },
+                Id = 1,
+                Name = "Name1",
+                Artist = new() { Name = "Artist1" },
+                ReleaseYear = 2001,
+                AlbumGenres = [new() { GenreID = Genres.Folk }],
+                Information = "Information",
+                StockQuantity = 1,
+                PriceInPence = 1 },
             ];
 
             List<AlbumReturnDto> dtos =
             [
-                new(1, "Name1", "Artist1", 2001, ["Folk"], "Information", 1),
+                new(1, "Name1", "Artist1", 2001, ["Folk"], "Information", 1, 1),
             ];
 
             _albumsRepositoryMock.Setup(s => s.FindAlbumsByGenre(Genres.Folk)).Returns(albums);
@@ -382,13 +390,14 @@ namespace RecordStoreAPI.Tests
             List<Album> albums =
             [
                 new() {
-                    Id = 1,
-                    Name = "Name1",
-                    Artist = new() { Name = "Artist1" },
-                    ReleaseYear = 2001,
-                    AlbumGenres = [],
-                    Information = "Information",
-                    StockQuantity = 1 },
+                Id = 1,
+                Name = "Name1",
+                Artist = new() { Name = "Artist1" },
+                ReleaseYear = 2001,
+                AlbumGenres = [],
+                Information = "Information",
+                StockQuantity = 1,
+                PriceInPence = 1 },
             ];
 
             _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(albums);
@@ -404,18 +413,19 @@ namespace RecordStoreAPI.Tests
             List<Album> albums =
             [
                 new() {
-                    Id = 1,
-                    Name = "Name1",
-                    Artist = new() { Name = "Artist1" },
-                    ReleaseYear = 2001,
-                    AlbumGenres = [],
-                    Information = "Information",
-                    StockQuantity = 1 },
+                Id = 1,
+                Name = "Name1",
+                Artist = new() { Name = "Artist1" },
+                ReleaseYear = 2001,
+                AlbumGenres = [],
+                Information = "Information",
+                StockQuantity = 1,
+                PriceInPence = 1 },
             ];
 
             List<AlbumReturnDto> dtos =
             [
-                new(1, "Name1", "Artist1", 2001, [], "Information", 1),
+                new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1),
             ];
 
             _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(albums);
@@ -434,13 +444,14 @@ namespace RecordStoreAPI.Tests
             List<Album> albums =
             [
                 new() {
-                    Id = 1,
-                    Name = "Name1",
-                    ArtistID = 1,
-                    ReleaseYear = 2001,
-                    AlbumGenres = [],
-                    Information = "Information",
-                    StockQuantity = 1 },
+                Id = 1,
+                Name = "Name1",
+                ArtistID = 1,
+                ReleaseYear = 2001,
+                AlbumGenres = [],
+                Information = "Information",
+                StockQuantity = 1,
+                PriceInPence = 1 },
             ];
 
             List<AlbumReturnDto> emptyList = [];

@@ -91,7 +91,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PostNewAlbum_Calls_Correct_Service_Method()
         {
-            AlbumPutDto album = new("Album1", 1, 2001, [], "Informtion", 1);
+            AlbumPutDto album = new("Album1", 1, 2001, [], "Informtion", 1, 1);
 
             _albumsController.PostNewAlbum(album);
 
@@ -101,8 +101,8 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PostNewAlbum_Returns_Correct_AlbumDto()
         {
-            AlbumPutDto putDto = new("Album1", 1, 2001, [], "Information", 1);
-            AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, [], "Information", 1);
+            AlbumPutDto putDto = new("Album1", 1, 2001, [], "Information", 1, 1);
+            AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1);
 
             _albumsServiceMock.Setup(s => s.AddNewAlbum(putDto)).Returns(returnDto);
 
@@ -115,7 +115,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PostNewAlbum_Returns_Not_Found_If_Not_Added()
         {
-            AlbumPutDto putDto = new("Album1", 1, 2001, [], "Information", 1);
+            AlbumPutDto putDto = new("Album1", 1, 2001, [], "Information", 1, 1);
             AlbumReturnDto? returnDto = null;
 
             _albumsServiceMock.Setup(s => s.AddNewAlbum(putDto)).Returns(returnDto);
@@ -129,7 +129,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PutAlbumById_Calls_Correct_Service_Method()
         {
-            AlbumPutDto putDto = new("Album1", 1, 2001, [], "Informtion", 1);
+            AlbumPutDto putDto = new("Album1", 1, 2001, [], "Informtion", 1, 1);
 
             _albumsController.PutAlbumById(1, putDto);
 
@@ -139,8 +139,8 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PutAlbumById_Returns_Correct_AlbumDto()
         {
-            AlbumPutDto putDto = new("Album1", 1, 2001, [], "Informtion", 1);
-            AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, [], "Information", 1);
+            AlbumPutDto putDto = new("Album1", 1, 2001, [], "Informtion", 1, 1);
+            AlbumReturnDto? returnDto = new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1);
 
             _albumsServiceMock.Setup(s => s.UpdateAlbum(1, putDto)).Returns(returnDto);
 
@@ -153,7 +153,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PutAlbumById_Returns_Not_Found_If_Not_Updated()
         {
-            AlbumPutDto putDto = new("Album1", 1, 2001, [], "Informtion", 1);
+            AlbumPutDto putDto = new("Album1", 1, 2001, [], "Informtion", 1, 1);
             AlbumReturnDto? returnDto = null;
 
             _albumsServiceMock.Setup(s => s.UpdateAlbum(1, putDto)).Returns(returnDto);
@@ -207,8 +207,8 @@ namespace RecordStoreAPI.Tests
         {
             List<AlbumReturnDto> albums =
             [
-                new(1, "Name1", "Artist1", 2025, [], "Information", 1),
-                new(2, "Name2", "Artist2", 2025, [], "Information", 2)
+                new(1, "Name1", "Artist1", 2025, [], "Information", 1, 1),
+                new(2, "Name2", "Artist2", 2025, [], "Information", 2, 1)
             ];
 
             _albumsServiceMock.Setup(s => s.FindAlbumsByReleaseYear(2025)).Returns(albums);
@@ -243,8 +243,8 @@ namespace RecordStoreAPI.Tests
         {
             List<AlbumReturnDto> albums =
             [
-                new(1, "Name1", "Artist1", 2025, new() {"Folk"}, "Information", 1),
-                new(2, "Name2", "Artist2", 2025, new() {"Folk"}, "Information", 2)
+                new(1, "Name1", "Artist1", 2025, new() {"Folk"}, "Information", 1, 1),
+                new(2, "Name2", "Artist2", 2025, new() {"Folk"}, "Information", 2, 1)
             ];
 
             _albumsServiceMock.Setup(s => s.FindAlbumsByGenre(Genres.Folk)).Returns(albums);
@@ -279,7 +279,7 @@ namespace RecordStoreAPI.Tests
         {
             List<AlbumReturnDto> albumDtos =
             [
-                new(1, "Name1", "Artist1", 2025, [], "Information", 1),
+                new(1, "Name1", "Artist1", 2025, [], "Information", 1, 1),
             ];
 
             List<Album> albums =

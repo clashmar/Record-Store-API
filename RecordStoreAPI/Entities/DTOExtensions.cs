@@ -27,7 +27,6 @@
                 PriceInPence = albumPutDto.PriceInPence
             };
         }
-
         public static ArtistDto ToArtistDto(Artist artist)
         {
             return new ArtistDto(
@@ -36,7 +35,6 @@
                 artist.Albums?.Select(a => ToAlbumReturnDto(a)).ToList()!
                 );
         }
-
         public static void MapAlbumProperties(Album target, AlbumPutDto source)
         {
             target.Name = source.Name;

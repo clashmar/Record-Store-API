@@ -48,6 +48,8 @@ namespace RecordStoreAPI.Repositories
 
             Album album = DTOExtensions.PutDtoToAlbum(albumPutDto);
 
+            _db.Attach(album);
+
             album.AlbumGenres = albumPutDto.Genres
                 .Select(g => new AlbumGenre() { AlbumID = album.Id, GenreID = g })
                 .ToList();
