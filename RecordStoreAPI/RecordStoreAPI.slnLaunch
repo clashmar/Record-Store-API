@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Full Stack",
+    "Projects": [
+      {
+        "Path": "RecordStoreAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\RecordStoreFrontend\\RecordStoreFrontend\\RecordStoreFrontend.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
