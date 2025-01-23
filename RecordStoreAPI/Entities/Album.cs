@@ -28,12 +28,14 @@ namespace RecordStoreAPI.Entities
 
         public int PriceInPence { get; set; } = 2000;
     }
+
     public record AlbumReturnDto(
         int Id,
         string Name,
         string? Artist,
+        int ArtistId,
         int ReleaseYear,
-        List<string>? Genres,
+        List<Genres> Genres,
         string Information,
         int StockQuantity,
         int PriceInPence

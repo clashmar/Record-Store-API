@@ -1,0 +1,53 @@
+﻿@if (AlbumToUpdate == null)
+{
+    <Loading />
+}
+else if (errorMessage != null)
+{
+    <h3>@errorMessage</h3>
+}
+else
+{
+    <PutAlbumForm AlbumToUpdate="AlbumToUpdate" UpdatedAlbum="UpdatedAlbum" ID="ID" />
+}
+
+@code {
+    public AlbumReturnDto? AlbumToUpdate { get; set; }
+
+    public AlbumDetails? UpdatedAlbum { get; set; } = new();
+
+    public int ID { get; set; } = 1;
+
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var http = new HttpClient();
+
+            var response = await http.GetFromJsonAsync<AlbumReturnDto>(
+                $"https://localhost:7186/Albums/{ID}");
+
+            AlbumToUpdate = response != null ? response : null;
+
+            if (AlbumToUpdate != null)
+            {
+                UpdatedAlbum!.AlbumID = AlbumToUpdate.Id;
+                UpdatedAlbum.Name = AlbumToUpdate.Name;
+                UpdatedAlbum.Artist = AlbumToUpdate.Artist!;
+                UpdatedAlbum.ArtistId = AlbumToUpdate.ArtistId;
+                UpdatedAlbum.ReleaseYear = AlbumToUpdate.ReleaseYear;
+                UpdatedAlbum.Genres = AlbumToUpdate.Genres;
+                UpdatedAlbum.Information = AlbumToUpdate.Information;
+                UpdatedAlbum.StockQuantity = AlbumToUpdate.StockQuantity;
+                UpdatedAlbum.PriceInPence = AlbumToUpdate.PriceInPence;
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+}
+

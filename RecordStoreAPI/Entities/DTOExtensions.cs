@@ -8,8 +8,9 @@
                         album.Id,
                         album.Name,
                         album.Artist?.Name,
+                        album.Artist!.ArtistID,
                         album.ReleaseYear,
-                        album.AlbumGenres?.Select(g => Genre.ToFriendlyString(g.GenreID)).ToList()!,
+                        album.AlbumGenres?.Select(g => g.GenreID).ToList()!,
                         album.Information,
                         album.StockQuantity,
                         album.PriceInPence

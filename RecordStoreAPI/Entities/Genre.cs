@@ -31,11 +31,18 @@ namespace RecordStoreAPI.Entities
         /// Returns a user friendly value for the given enum.
         /// </summary>
         /// <param name="genre"></param>
-        /// <returns></returns>
+        /// <returns></returns
         /// 
         public static string ToFriendlyString(Genres genre)
         {
             return genre.ToString().Replace('_', '-');
+        }
+
+        public static (bool success, Genres genre) ToGenre(string s)
+        {
+            var result = Enum.TryParse(s.Replace('-', '_'), out Genres genre);
+
+            return (result, genre);
         }
 
         public static List<string> ReturnGenresInOrder()

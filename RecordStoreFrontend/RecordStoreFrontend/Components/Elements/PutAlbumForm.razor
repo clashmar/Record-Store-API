@@ -1,0 +1,116 @@
+﻿@rendermode InteractiveServer
+
+<div>
+    <div class="field">
+        <label class="label">Name</label>
+        <div class="control" width="20px">
+            <input class="input" type="text" placeholder="Enter Album Name" @bind="UpdatedAlbum.Name"/>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Artist</label>
+        <div class="control has-icons-right">
+            <input class="input" type="text" placeholder="Enter Artist Name" @bind="UpdatedAlbum.Artist"/>
+            <span class="icon is-right">
+                <i class="fas fa-check"></i>
+            </span>
+        </div>
+        <p class="help is-danger">Enter a valid artist.</p>
+    </div>
+
+    <div class="field">
+        <label class="label">Release Year</label>
+        <div class="control has-icons-right">
+            <input class="input" type="number" placeholder="Release Year" @bind="UpdatedAlbum.ReleaseYear"/>
+            <span class="icon is-right">
+                <i class="fas fa-check"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Add/Delete Genre</label>
+        <div class="control">
+            <div class="select mr-2">
+                <select @bind="@genretoAdd">
+                    <option>Add Genre</option>
+                    @foreach (string genre in Genre.ReturnGenresInOrder())
+                    {
+                        <option >@genre</option>
+                    }
+                </select>
+            </div>
+            <button class="button is-outlined ml-2 mr-2 is-success" @onclick="()=>AddGenre()">Add</button>
+            @foreach(var genre in UpdatedAlbum.Genres) 
+            {
+                <button class="button is-outlined ml-2 mr-2 is-danger" @onclick="()=>DeleteGenre(genre)">@Genre.ToFriendlyString(genre)</button>
+            }
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Information</label>
+        <div class="control">
+            <textarea class="textarea" placeholder="Album Info" @bind="UpdatedAlbum.ReleaseYear"></textarea>
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button is-light" @onclick="()=>DisplayUpdatedInfo()">Submit</button>
+        </div>
+        <div class="control">
+            <button class="button is-dark">Cancel</button>
+        </div>
+    </div>
+
+    @if(updated) 
+    {
+        <h2>Genre to add: @genretoAdd</h2>
+        <h2>@UpdatedAlbum.Name</h2>
+        <h2>@UpdatedAlbum.Artist</h2>
+        <h2>@UpdatedAlbum.ArtistId</h2>
+        <h2>@UpdatedAlbum.ReleaseYear</h2>
+        @foreach(Genres genre in UpdatedAlbum.Genres)
+        {
+            <h2>@Genre.ToFriendlyString(genre)</h2>
+        }
+        <h2>@UpdatedAlbum.Information</h2>
+        <h2>@UpdatedAlbum.StockQuantity</h2>
+        <h2>@UpdatedAlbum.PriceInPence</h2>
+    }
+</div>
+
+@code {
+    [Parameter] 
+    public AlbumReturnDto? AlbumToUpdate { get; set; } = new(1, "Mezzanine", "Massive Attack", 1, 1998, [Genres.Electronic, Genres.Dance], "Information", 1, 2000);
+
+    [Parameter]
+    public AlbumDetails? UpdatedAlbum { get; set; }
+
+    [Parameter]
+    public int ID { get; set; } = 1;
+
+    bool updated = false;
+
+    string genretoAdd;
+
+    public void DisplayUpdatedInfo() 
+    {
+        updated = !updated;
+    }
+
+    private void AddGenre()
+    {
+        var result = Genre.ToGenre(genretoAdd);
+
+        if (result.success && !UpdatedAlbum!.Genres.Contains(result.genre)) 
+        UpdatedAlbum!.Genres.Add(result.genre);
+    }
+
+    private void DeleteGenre(Genres genre) 
+    {
+        UpdatedAlbum!.Genres.Remove(genre);      
+    }
+}
