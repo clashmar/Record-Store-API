@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "d+AELrBl519T69ayTZqyCHg3QWGVbA5ds4IxTPfDqNg=",
+  "Hash": "4wdME12quJLl1ZFzUkDK05U9tjNLau5OteDy4NYrpcQ=",
   "Source": "RecordStoreFrontend",
   "BasePath": "_content/RecordStoreFrontend",
   "Mode": "Default",
@@ -8711,6 +8711,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\app.css"
+    },
+    {
+      "Identity": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend\\wwwroot\\bulma.min.css",
+      "SourceId": "RecordStoreFrontend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend\\wwwroot\\",
+      "BasePath": "_content/RecordStoreFrontend",
+      "RelativePath": "bulma.min#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "0tgfagtn58",
+      "Integrity": "LOPYOeuuM4aHyLpyU6lXAczkiznosaeHuJcpavrel0U=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\bulma.min.css"
+    },
+    {
+      "Identity": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend\\wwwroot\\Images\\top-five-logo.png",
+      "SourceId": "RecordStoreFrontend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend\\wwwroot\\",
+      "BasePath": "_content/RecordStoreFrontend",
+      "RelativePath": "Images/top-five-logo#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "hsc260mv1s",
+      "Integrity": "QZORu7Spq+p4+10Tx8AO33G3V+eQEJK1zanCau6uUpQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\top-five-logo.png"
     }
   ],
   "Endpoints": [
@@ -36878,6 +36920,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-Y3QRrYDjsQ+Bj4noKNSCcSRxgRtgAn0QL1o5m5BNepk="
+        }
+      ]
+    },
+    {
+      "Route": "bulma.min.0tgfagtn58.css",
+      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend\\wwwroot\\bulma.min.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "826691"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LOPYOeuuM4aHyLpyU6lXAczkiznosaeHuJcpavrel0U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Jan 2025 11:32:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0tgfagtn58"
+        },
+        {
+          "Name": "label",
+          "Value": "bulma.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-LOPYOeuuM4aHyLpyU6lXAczkiznosaeHuJcpavrel0U="
+        }
+      ]
+    },
+    {
+      "Route": "bulma.min.css",
+      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend\\wwwroot\\bulma.min.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "826691"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LOPYOeuuM4aHyLpyU6lXAczkiznosaeHuJcpavrel0U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Jan 2025 11:32:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-LOPYOeuuM4aHyLpyU6lXAczkiznosaeHuJcpavrel0U="
+        }
+      ]
+    },
+    {
+      "Route": "Images/top-five-logo.hsc260mv1s.png",
+      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend\\wwwroot\\Images\\top-five-logo.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"QZORu7Spq+p4+10Tx8AO33G3V+eQEJK1zanCau6uUpQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 22 Jan 2025 17:36:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hsc260mv1s"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/top-five-logo.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-QZORu7Spq+p4+10Tx8AO33G3V+eQEJK1zanCau6uUpQ="
+        }
+      ]
+    },
+    {
+      "Route": "Images/top-five-logo.png",
+      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend\\wwwroot\\Images\\top-five-logo.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"QZORu7Spq+p4+10Tx8AO33G3V+eQEJK1zanCau6uUpQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 22 Jan 2025 17:36:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-QZORu7Spq+p4+10Tx8AO33G3V+eQEJK1zanCau6uUpQ="
         }
       ]
     },

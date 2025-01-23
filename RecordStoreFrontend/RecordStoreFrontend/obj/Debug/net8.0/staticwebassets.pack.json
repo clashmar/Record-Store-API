@@ -5,8 +5,16 @@
       "PackagePath": "staticwebassets\\RecordStoreFrontend.2wxgq1qjc1.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend\\wwwroot\\Images\\top-five-logo.png",
+      "PackagePath": "staticwebassets\\Images\\top-five-logo.png"
+    },
+    {
       "Id": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend\\wwwroot\\bulma.min.css",
+      "PackagePath": "staticwebassets\\bulma.min.css"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.RecordStoreFrontend.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
