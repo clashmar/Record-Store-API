@@ -1017,9 +1017,6 @@ C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFronten
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\8k0gf51bcn-tptq2av103.gz
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\g9yqbbre77-lfu7j35m59.gz
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\unt97oc91u-oyz0vx2fzb.gz
-C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\jrgkqsblu4-44ihp28f9e.gz
-C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\nkom3m9u4k-go4nd0ew7m.gz
-C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\8g99s3amv6-vbbsb6a9pi.gz
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\staticwebassets.build.endpoints.json
@@ -1035,3 +1032,6 @@ C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFronten
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\refint\RecordStoreFrontend.Client.dll
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\RecordStoreFrontend.Client.pdb
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\ref\RecordStoreFrontend.Client.dll
+C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\jrgkqsblu4-ko21mzcrid.gz
+C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\nkom3m9u4k-fwhhw7xkwf.gz
+C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\8g99s3amv6-j61f7oe57b.gz

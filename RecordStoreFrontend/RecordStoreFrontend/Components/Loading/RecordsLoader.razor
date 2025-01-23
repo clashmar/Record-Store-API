@@ -1,0 +1,34 @@
+﻿@if(Albums == null) 
+{
+    <Loading />
+}
+else if(errorMessage != null)
+{
+    <h3>@errorMessage</h3>
+}
+else
+{
+        <AlbumCardList Albums="Albums"/>
+}
+
+@code {
+    public List<AlbumReturnDto> Albums { get; set; } = [];
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync() {
+
+        try
+        {
+            var http = new HttpClient();
+
+            var response = await http.GetFromJsonAsync<List<AlbumReturnDto>>(
+                $"https://localhost:7186/Albums");
+
+            Albums = response != null ? response : [];
+        }
+        catch(Exception ex) 
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+}

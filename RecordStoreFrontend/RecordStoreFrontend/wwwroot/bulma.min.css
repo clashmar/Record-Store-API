@@ -6885,6 +6885,10 @@ div.icon-text {
     position: relative
 }
 
+.card-content {
+    height: 125px
+}
+
 .card-content:first-child, .card-footer:first-child, .card-header:first-child {
     border-start-end-radius: var(--bulma-card-radius);
     border-start-start-radius: var(--bulma-card-radius)

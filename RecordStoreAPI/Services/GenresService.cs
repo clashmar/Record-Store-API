@@ -19,7 +19,7 @@ namespace RecordStoreAPI.Services
         public List<GenreDto> FindAllGenres()
         {
             return _genresRepository.FindAllGenres()
-                .Select(g => new GenreDto(g.GenreID, g.Name = Genre.ToString(g.GenreID)))
+                .Select(g => new GenreDto(g.GenreID, g.Name = Genre.ToFriendlyString(g.GenreID)))
                 .ToList();
         }
     }

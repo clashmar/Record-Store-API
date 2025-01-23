@@ -35,9 +35,9 @@
             <div class="select">
                 <select>
                     <option>Select Genre</option>
-                    @foreach(Genres genre in Enum.GetValues(typeof(Genres))) 
+                    @foreach(string genre in Genre.ReturnGenresInOrder()) 
                     {
-                        <option>@Genre.ToString(genre)</option>
+                        <option>@genre</option>
                     }
                 </select>
             </div>

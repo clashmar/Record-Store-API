@@ -1,3 +1,4 @@
 wwwroot\app.css
 wwwroot\bulma.min.css
+wwwroot\Images\high-fidelity.jpg
 wwwroot\Images\top-five-logo.png

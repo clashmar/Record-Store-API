@@ -12,7 +12,10 @@ namespace RecordStoreAPI.Entities
         Art_Rock,
         Electronic,
         Alternative,
-        Emo
+        Emo,
+        Post_Rock,
+        Soul,
+        Dance
     }
     public class Genre
     {
@@ -29,9 +32,19 @@ namespace RecordStoreAPI.Entities
         /// </summary>
         /// <param name="genre"></param>
         /// <returns></returns>
-        public static string ToString(Genres genre)
+        /// 
+        public static string ToFriendlyString(Genres genre)
         {
             return genre.ToString().Replace('_', '-');
+        }
+
+        public static List<string> ReturnGenresInOrder()
+        {
+            return Enum.GetValues(typeof(Genres))
+                .Cast<Genres>()
+                .Select(g => ToFriendlyString(g))
+                .Order()
+                .ToList();
         }
     }
     public record GenreDto(Genres GenreID, string Name);

@@ -10,7 +10,7 @@ namespace RecordStoreAPI.Tests
         [TestCase(Genres.Alternative, "Alternative")]
         public void ToString_Test(Genres genre, string expectedOutput)
         {
-            var result = Genre.ToString(genre);
+            var result = Genre.ToFriendlyString(genre);
 
             Assert.That(result, Is.EqualTo(expectedOutput));
         }

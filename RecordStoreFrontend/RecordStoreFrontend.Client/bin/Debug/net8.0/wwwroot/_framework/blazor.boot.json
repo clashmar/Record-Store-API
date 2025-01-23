@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "RecordStoreFrontend.Client",
   "resources": {
-    "hash": "sha256-6FgaLQijIk4fDNsc8eIiQXWnH11wILKhBUhqUG7RP/g=",
+    "hash": "sha256-VUx2iQPTH307dOaI2JwWD2Obq5IO4GblWBaxiMwVP+M=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-B6DNRvFeCUi3jbx9uKpuj+hV9cN0KG4RdZj1FgBZwj8="
     },
@@ -209,10 +209,10 @@
       "mscorlib.wasm": "sha256-QoC5hTKpDNO6efLnEvYwV9OJBXvYRq8/1yGhNZKiNCw=",
       "netstandard.wasm": "sha256-JT2F4bYWJpaSGq+iD0ITLpWxsDhMUjhqje9RpBtTg7w=",
       "System.Private.CoreLib.wasm": "sha256-fvIPBcvgvsRuWrKi2LGQsLYvcKUSnyIuBUsE3LJu/0Y=",
-      "RecordStoreFrontend.Client.wasm": "sha256-DElO95h8loqIplToxq742Ot/yPDyy5rOgCTC6MG/GgA="
+      "RecordStoreFrontend.Client.wasm": "sha256-LHoreZCHEgeIfTvXDsYjwo9Trtq56nakjiJWqXqBfe0="
     },
     "pdb": {
-      "RecordStoreFrontend.Client.pdb": "sha256-kHvIsM80PvaDqkL/haYq1pwpLKTGFHrr+ziOfR6qrDE="
+      "RecordStoreFrontend.Client.pdb": "sha256-3yC1W8odY0MGiqB/zrgL2fI6qOqB1r1OOTH+0ccao4U="
     }
   },
   "cacheBootResources": true,

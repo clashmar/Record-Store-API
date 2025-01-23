@@ -62,7 +62,7 @@ namespace RecordStoreAPI.Controllers
         public IActionResult GetAlbumsByGenre(Genres genre)
         {
             var result = _albumsService.FindAlbumsByGenre(genre);
-            return result != null && result.Count > 0 ? Ok(result) : NotFound($"We don't have any {Genre.ToString(genre)} albums in stock.");
+            return result != null && result.Count > 0 ? Ok(result) : NotFound($"We don't have any {Genre.ToFriendlyString(genre)} albums in stock.");
         }
 
         [HttpGet("Search")]
