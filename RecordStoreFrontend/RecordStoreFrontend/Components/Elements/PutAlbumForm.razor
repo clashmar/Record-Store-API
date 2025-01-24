@@ -1,97 +1,79 @@
 ﻿@rendermode InteractiveServer
+@inject NavigationManager Navigation
 
 <div>
-    <div class="field">
-        <label class="label">Name</label>
-        <div class="control" width="20px">
-            <input class="input" type="text" placeholder="Album Name" @bind="UpdatedAlbum.Name"/>
-        </div>
-        @if (UpdatedAlbum.Name.Length == 0)
-        {
-            <p class="help is-danger">Enter a valid name.</p>
-        }
-    </div>
-
-    <div class="field">
-        <label class="label">Artist</label>
-        <div class="control has-icons-right">
-            <input class="input" type="text" placeholder="Artist Name" @bind="UpdatedAlbum.ArtistName"/>
-            <span class="icon is-right">
-                <i class="fas fa-check"></i>
-            </span>
-        </div>
-        @if(UpdatedAlbum.ArtistName.Length == 0)
-        {
-            <p class="help is-danger">Enter a valid artist.</p>
-        }
-    </div>
-
-    <div class="field">
-        <label class="label">Release Year</label>
-        <div class="control has-icons-right">
-            <input class="input" type="number" placeholder="Release Year" @bind="UpdatedAlbum.ReleaseYear"/>
-            <span class="icon is-right">
-                <i class="fas fa-check"></i>
-            </span>
-        </div>
-        @if (UpdatedAlbum.ReleaseYear < 1860)
-        {
-            <p class="help is-danger">Enter a valid release year.</p>
-        }
-    </div>
-
-    <div class="field">
-        <label class="label">Add/Delete Genre</label>
-        <div class="control">
-            <div class="select mr-2">
-                <select @bind="@genreToAdd">
-                    <option>Add Genre</option>
-                    @foreach (string genre in Genre.ReturnGenresInOrder())
-                    {
-                        <option >@genre</option>
-                    }
-                </select>
+    <EditForm FormName="PutAlbumForm" Model="UpdatedAlbum" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
+        <DataAnnotationsValidator />
+        <div class="field">
+            <label class="label">Name</label>
+            <div class="control" width="20px">
+                <InputText class="input" placeholder="Album Name" @bind-Value="UpdatedAlbum!.Name"></InputText>
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.Name)" />
             </div>
-            <button class="button is-outlined ml-2 mr-2 is-success" @onclick="()=>AddGenre()">Add</button>
-            @foreach(var genre in UpdatedAlbum.Genres) 
-            {
-                <button class="button is-outlined ml-2 mr-2 is-danger" @onclick="()=>DeleteGenre(genre)">@Genre.ToFriendlyString(genre)</button>
-            }
         </div>
-    </div>
 
-    <div class="field pb-3">
-        <label class="label">Information</label>
-        <div class="control">
-            <textarea class="textarea" placeholder="Album Info" @bind="UpdatedAlbum.Information"></textarea>
+        <div class="field">
+            <label class="label">Artist</label>
+            <div class="control has-icons-right">
+                <InputText class="input" placeholder="Artist Name" @bind-Value="UpdatedAlbum!.ArtistName"></InputText>
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ArtistName)" />
+                <span class="icon is-right">
+                    <i class="fas fa-check"></i>
+                </span>
+            </div>
         </div>
-    </div>
 
-    <div class="field is-grouped pb-6">
-        <div class="control">
-            <button class="button is-light" @onclick="()=>Submit()">Submit</button>
+        <div class="field">
+            <label class="label">Release Year</label>
+            <div class="control has-icons-right">
+                <InputNumber class="input" placeholder="Release Year" @bind-Value="UpdatedAlbum!.ReleaseYear"></InputNumber>
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ReleaseYear)" />
+                <span class="icon is-right">
+                    <i class="fas fa-check"></i>
+                </span>
+            </div>
         </div>
-        <div class="control">
-            <button class="button is-dark">Cancel</button>
+
+        <div class="field">
+            <label class="label">Add/Delete Genre</label>
+            <div class="control">
+                <div class="select mr-2">
+
+                    <InputSelect @bind-Value="genreToAdd">
+                        <option value="">Add Genre</option>
+                        @foreach (string genre in Genre.ReturnGenresInOrder())
+                        {
+                            <option>@genre</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.Genres)" />
+                </div>
+                <button class="button is-outlined ml-2 mr-2 is-success" type="button" @onclick="()=>AddGenre()">Add</button>
+                @foreach (var genre in UpdatedAlbum!.Genres)
+                {
+                    <button class="button is-outlined ml-2 mr-2 is-danger" type="button" @onclick="()=>DeleteGenre(genre)">@Genre.ToFriendlyString(genre)</button>
+                }
+            </div>
         </div>
+
+        <div class="field pb-3">
+            <label class="label">Information</label>
+            <div class="control">
+                <InputTextArea class="textarea" placeholder="Album Info" @bind-Value="UpdatedAlbum!.Information"></InputTextArea>
+            </div>
+        </div>
+
+        <div class="field is-grouped pb-6">
+            <div class="control">
+                <button class="button is-light" type="submit">Submit</button>
+            </div>
+            <div class="control">
+                <button class="button is-dark" type="button">Cancel</button>
+            </div>
             <p class="help is-danger mt-2">@warning</p>
-    </div>
+        </div>
 
-    @if(updated) 
-    {
-        <h2>Genre to add: @genreToAdd</h2>
-        <h2>@UpdatedAlbum.Name</h2>
-        <h2>@UpdatedAlbum.ArtistName</h2>
-        <h2>@UpdatedAlbum.ArtistID</h2>
-        <h2>@UpdatedAlbum.ReleaseYear</h2>
-        @foreach(Genres genre in UpdatedAlbum.Genres)
-        {
-            <h2>@Genre.ToFriendlyString(genre)</h2>
-        }
-        <h2>@UpdatedAlbum.Information</h2>
-        <h2>@UpdatedAlbum.StockQuantity</h2>
-        <h2>@UpdatedAlbum.PriceInPence</h2>
-    }
+    </EditForm>
 </div>
 
 @code {
@@ -99,34 +81,42 @@
     public AlbumDetails? UpdatedAlbum { get; set; }
 
     [Parameter]
-    public int ID { get; set; } = 1;
+    public int Id { get; set; }
 
-    private bool updated = false;
+    protected string genreToAdd = "";
 
-    private string genreToAdd;
+    protected string warning = "";
 
-    private string warning = "";
+    protected string? errorMessage;
 
-    public void Submit() 
+
+    protected async Task HandleValidSubmit()
     {
-        if (CheckForm()) { updated = !updated; warning = ""; }
-        else warning = "Make Sure All Fields Have Been Completed";
+        var http = new HttpClient();
+
+        try
+        {
+            var response = await http.PutAsJsonAsync<AlbumDetails>(
+                $"https://localhost:7186/Albums/{Id}", UpdatedAlbum!);
+
+            if (response != null)
+            {
+                Navigation.NavigateTo($"/Albums/{Id}");
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+            Console.Write(errorMessage);
+        }
     }
 
-    private bool CheckForm() 
+    protected void HandleInvalidSubmit()
     {
-        bool isValid = true;
-
-        if (
-            !(UpdatedAlbum.Name.Length > 0) |
-            !(UpdatedAlbum.ArtistName.Length > 0) |
-            !(UpdatedAlbum.ReleaseYear > 0) |
-            !(UpdatedAlbum.Genres.Count > 0)) isValid = false;
-
-        return isValid;
+        warning = "Make Sure All Fields Have Been Completed";
     }
 
-    private void AddGenre()
+    protected void AddGenre()
     {
         var result = Genre.ToGenre(genreToAdd);
 
@@ -134,7 +124,7 @@
         UpdatedAlbum!.Genres.Add(result.genre);
     }
 
-    private void DeleteGenre(Genres genre) 
+    protected void DeleteGenre(Genres genre)
     {
         UpdatedAlbum!.Genres.Remove(genre);      
     }

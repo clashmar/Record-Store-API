@@ -1,0 +1,41 @@
+﻿@page "/Albums/{Id:int}"
+
+@if (Album == null)
+{
+    <Loading />
+}
+else if (errorMessage != null)
+{
+    <h3>@errorMessage</h3>
+}
+else
+{
+    <AlbumPage Album="Album" />
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    
+    protected AlbumReturnDto? Album { get; set; }
+
+    protected string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        try
+        {
+            var http = new HttpClient();
+
+            var response = await http.GetFromJsonAsync<AlbumReturnDto>(
+                $"https://localhost:7186/Albums/{Id}");
+
+            Album = response != null ? response : null;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+}

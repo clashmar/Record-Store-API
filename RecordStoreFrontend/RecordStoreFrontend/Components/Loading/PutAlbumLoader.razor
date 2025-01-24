@@ -1,4 +1,6 @@
-﻿@if (AlbumToUpdate == null)
+﻿@page "/Albums/{Id:int}/Edit"
+
+@if (AlbumToUpdate == null)
 {
     <Loading />
 }
@@ -8,7 +10,7 @@ else if (errorMessage != null)
 }
 else
 {
-    <PutAlbumForm__2 UpdatedAlbum="UpdatedAlbum" ID="ID" />
+    <PutAlbumForm UpdatedAlbum="UpdatedAlbum" Id="Id" />
 }
 
 @code {
@@ -16,7 +18,8 @@ else
 
     public AlbumDetails? UpdatedAlbum { get; set; } = new();
 
-    public int ID { get; set; } = 1;
+    [Parameter]
+    public int Id { get; set; }
 
     private string? errorMessage;
 
@@ -27,7 +30,7 @@ else
             var http = new HttpClient();
 
             var response = await http.GetFromJsonAsync<AlbumReturnDto>(
-                $"https://localhost:7186/Albums/{ID}");
+                $"https://localhost:7186/Albums/{Id}");
 
             AlbumToUpdate = response != null ? response : null;
 

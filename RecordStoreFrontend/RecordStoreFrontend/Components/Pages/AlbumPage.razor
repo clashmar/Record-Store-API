@@ -1,0 +1,15 @@
+﻿
+<div class="colums mt-5 mb-5">
+    <div class="column is-one-quarter">
+        <AlbumPageCard Album="Album"/>
+    </div>
+</div>
+    
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    public AlbumReturnDto? Album { get; set; }
+}

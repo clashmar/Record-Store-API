@@ -1,5 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using RecordStoreAPI.Entities;
+﻿using RecordStoreAPI.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace RecordStoreAPI.Validation
@@ -12,6 +11,7 @@ namespace RecordStoreAPI.Validation
             {
                 if (list.Count <= 0) return new ValidationResult("Must have at least one genre.");
             }
+
             return ValidationResult.Success;
         }
     }

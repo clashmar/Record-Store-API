@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Components\Elements\PutAlbumForm _2.razor">
+    <Content Update="Components\Elements\PutAlbumForm.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
   </ItemGroup>

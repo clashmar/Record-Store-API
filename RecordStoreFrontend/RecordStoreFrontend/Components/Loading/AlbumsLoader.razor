@@ -12,8 +12,9 @@ else
 }
 
 @code {
-    public List<AlbumReturnDto> Albums { get; set; } = [];
-    private string? errorMessage;
+    protected List<AlbumReturnDto> Albums { get; set; } = [];
+
+    protected string? errorMessage;
 
     protected override async Task OnInitializedAsync() {
 
