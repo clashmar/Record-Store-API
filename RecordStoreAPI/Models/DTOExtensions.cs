@@ -1,4 +1,6 @@
-﻿namespace RecordStoreAPI.Entities
+﻿using RecordStoreAPI.Entities;
+
+namespace RecordStoreAPI.Models
 {
     public class DTOExtensions
     {

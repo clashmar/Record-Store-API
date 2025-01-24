@@ -1,4 +1,5 @@
 ﻿using RecordStoreAPI.Entities;
+using RecordStoreAPI.Models;
 using System.Text.Json;
 
 namespace RecordStoreAPI.Tests

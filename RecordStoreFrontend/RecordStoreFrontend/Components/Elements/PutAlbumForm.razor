@@ -1,7 +1,6 @@
 ﻿@rendermode InteractiveServer
 
 <div>
-    
     <div class="field">
         <label class="label">Name</label>
         <div class="control" width="20px">
@@ -16,12 +15,12 @@
     <div class="field">
         <label class="label">Artist</label>
         <div class="control has-icons-right">
-            <input class="input" type="text" placeholder="Artist Name" @bind="UpdatedAlbum.Artist"/>
+            <input class="input" type="text" placeholder="Artist Name" @bind="UpdatedAlbum.ArtistName"/>
             <span class="icon is-right">
                 <i class="fas fa-check"></i>
             </span>
         </div>
-        @if(UpdatedAlbum.Artist.Length == 0)
+        @if(UpdatedAlbum.ArtistName.Length == 0)
         {
             <p class="help is-danger">Enter a valid artist.</p>
         }
@@ -61,29 +60,29 @@
         </div>
     </div>
 
-    <div class="field">
+    <div class="field pb-3">
         <label class="label">Information</label>
         <div class="control">
             <textarea class="textarea" placeholder="Album Info" @bind="UpdatedAlbum.Information"></textarea>
         </div>
     </div>
 
-    <div class="field is-grouped">
+    <div class="field is-grouped pb-6">
         <div class="control">
             <button class="button is-light" @onclick="()=>Submit()">Submit</button>
         </div>
         <div class="control">
             <button class="button is-dark">Cancel</button>
         </div>
-            <h1 class="help is-danger">@warning</h1>
+            <p class="help is-danger mt-2">@warning</p>
     </div>
 
     @if(updated) 
     {
         <h2>Genre to add: @genreToAdd</h2>
         <h2>@UpdatedAlbum.Name</h2>
-        <h2>@UpdatedAlbum.Artist</h2>
-        <h2>@UpdatedAlbum.ArtistId</h2>
+        <h2>@UpdatedAlbum.ArtistName</h2>
+        <h2>@UpdatedAlbum.ArtistID</h2>
         <h2>@UpdatedAlbum.ReleaseYear</h2>
         @foreach(Genres genre in UpdatedAlbum.Genres)
         {
@@ -120,7 +119,7 @@
 
         if (
             !(UpdatedAlbum.Name.Length > 0) |
-            !(UpdatedAlbum.Artist.Length > 0) |
+            !(UpdatedAlbum.ArtistName.Length > 0) |
             !(UpdatedAlbum.ReleaseYear > 0) |
             !(UpdatedAlbum.Genres.Count > 0)) isValid = false;
 

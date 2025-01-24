@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RecordStoreAPI.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace RecordStoreAPI.Entities
 {
@@ -8,13 +9,8 @@ namespace RecordStoreAPI.Entities
         public int ArtistID { get; set; }
 
         [Required]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         public List<Album> Albums { get; set; } = [];
     }
-    public record ArtistDto(
-            int ArtistID,
-            string Name,
-            List<AlbumReturnDto> Albums
-            );
 }

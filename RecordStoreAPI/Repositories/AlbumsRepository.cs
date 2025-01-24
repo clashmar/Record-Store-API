@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecordStoreAPI.Data;
 using RecordStoreAPI.Entities;
+using RecordStoreAPI.Models;
 
 namespace RecordStoreAPI.Repositories
 {
@@ -8,8 +9,8 @@ namespace RecordStoreAPI.Repositories
     {
         List<Album> FindAllAlbums();
         Album? FindAlbumById(int id);
-        Album? AddNewAlbum(AlbumPutDto albumDto);
-        Album? UpdateAlbum(int id, AlbumPutDto album);
+        Album? AddNewAlbum(AlbumDetails albumDetails);
+        Album? UpdateAlbum(int id, AlbumDetails albumDetails);
         bool TryRemoveAlbumById(int id);
         List<Album>? FindAlbumsByReleaseYear(int releaseYear);
         List<Album>? FindAlbumsByGenre(Genres genre);
@@ -41,16 +42,15 @@ namespace RecordStoreAPI.Repositories
                 .FirstOrDefault(a => a.Id == id);
         }
 
-        public Album? AddNewAlbum(AlbumPutDto albumPutDto)
+        public Album? AddNewAlbum(AlbumDetails albumDetails)
         {
-            Artist? artist = CheckArtistExists(albumPutDto.ArtistID);
-            if (artist == null) return null;
+            Artist? artist = CheckArtistExists(albumDetails.ArtistName);
+            if (artist == null) return null; albumDetails.ArtistID = artist.ArtistID;
 
-            Album album = DTOExtensions.PutDtoToAlbum(albumPutDto);
 
-            _db.Attach(album);
+            Album album = ModelExtensions.AlbumDetailsToAlbum(albumDetails);
 
-            album.AlbumGenres = albumPutDto.Genres
+            album.AlbumGenres = albumDetails.Genres
                 .Select(g => new AlbumGenre() { AlbumID = album.Id, GenreID = g })
                 .ToList();
 
@@ -60,17 +60,17 @@ namespace RecordStoreAPI.Repositories
             return album;
         }
 
-        public Album? UpdateAlbum(int id, AlbumPutDto albumPutDto)
+        public Album? UpdateAlbum(int id, AlbumDetails albumDetails)
         {
             var albumToUpdate = _db.Albums.FirstOrDefault(a => a.Id == id);
-            if (albumToUpdate == null) return null;
+            if (albumToUpdate == null) return null; 
 
-            Artist? artist = CheckArtistExists(albumPutDto.ArtistID);
-            if (artist == null) return null;
+            Artist? artist = CheckArtistExists(albumDetails.ArtistName);
+            if (artist == null) return null; albumDetails.ArtistID = artist.ArtistID;
+
+            ModelExtensions.MapAlbumDetailsProperties(albumToUpdate, albumDetails);
 
             _db.AlbumGenre.RemoveRange(_db.AlbumGenre.Where(ag => ag.AlbumID == albumToUpdate.Id));
-
-            DTOExtensions.MapAlbumProperties(albumToUpdate, albumPutDto);
 
             _db.Update(albumToUpdate);
             _db.SaveChanges();
@@ -106,9 +106,9 @@ namespace RecordStoreAPI.Repositories
                 .ToList();
         }
 
-        public Artist? CheckArtistExists(int artistID)
+        public Artist? CheckArtistExists(string artistName)
         {
-            Artist? artist = _db.Artists.Where(a => a.ArtistID == artistID).FirstOrDefault();
+            Artist? artist = _db.Artists.Where(a => a.Name.ToLower() == artistName.ToLower()).FirstOrDefault();
             return artist ?? null;
         }
         public bool CheckGenreExists(Genres genre)

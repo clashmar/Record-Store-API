@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecordStoreAPI.Entities;
+using RecordStoreAPI.Models;
 using RecordStoreAPI.Services;
 
 namespace RecordStoreAPI.Controllers
@@ -30,7 +31,7 @@ namespace RecordStoreAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostNewAlbum(AlbumPutDto album)
+        public IActionResult PostNewAlbum(AlbumDetails album)
         {
             if (album == null || !ModelState.IsValid) return BadRequest("Invalid input.");
             var result = _albumsService.AddNewAlbum(album);
@@ -38,7 +39,7 @@ namespace RecordStoreAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutAlbumById(int id, AlbumPutDto album)
+        public IActionResult PutAlbumById(int id, AlbumDetails album)
         {
             if (album == null || !ModelState.IsValid) return BadRequest("Invalid input.");
             var result = _albumsService.UpdateAlbum(id, album);
