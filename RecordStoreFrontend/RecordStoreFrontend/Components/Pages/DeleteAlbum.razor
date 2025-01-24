@@ -1,0 +1,35 @@
+﻿@inject NavigationManager Navigation
+@rendermode InteractiveServer
+@page "/Albums/{Id:int}/Delete"
+
+
+
+<div class="has-text-centered">
+    <h1 class="is-size-2 has-text-light has-text-weight-bold">Are You Sure?</h1>
+    <div class="field is-grouped pb-6 is-justify-content-center mt-3">
+        <div class="control">
+            <button class="button is-danger is-dark" type="button" @onclick="()=>HandleDelete()">Delete</button>
+        </div>
+        <div class="control">
+            <button class="button is-dark" type="button" @onclick="()=>Cancel()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected void HandleDelete()
+    {
+        Navigation.NavigateTo($"/Albums");
+    }
+
+    protected void Cancel()
+    {
+        Navigation.NavigateTo($"/Albums/{Id}");
+    }
+}

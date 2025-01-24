@@ -10,7 +10,7 @@
         </div>
         <footer class="card-footer">
             <a href="@($"/Albums/{Album!.Id}/Edit")" class="card-footer-item has-text-warning">Edit</a>
-            <a class="card-footer-item has-text-danger" @onclick="()=>HandleDeleteAlbum()">Delete</a>
+            <a href="@($"/Albums/{Album!.Id}/Delete")" class="card-footer-item has-text-danger" type="button">Delete</a>
         </footer>
     </div>
 </div>
@@ -20,10 +20,5 @@
     [Parameter]
     public AlbumReturnDto? Album { get; set; }
 
-    List<string> message = ["Are you sure you want to delete this album?"];
-
-    protected async Task HandleDeleteAlbum()
-    {
-        await jsRuntime.InvokeAsync<object>("Confirm", new object[] {"Are you sure you want to delete this album."});
-    }
+    private bool deleted = false;
 }

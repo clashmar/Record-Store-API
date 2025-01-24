@@ -68,7 +68,7 @@
                 <button class="button is-light" type="submit">Submit</button>
             </div>
             <div class="control">
-                <button class="button is-dark" type="button">Cancel</button>
+                <button class="button is-dark" type="button" @onclick="()=>Cancel()">Cancel</button>
             </div>
             <p class="help is-danger mt-2">@warning</p>
         </div>
@@ -127,5 +127,10 @@
     protected void DeleteGenre(Genres genre)
     {
         UpdatedAlbum!.Genres.Remove(genre);      
+    }
+
+    protected void Cancel()
+    {
+        Navigation.NavigateTo($"/Albums/{Id}");
     }
 }
