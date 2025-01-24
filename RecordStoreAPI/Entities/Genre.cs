@@ -13,9 +13,10 @@ namespace RecordStoreAPI.Entities
         Electronic,
         Alternative,
         Emo,
-        Post_Rock,
+        Post_Rock,  
         Soul,
-        Dance
+        Dance,
+        R4B
     }
     public class Genre
     {
@@ -35,12 +36,12 @@ namespace RecordStoreAPI.Entities
         /// 
         public static string ToFriendlyString(Genres genre)
         {
-            return genre.ToString().Replace('_', '-');
+            return genre.ToString().Replace('_', '-').Replace('4', '&');
         }
 
         public static (bool success, Genres genre) ToGenre(string s)
         {
-            var result = Enum.TryParse(s.Replace('-', '_'), out Genres genre);
+            var result = Enum.TryParse(s.Replace('-', '_').Replace('&', '4'), out Genres genre);
 
             return (result, genre);
         }

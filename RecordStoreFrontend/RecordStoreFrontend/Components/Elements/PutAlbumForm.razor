@@ -1,22 +1,30 @@
 ﻿@rendermode InteractiveServer
 
 <div>
+    
     <div class="field">
         <label class="label">Name</label>
         <div class="control" width="20px">
-            <input class="input" type="text" placeholder="Enter Album Name" @bind="UpdatedAlbum.Name"/>
+            <input class="input" type="text" placeholder="Album Name" @bind="UpdatedAlbum.Name"/>
         </div>
+        @if (UpdatedAlbum.Name.Length == 0)
+        {
+            <p class="help is-danger">Enter a valid name.</p>
+        }
     </div>
 
     <div class="field">
         <label class="label">Artist</label>
         <div class="control has-icons-right">
-            <input class="input" type="text" placeholder="Enter Artist Name" @bind="UpdatedAlbum.Artist"/>
+            <input class="input" type="text" placeholder="Artist Name" @bind="UpdatedAlbum.Artist"/>
             <span class="icon is-right">
                 <i class="fas fa-check"></i>
             </span>
         </div>
-        <p class="help is-danger">Enter a valid artist.</p>
+        @if(UpdatedAlbum.Artist.Length == 0)
+        {
+            <p class="help is-danger">Enter a valid artist.</p>
+        }
     </div>
 
     <div class="field">
@@ -27,13 +35,17 @@
                 <i class="fas fa-check"></i>
             </span>
         </div>
+        @if (UpdatedAlbum.ReleaseYear < 1860)
+        {
+            <p class="help is-danger">Enter a valid release year.</p>
+        }
     </div>
 
     <div class="field">
         <label class="label">Add/Delete Genre</label>
         <div class="control">
             <div class="select mr-2">
-                <select @bind="@genretoAdd">
+                <select @bind="@genreToAdd">
                     <option>Add Genre</option>
                     @foreach (string genre in Genre.ReturnGenresInOrder())
                     {
@@ -52,22 +64,23 @@
     <div class="field">
         <label class="label">Information</label>
         <div class="control">
-            <textarea class="textarea" placeholder="Album Info" @bind="UpdatedAlbum.ReleaseYear"></textarea>
+            <textarea class="textarea" placeholder="Album Info" @bind="UpdatedAlbum.Information"></textarea>
         </div>
     </div>
 
     <div class="field is-grouped">
         <div class="control">
-            <button class="button is-light" @onclick="()=>DisplayUpdatedInfo()">Submit</button>
+            <button class="button is-light" @onclick="()=>Submit()">Submit</button>
         </div>
         <div class="control">
             <button class="button is-dark">Cancel</button>
         </div>
+            <h1 class="help is-danger">@warning</h1>
     </div>
 
     @if(updated) 
     {
-        <h2>Genre to add: @genretoAdd</h2>
+        <h2>Genre to add: @genreToAdd</h2>
         <h2>@UpdatedAlbum.Name</h2>
         <h2>@UpdatedAlbum.Artist</h2>
         <h2>@UpdatedAlbum.ArtistId</h2>
@@ -83,27 +96,40 @@
 </div>
 
 @code {
-    [Parameter] 
-    public AlbumReturnDto? AlbumToUpdate { get; set; } = new(1, "Mezzanine", "Massive Attack", 1, 1998, [Genres.Electronic, Genres.Dance], "Information", 1, 2000);
-
     [Parameter]
     public AlbumDetails? UpdatedAlbum { get; set; }
 
     [Parameter]
     public int ID { get; set; } = 1;
 
-    bool updated = false;
+    private bool updated = false;
 
-    string genretoAdd;
+    private string genreToAdd;
 
-    public void DisplayUpdatedInfo() 
+    private string warning = "";
+
+    public void Submit() 
     {
-        updated = !updated;
+        if (CheckForm()) { updated = !updated; warning = ""; }
+        else warning = "Make Sure All Fields Have Been Completed";
+    }
+
+    private bool CheckForm() 
+    {
+        bool isValid = true;
+
+        if (
+            !(UpdatedAlbum.Name.Length > 0) |
+            !(UpdatedAlbum.Artist.Length > 0) |
+            !(UpdatedAlbum.ReleaseYear > 0) |
+            !(UpdatedAlbum.Genres.Count > 0)) isValid = false;
+
+        return isValid;
     }
 
     private void AddGenre()
     {
-        var result = Genre.ToGenre(genretoAdd);
+        var result = Genre.ToGenre(genreToAdd);
 
         if (result.success && !UpdatedAlbum!.Genres.Contains(result.genre)) 
         UpdatedAlbum!.Genres.Add(result.genre);
