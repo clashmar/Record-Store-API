@@ -4,11 +4,11 @@ namespace RecordStoreAPI.Tests
 {
     public class GenreTests
     {
-        [TestCase(Genres.Folk, "Folk")]
-        [TestCase(Genres.Hip_Hop, "Hip-Hop")]
-        [TestCase(Genres.Art_Rock, "Art-Rock")]
-        [TestCase(Genres.Alternative, "Alternative")]
-        public void ToString_Test(Genres genre, string expectedOutput)
+        [TestCase(Genre.Folk, "Folk")]
+        [TestCase(Genre.Hip_Hop, "Hip-Hop")]
+        [TestCase(Genre.Art_Rock, "Art-Rock")]
+        [TestCase(Genre.Alternative, "Alternative")]
+        public void ToString_Test(Genre genre, string expectedOutput)
         {
             var result = Genre.ToFriendlyString(genre);
 

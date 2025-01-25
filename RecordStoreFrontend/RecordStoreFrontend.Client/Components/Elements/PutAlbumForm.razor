@@ -41,7 +41,7 @@
 
                     <InputSelect @bind-Value="genreToAdd" class="dropdown is-active">
                         <option value="">Add Genre</option>
-                        @foreach (string genre in Genres!.Values)
+                        @foreach (string genre in genres!.Values)
                         {
                             <option>@genre</option>
                         }
@@ -51,7 +51,7 @@
                 <button class="button is-outlined ml-2 mr-2 is-success" type="button" @onclick="()=>AddGenre()">Add</button>
                 @foreach (var genre in UpdatedAlbum!.Genres)
                 {
-                    <button class="button is-outlined ml-2 mr-2 is-danger" type="button" @onclick="()=>DeleteGenre(genre)">@Genres![genre]</button>
+                    <button class="button is-outlined ml-2 mr-2 is-danger" type="button" @onclick="()=>DeleteGenre(genre)">@genres![genre]</button>
                 }
             </div>
         </div>
@@ -83,7 +83,7 @@
     [Parameter]
     public int Id { get; set; }
 
-    protected Dictionary<Genres, string>? Genres;
+    protected Dictionary<GenreEnum, string>? genres;
 
     protected string genreToAdd = "";
 
@@ -94,7 +94,7 @@
 
     protected override void OnInitialized()
     {
-        Genres = Genre.GenresDictionary() ?? [];
+        genres = Genres.GenresDictionary() ?? [];
     }
 
     protected async Task HandleValidSubmit()
@@ -125,13 +125,13 @@
 
     protected void AddGenre()
     {
-        var result = Genre.ToGenre(genreToAdd);
+        GenreEnum genre = genres!.FirstOrDefault(x => x.Value == genreToAdd).Key;
 
-        if (result.success && !UpdatedAlbum!.Genres.Contains(result.genre)) 
-        UpdatedAlbum!.Genres.Add(result.genre);
+        if (!UpdatedAlbum!.Genres.Contains(genre)) 
+        UpdatedAlbum!.Genres.Add(genre);
     }
 
-    protected void DeleteGenre(Genres genre)
+    protected void DeleteGenre(GenreEnum genre)
     {
         UpdatedAlbum!.Genres.Remove(genre);      
     }

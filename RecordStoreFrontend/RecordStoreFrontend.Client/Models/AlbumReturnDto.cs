@@ -1,6 +1,4 @@
-﻿using RecordStoreAPI.Entities;
-
-namespace RecordStoreAPI.Models
+﻿namespace RecordStoreFrontend.Client.Models
 {
     public record AlbumReturnDto(
         int Id,
@@ -8,7 +6,7 @@ namespace RecordStoreAPI.Models
         string? Artist,
         int ArtistId,
         int ReleaseYear,
-        List<Genres> Genres,
+        List<GenreEnum> Genres,
         string Information,
         int StockQuantity,
         int PriceInPence

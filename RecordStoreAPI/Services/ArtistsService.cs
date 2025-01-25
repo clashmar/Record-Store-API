@@ -1,7 +1,7 @@
 ﻿using RecordStoreAPI.Entities;
 using RecordStoreAPI.Models;
 using RecordStoreAPI.Repositories;
-using static RecordStoreAPI.Entities.Artist;
+using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Services
 {

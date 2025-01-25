@@ -1,4 +1,5 @@
 ﻿using RecordStoreAPI.Entities;
+using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Models
 {

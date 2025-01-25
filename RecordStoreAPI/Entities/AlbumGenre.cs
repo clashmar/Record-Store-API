@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+using RecordStoreFrontend.Client.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecordStoreAPI.Entities
@@ -13,7 +13,7 @@ namespace RecordStoreAPI.Entities
         public Album? Album { get; set; }
 
         [ForeignKey("GenreID")]
-        public Genres GenreID { get; set; }
+        public GenreEnum GenreID { get; set; }
 
         public Genre? Genre { get; set; }
     }

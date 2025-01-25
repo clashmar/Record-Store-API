@@ -2089,6 +2089,7 @@
           "Microsoft.EntityFrameworkCore": "9.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.0",
           "Microsoft.EntityFrameworkCore.Sqlite": "9.0.0",
+          "RecordStoreFrontend.Client": "1.0.0",
           "SQLite": "3.13.0",
           "Swashbuckle.AspNetCore": "6.6.2"
         },

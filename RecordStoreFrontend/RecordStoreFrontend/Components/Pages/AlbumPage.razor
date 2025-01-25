@@ -15,7 +15,7 @@
             <span class="is-size-4">Genres: </span>
             @for(int i = 0; i < Album.Genres.Count; i++)
             {
-                string genre = Genres![Album.Genres[i]];
+                string genre = genres![Album.Genres[i]];
                 if (i != Album.Genres.Count - 1) genre += ", ";
                 <span class="is-size-4">@genre</span>
             }
@@ -34,11 +34,11 @@
     [Parameter]
     public bool Edited { get; set; }
 
-    public Dictionary<Genres, string>? Genres;
+    public Dictionary<GenreEnum, string>? genres;
 
 
     protected override void OnInitialized()
     {
-        Genres = Genre.GenresDictionary() ?? [];
+        genres = Genres.GenresDictionary() ?? [];
     }
 }

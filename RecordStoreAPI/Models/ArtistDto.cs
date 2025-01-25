@@ -1,4 +1,4 @@
-﻿namespace RecordStoreAPI.Models
+﻿namespace RecordStoreFrontend.Client.Models
 {
     public record ArtistDto(
             int ArtistID,

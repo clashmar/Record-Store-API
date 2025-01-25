@@ -1,8 +1,7 @@
-﻿using RecordStoreAPI.Entities;
-using RecordStoreAPI.Validation;
+﻿using RecordStoreFrontend.Client.Validation.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace RecordStoreAPI.Models
+namespace RecordStoreFrontend.Client.Models
 {
     public class AlbumDetails
     {
@@ -19,7 +18,7 @@ namespace RecordStoreAPI.Models
         public int ReleaseYear { get; set; } = 1860;
 
         [PopulatedGenres]
-        public List<Genres> Genres { get; set; } = [];
+        public List<GenreEnum> Genres { get; set; } = [];
         public string Information { get; set; } = "";
         public int StockQuantity { get; set; } = 0;
         public int PriceInPence { get; set; } = 0;

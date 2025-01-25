@@ -14,7 +14,7 @@ namespace RecordStoreAPI.Tests
                 Name = "Name1",
                 Artist = new() { Name = "Name1" },
                 ReleaseYear = 2001,
-                AlbumGenres = new([new() { GenreID = Genres.Folk }]),
+                AlbumGenres = new([new() { GenreID = Genre.Folk }]),
                 Information = "Information",
                 StockQuantity = 1,
                 PriceInPence = 1
@@ -58,7 +58,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void PutDtoToAlbum_Returns_Correct_Album()
         {
-            AlbumPutDto dto = new("Name1", 1, 2001, new([Genres.Folk]), "Information", 1, 1);
+            AlbumPutDto dto = new("Name1", 1, 2001, new([Genre.Folk]), "Information", 1, 1);
 
             Album album = new()
             {
@@ -120,13 +120,13 @@ namespace RecordStoreAPI.Tests
                 Name = "Name1",
                 ArtistID = 1,
                 ReleaseYear = 2001,
-                AlbumGenres = new([new() { AlbumID = 1, GenreID = Genres.Folk }]),
+                AlbumGenres = new([new() { AlbumID = 1, GenreID = Genre.Folk }]),
                 Information = "Information",
                 StockQuantity = 1,
                 PriceInPence = 1
             };
 
-            AlbumPutDto dto = new("Name2", 2, 2002, new([Genres.Indie]), "MoreInformation", 2, 2);
+            AlbumPutDto dto = new("Name2", 2, 2002, new([Genre.Indie]), "MoreInformation", 2, 2);
 
             Album updatedAlbum = new()
             {
@@ -134,7 +134,7 @@ namespace RecordStoreAPI.Tests
                 Name = "Name2",
                 ArtistID = 2,
                 ReleaseYear = 2002,
-                AlbumGenres = new([new() { AlbumID = 1, GenreID = Genres.Indie }]),
+                AlbumGenres = new([new() { AlbumID = 1, GenreID = Genre.Indie }]),
                 Information = "MoreInformation",
                 StockQuantity = 2,
                 PriceInPence = 2
@@ -157,7 +157,7 @@ namespace RecordStoreAPI.Tests
                 Name = "Name1",
                 ArtistID = 1,
                 ReleaseYear = 2001,
-                AlbumGenres = new([new() { AlbumID = 1, GenreID = Genres.Folk }]),
+                AlbumGenres = new([new() { AlbumID = 1, GenreID = Genre.Folk }]),
                 Information = "Information",
                 StockQuantity = 1,
                 PriceInPence = 1

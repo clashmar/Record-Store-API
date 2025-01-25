@@ -233,9 +233,9 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAlbumsByGenre_Calls_Correct_Service_Method()
         {
-            _albumsController.GetAlbumsByGenre(Genres.Folk);
+            _albumsController.GetAlbumsByGenre(Genre.Folk);
 
-            _albumsServiceMock.Verify(s => s.FindAlbumsByGenre(Genres.Folk), Times.Once());
+            _albumsServiceMock.Verify(s => s.FindAlbumsByGenre(Genre.Folk), Times.Once());
         }
 
         [Test]
@@ -247,9 +247,9 @@ namespace RecordStoreAPI.Tests
                 new(2, "Name2", "Artist2", 2025, new() {"Folk"}, "Information", 2, 1)
             ];
 
-            _albumsServiceMock.Setup(s => s.FindAlbumsByGenre(Genres.Folk)).Returns(albums);
+            _albumsServiceMock.Setup(s => s.FindAlbumsByGenre(Genre.Folk)).Returns(albums);
 
-            var result = _albumsController.GetAlbumsByGenre(Genres.Folk);
+            var result = _albumsController.GetAlbumsByGenre(Genre.Folk);
 
             if (result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(albums));
             else Assert.Fail();
@@ -258,9 +258,9 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAlbumsByGenre_Returns_Not_Found_If_Not_Found()
         {
-            _albumsServiceMock.Setup(s => s.FindAlbumsByGenre(Genres.Folk)).Returns([]);
+            _albumsServiceMock.Setup(s => s.FindAlbumsByGenre(Genre.Folk)).Returns([]);
 
-            var result = _albumsController.GetAlbumsByGenre(Genres.Folk);
+            var result = _albumsController.GetAlbumsByGenre(Genre.Folk);
 
             if (result is NotFoundObjectResult) Assert.Pass();
             else Assert.Fail();
@@ -271,7 +271,7 @@ namespace RecordStoreAPI.Tests
         {
             _albumsController.GetAlbumByName("Name");
 
-            _albumsServiceMock.Verify(s => s.FindAlbumByName("Name"), Times.Once());
+            _albumsServiceMock.Verify(s => s.FindAlbumsByName("Name"), Times.Once());
         }
 
         [Test]
@@ -294,7 +294,7 @@ namespace RecordStoreAPI.Tests
                     StockQuantity = 1 },
             ];
 
-            _albumsServiceMock.Setup(s => s.FindAlbumByName("Name1")).Returns(albumDtos);
+            _albumsServiceMock.Setup(s => s.FindAlbumsByName("Name1")).Returns(albumDtos);
 
             var result = _albumsController.GetAlbumByName("Name1");
 
@@ -305,7 +305,7 @@ namespace RecordStoreAPI.Tests
         [Test]
         public void GetAlbumByName_Returns_Not_Found_If_Not_Found()
         {
-            _albumsServiceMock.Setup(s => s.FindAlbumByName("Name1")).Returns([]);
+            _albumsServiceMock.Setup(s => s.FindAlbumsByName("Name1")).Returns([]);
 
             var result = _albumsController.GetAlbumByName("Name1");
 

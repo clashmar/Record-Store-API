@@ -1,5 +1,6 @@
 ﻿using RecordStoreAPI.Entities;
 using RecordStoreAPI.Models;
+using RecordStoreFrontend.Client.Models;
 using RecordStoreAPI.Repositories;
 
 namespace RecordStoreAPI.Services
@@ -11,9 +12,9 @@ namespace RecordStoreAPI.Services
         AlbumReturnDto? AddNewAlbum(AlbumDetails album);
         AlbumReturnDto? UpdateAlbum(int id, AlbumDetails album);
         bool TryRemoveAlbumById(int id);
-        List<AlbumReturnDto>? FindAlbumsByReleaseYear(int releaseYear);
-        List<AlbumReturnDto>? FindAlbumsByGenre(Genres genre);
-        List<AlbumReturnDto>? FindAlbumByName(string name);
+        List<AlbumReturnDto> FindAlbumsByReleaseYear(int releaseYear);
+        List<AlbumReturnDto> FindAlbumsByGenre(GenreEnum genre);
+        List<AlbumReturnDto> FindAlbumsByName(string name);
     }
     public class AlbumsService : IAlbumsService
     {
@@ -28,7 +29,7 @@ namespace RecordStoreAPI.Services
         {
             return _albumsRepository.FindAllAlbums()
                 .Select(a => DTOExtensions.ToAlbumReturnDto(a))
-                .ToList()!;
+                .ToList() ?? [];
         }
 
         public AlbumReturnDto? FindAlbumById(int id)
@@ -54,24 +55,24 @@ namespace RecordStoreAPI.Services
             return _albumsRepository.TryRemoveAlbumById(id);
         }
 
-        public List<AlbumReturnDto>? FindAlbumsByReleaseYear(int releaseYear)
+        public List<AlbumReturnDto> FindAlbumsByReleaseYear(int releaseYear)
         {
             List<Album>? albums = _albumsRepository.FindAlbumsByReleaseYear(releaseYear);
-            return albums?.Select(a => DTOExtensions.ToAlbumReturnDto(a)).ToList();
+            return albums?.Select(a => DTOExtensions.ToAlbumReturnDto(a)).ToList() ?? [];
         }
 
-        public List<AlbumReturnDto>? FindAlbumsByGenre(Genres genre)
+        public List<AlbumReturnDto> FindAlbumsByGenre(GenreEnum genre)
         {
             List<Album>? albums = _albumsRepository.FindAlbumsByGenre(genre);
-            return albums?.Select(a => DTOExtensions.ToAlbumReturnDto(a)).ToList();
+            return albums?.Select(a => DTOExtensions.ToAlbumReturnDto(a)).ToList() ?? [];
         }
 
-        public List<AlbumReturnDto>? FindAlbumByName(string name)
+        public List<AlbumReturnDto> FindAlbumsByName(string name)
         {
             return _albumsRepository.FindAllAlbums()
                 .Where(a => a.Name.ToLower().Contains(name.ToLower()))
                 .Select(a => DTOExtensions.ToAlbumReturnDto(a))
-                .ToList();
+                .ToList() ?? [];
         }
     }
 }

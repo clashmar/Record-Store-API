@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecordStoreAPI.Entities;
-using RecordStoreAPI.Models;
+using RecordStoreFrontend.Client.Models;
 using RecordStoreAPI.Services;
 
 namespace RecordStoreAPI.Controllers
@@ -60,16 +60,16 @@ namespace RecordStoreAPI.Controllers
         }
 
         [HttpGet("Genre/{genre}")]
-        public IActionResult GetAlbumsByGenre(Genres genre)
+        public IActionResult GetAlbumsByGenre(GenreEnum genre)
         {
             var result = _albumsService.FindAlbumsByGenre(genre);
-            return result != null && result.Count > 0 ? Ok(result) : NotFound($"We don't have any {Genre.ToFriendlyString(genre)} albums in stock.");
+            return result != null && result.Count > 0 ? Ok(result) : NotFound($"We don't have any {Genres.ToFriendlyString(genre)} albums in stock.");
         }
 
         [HttpGet("Search")]
         public IActionResult GetAlbumByName(string name)
         {
-            var result = _albumsService.FindAlbumByName(name);
+            var result = _albumsService.FindAlbumsByName(name);
             return result != null && result.Count > 0 ? Ok(result) : NotFound("We couldn't find an album matching your search.");
         }
     }

@@ -30,12 +30,12 @@ namespace RecordStoreAPI.Tests
         {
             IEnumerable<Genre> genres =
             [
-                new() { GenreID = Genres.Folk, Name = "Folk" }
+                new() { GenreID = Genre.Folk, Name = "Folk" }
             ];
 
             List<GenreDto> dtos =
             [
-                new(Genres.Folk, "Folk")
+                new(Genre.Folk, "Folk")
             ];
 
             _genresRepositoryMock.Setup(s => s.FindAllGenres()).Returns(genres);

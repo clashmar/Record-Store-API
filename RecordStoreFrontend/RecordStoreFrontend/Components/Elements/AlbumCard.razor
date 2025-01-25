@@ -7,12 +7,12 @@
             </figure>
         </div>
         <div class="card-header is-justify-content-center mt-3">
-            <p class="title is-6 has-text-centered">@Album.Name</p>
+            <p class="title is-6 has-text-centered">@Album!.Name</p>
         </div>
         <div class="card-content">
             <div class="content is-justify-content-center">
-                <p class="has-text-centered">@Album.Artist</p>
-                <p class="has-text-centered">@Album.ReleaseYear</p>
+                <p class="has-text-centered">@Album!.Artist</p>
+                <p class="has-text-centered">@Album!.ReleaseYear</p>
             </div>
         </div>
     </div>
@@ -22,5 +22,5 @@
 @code {
     
     [Parameter]
-    public AlbumReturnDto Album { get; set; }
+    public AlbumReturnDto? Album { get; set; }
 }

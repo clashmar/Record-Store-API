@@ -328,17 +328,17 @@ namespace RecordStoreAPI.Tests
                 Name = "Name1",
                 Artist = new() { Name = "Artist1" },
                 ReleaseYear = 2001,
-                AlbumGenres = [new() { GenreID = Genres.Folk }],
+                AlbumGenres = [new() { GenreID = Genre.Folk }],
                 Information = "Information",
                 StockQuantity = 1,
                 PriceInPence = 1 },
             ];
 
-            _albumsRepositoryMock.Setup(s => s.FindAlbumsByGenre(Genres.Folk)).Returns(albums);
+            _albumsRepositoryMock.Setup(s => s.FindAlbumsByGenre(Genre.Folk)).Returns(albums);
 
-            _albumsService.FindAlbumsByGenre(Genres.Folk);
+            _albumsService.FindAlbumsByGenre(Genre.Folk);
 
-            _albumsRepositoryMock.Verify(s => s.FindAlbumsByGenre(Genres.Folk), Times.Once());
+            _albumsRepositoryMock.Verify(s => s.FindAlbumsByGenre(Genre.Folk), Times.Once());
         }
 
         [Test]
@@ -351,7 +351,7 @@ namespace RecordStoreAPI.Tests
                 Name = "Name1",
                 Artist = new() { Name = "Artist1" },
                 ReleaseYear = 2001,
-                AlbumGenres = [new() { GenreID = Genres.Folk }],
+                AlbumGenres = [new() { GenreID = Genre.Folk }],
                 Information = "Information",
                 StockQuantity = 1,
                 PriceInPence = 1 },
@@ -362,9 +362,9 @@ namespace RecordStoreAPI.Tests
                 new(1, "Name1", "Artist1", 2001, ["Folk"], "Information", 1, 1),
             ];
 
-            _albumsRepositoryMock.Setup(s => s.FindAlbumsByGenre(Genres.Folk)).Returns(albums);
+            _albumsRepositoryMock.Setup(s => s.FindAlbumsByGenre(Genre.Folk)).Returns(albums);
 
-            var result = _albumsService.FindAlbumsByGenre(Genres.Folk);
+            var result = _albumsService.FindAlbumsByGenre(Genre.Folk);
 
             var jsonResult = JsonSerializer.Serialize(result);
             var jsonDto = JsonSerializer.Serialize(dtos);
@@ -379,7 +379,7 @@ namespace RecordStoreAPI.Tests
 
             _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns([]);
 
-            var result = _albumsService.FindAlbumsByGenre(Genres.Folk);
+            var result = _albumsService.FindAlbumsByGenre(Genre.Folk);
 
             Assert.That(result, Is.EqualTo(dtos));
         }
@@ -402,7 +402,7 @@ namespace RecordStoreAPI.Tests
 
             _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(albums);
 
-            _albumsService.FindAlbumByName("Name1");
+            _albumsService.FindAlbumsByName("Name1");
 
             _albumsRepositoryMock.Verify(s => s.FindAllAlbums(), Times.Once());
         }
@@ -430,7 +430,7 @@ namespace RecordStoreAPI.Tests
 
             _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(albums);
 
-            var result = _albumsService.FindAlbumByName("Name1");
+            var result = _albumsService.FindAlbumsByName("Name1");
 
             var jsonResult = JsonSerializer.Serialize(result);
             var jsonDto = JsonSerializer.Serialize(dtos);
@@ -458,7 +458,7 @@ namespace RecordStoreAPI.Tests
 
             _albumsRepositoryMock.Setup(s => s.FindAllAlbums()).Returns(albums);
 
-            var result = _albumsService.FindAlbumByName("Name2");
+            var result = _albumsService.FindAlbumsByName("Name2");
 
             Assert.That(result, Is.EqualTo(emptyList));
         }

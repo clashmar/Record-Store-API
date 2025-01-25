@@ -31,7 +31,7 @@ namespace RecordStoreAPI.Tests
         {
             List<GenreDto> dtos =
             [
-                new(Genres.Folk, "Folk")
+                new(Genre.Folk, "Folk")
             ];
 
             _genresServiceMock.Setup(s => s.FindAllGenres()).Returns(dtos);

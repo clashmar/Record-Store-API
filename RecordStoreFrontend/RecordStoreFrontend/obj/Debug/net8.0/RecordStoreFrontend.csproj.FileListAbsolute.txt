@@ -163,3 +163,4 @@ C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFronten
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend\obj\Debug\net8.0\RecordStoreFrontend.pdb
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend\obj\Debug\net8.0\RecordStoreFrontend.genruntimeconfig.cache
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend\obj\Debug\net8.0\ref\RecordStoreFrontend.dll
+C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend\bin\Debug\net8.0\RecordStoreAPI.staticwebassets.runtime.json
