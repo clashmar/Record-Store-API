@@ -1,43 +1,38 @@
 ﻿@inject NavigationManager Navigation
 @inject IHttpClientFactory ClientFactory
-@page "/Albums"
+@page "/"
 
-@if(errorMessage != null)
+@if (errorMessage != null)
 {
     <ErrorMessage Message="@errorMessage" />
 }
-else if(Albums == null) 
+else if (Albums == null)
 {
     <Loading />
 }
 else
 {
-    <CascadingValue Value="Deleted">
-        <CascadingValue Value="Albums">
-            <AlbumsPage/>
-        </CascadingValue>
+    <CascadingValue Value="Albums">
+        <Home />
     </CascadingValue>
 }
 
 @code {
-    [SupplyParameterFromQuery]
-    public bool Deleted { get; set; }
-
     protected List<AlbumReturnDto>? Albums { get; set; }
 
     protected string? errorMessage;
 
-    protected override async Task OnInitializedAsync() 
+    protected override async Task OnInitializedAsync()
     {
         try
         {
             var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await client.GetFromJsonAsync<List<AlbumReturnDto>>("Albums");
+            var response = await client.GetFromJsonAsync<List<AlbumReturnDto>>("Albums/TopFive");
 
             Albums = response != null ? response : [];
         }
-        catch(Exception ex) 
+        catch(Exception ex)
         {
             errorMessage = $"An error occured: {ex.Message}";
         }

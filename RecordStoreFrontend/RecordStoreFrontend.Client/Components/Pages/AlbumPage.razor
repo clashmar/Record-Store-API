@@ -10,12 +10,7 @@
         <h2 class="is-size-4">@Album!.ReleaseYear</h2>
         <div>
             <span class="is-size-4">Genres: </span>
-            @for(int i = 0; i < Album.Genres.Count; i++)
-            {
-                string genre = genres![Album.Genres[i]];
-                if (i != Album.Genres.Count - 1) genre += ", ";
-                <span class="is-size-4">@genre</span>
-            }
+            <span class="is-size-4">@String.Join(", ", Album.Genres.Select(g => genres![g]).ToList())</span>
         </div>
         <p class="is-size-4">@Album.Information</p>
     </div>

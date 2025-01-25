@@ -4,13 +4,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\app.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-emQeTG7RWR7y/XDnuW/0CHz7bnRvz/q0qqJxW8\u002B4DFY="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2156"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022emQeTG7RWR7y/XDnuW/0CHz7bnRvz/q0qqJxW8\u002B4DFY=\u0022"},{"Name":"Last-Modified","Value":"Thu, 23 Jan 2025 15:06:54 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2156"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022emQeTG7RWR7y/XDnuW/0CHz7bnRvz/q0qqJxW8\u002B4DFY=\u0022"},{"Name":"Last-Modified","Value":"Sat, 25 Jan 2025 19:46:29 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/RecordStoreFrontend/app.motlisla8a.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\app.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"motlisla8a"},{"Name":"integrity","Value":"sha256-emQeTG7RWR7y/XDnuW/0CHz7bnRvz/q0qqJxW8\u002B4DFY="},{"Name":"label","Value":"_content/RecordStoreFrontend/app.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2156"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022emQeTG7RWR7y/XDnuW/0CHz7bnRvz/q0qqJxW8\u002B4DFY=\u0022"},{"Name":"Last-Modified","Value":"Thu, 23 Jan 2025 15:06:54 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2156"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022emQeTG7RWR7y/XDnuW/0CHz7bnRvz/q0qqJxW8\u002B4DFY=\u0022"},{"Name":"Last-Modified","Value":"Sat, 25 Jan 2025 19:46:29 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/RecordStoreFrontend/bulma.min.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\bulma.min.css'))</AssetFile>
