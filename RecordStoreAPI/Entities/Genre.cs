@@ -34,6 +34,16 @@ namespace RecordStoreAPI.Entities
         /// <param name="genre"></param>
         /// <returns></returns
         /// 
+        
+        public static Dictionary<Genres, string> GenresDictionary()
+        {
+            return Enum.GetValues(typeof(Genres))
+                .Cast<Genres>()
+                .Select(g => (g, ToFriendlyString(g)))
+                .OrderBy(x => x.Item2)
+                .ToDictionary();
+        }
+        
         public static string ToFriendlyString(Genres genre)
         {
             return genre.ToString().Replace('_', '-').Replace('4', '&');
@@ -44,15 +54,6 @@ namespace RecordStoreAPI.Entities
             var result = Enum.TryParse(s.Replace('-', '_').Replace('&', '4'), out Genres genre);
 
             return (result, genre);
-        }
-
-        public static List<string> ReturnGenresInOrder()
-        {
-            return Enum.GetValues(typeof(Genres))
-                .Cast<Genres>()
-                .Select(g => ToFriendlyString(g))
-                .Order()
-                .ToList();
         }
     }
     public record GenreDto(Genres GenreID, string Name);

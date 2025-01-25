@@ -1,7 +1,7 @@
-﻿ @if(Edited)  
- { 
-     <p class="is-size-4 has-text-success has-text-centered">Changes Were Made Successfully</p> 
- } 
+﻿@if(Edited)  
+{ 
+    <p class="is-size-4 has-text-success has-text-centered">Changes Were Made Successfully</p> 
+} 
 
 <div class="columns is-8 mt-5 mb-5">
     <div class="column is-one-quarter">
@@ -15,7 +15,7 @@
             <span class="is-size-4">Genres: </span>
             @for(int i = 0; i < Album.Genres.Count; i++)
             {
-                string genre = Genre.ToFriendlyString(Album.Genres[i]);
+                string genre = Genres![Album.Genres[i]];
                 if (i != Album.Genres.Count - 1) genre += ", ";
                 <span class="is-size-4">@genre</span>
             }
@@ -23,7 +23,6 @@
         <p class="is-size-4">@Album.Information</p>
     </div>
 </div>
-
 
 @code {
     [Parameter]
@@ -34,4 +33,12 @@
 
     [Parameter]
     public bool Edited { get; set; }
+
+    public Dictionary<Genres, string>? Genres;
+
+
+    protected override void OnInitialized()
+    {
+        Genres = Genre.GenresDictionary() ?? [];
+    }
 }

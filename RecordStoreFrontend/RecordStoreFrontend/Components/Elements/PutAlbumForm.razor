@@ -37,11 +37,11 @@
         <div class="field">
             <label class="label">Add/Delete Genre</label>
             <div class="control">
-                <div class="select mr-2">
+                <div class="select mr-2 is-white">
 
-                    <InputSelect @bind-Value="genreToAdd">
+                    <InputSelect @bind-Value="genreToAdd" class="dropdown is-active">
                         <option value="">Add Genre</option>
-                        @foreach (string genre in Genre.ReturnGenresInOrder())
+                        @foreach (string genre in Genres!.Values)
                         {
                             <option>@genre</option>
                         }
@@ -51,7 +51,7 @@
                 <button class="button is-outlined ml-2 mr-2 is-success" type="button" @onclick="()=>AddGenre()">Add</button>
                 @foreach (var genre in UpdatedAlbum!.Genres)
                 {
-                    <button class="button is-outlined ml-2 mr-2 is-danger" type="button" @onclick="()=>DeleteGenre(genre)">@Genre.ToFriendlyString(genre)</button>
+                    <button class="button is-outlined ml-2 mr-2 is-danger" type="button" @onclick="()=>DeleteGenre(genre)">@Genres![genre]</button>
                 }
             </div>
         </div>
@@ -83,12 +83,19 @@
     [Parameter]
     public int Id { get; set; }
 
+    protected Dictionary<Genres, string>? Genres;
+
     protected string genreToAdd = "";
 
     protected string warning = "";
 
     protected string? errorMessage;
 
+
+    protected override void OnInitialized()
+    {
+        Genres = Genre.GenresDictionary() ?? [];
+    }
 
     protected async Task HandleValidSubmit()
     {
