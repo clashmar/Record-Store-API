@@ -1032,6 +1032,6 @@ C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFronten
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\refint\RecordStoreFrontend.Client.dll
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\RecordStoreFrontend.Client.pdb
 C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\ref\RecordStoreFrontend.Client.dll
-C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\jrgkqsblu4-3ry045sc85.gz
-C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\nkom3m9u4k-e5yo7inr6v.gz
-C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\8g99s3amv6-8ktwtbo6fv.gz
+C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\jrgkqsblu4-ucv77r0mrv.gz
+C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\nkom3m9u4k-dtofs4f4gp.gz
+C:\Users\charl\Documents\Northcoders\Backend\record-store-API\RecordStoreFrontend\RecordStoreFrontend.Client\obj\Debug\net8.0\compressed\8g99s3amv6-g2jzax7vts.gz
