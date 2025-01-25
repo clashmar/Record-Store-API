@@ -1,7 +1,13 @@
 ﻿@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
 @rendermode InteractiveAuto
 
 <div>
+    @if(!string.IsNullOrEmpty(errorMessage)) 
+    {
+        <ErrorMessage Error="@errorMessage" />
+    }
+
     <EditForm FormName="PutAlbumForm" Model="UpdatedAlbum" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
         <DataAnnotationsValidator />
         <div class="field">
@@ -70,9 +76,8 @@
             <div class="control">
                 <button class="button is-dark" type="button" @onclick="()=>Cancel()">Cancel</button>
             </div>
-            <p class="help is-danger mt-2">@warning</p>
+            <p class="help is-danger mt-2">@errorMessage</p>
         </div>
-
     </EditForm>
 </div>
 
@@ -87,8 +92,6 @@
 
     protected string genreToAdd = "";
 
-    protected string warning = "";
-
     protected string? errorMessage;
 
 
@@ -99,28 +102,30 @@
 
     protected async Task HandleValidSubmit()
     {
-        var http = new HttpClient();
-
         try
         {
-            var response = await http.PutAsJsonAsync<AlbumDetails>(
-                $"https://localhost:7186/Albums/{Id}", UpdatedAlbum!);
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            if (response != null)
+            var response = await client.PutAsJsonAsync<AlbumDetails>($"/Albums/{Id}", UpdatedAlbum!);
+
+            if (response.IsSuccessStatusCode)
             {
                 Navigation.NavigateTo($"/Albums/{Id}?edited=true");
+            }
+            else 
+            {
+                errorMessage = $"API returned with status code {response.StatusCode}. Check that the artist is correct.";
             }
         }
         catch (Exception ex)
         {
             errorMessage = $"An error occured: {ex.Message}";
-            Console.Write(errorMessage);
         }
     }
 
     protected void HandleInvalidSubmit()
     {
-        warning = "Make Sure All Fields Have Been Completed";
+        errorMessage = "Make Sure All Fields Have Been Completed";
     }
 
     protected void AddGenre()

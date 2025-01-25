@@ -1,13 +1,14 @@
 ﻿@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
 @page "/Albums/{Id:int}"
 
-@if (Album == null)
+@if (errorMessage != null)
+{
+    <ErrorMessage Error="@errorMessage" />
+}
+else if (Album == null)
 {
     <Loading />
-}
-else if (errorMessage != null)
-{
-    <h3>@errorMessage</h3>
 }
 else
 {
@@ -27,13 +28,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-
         try
         {
-            var http = new HttpClient();
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await http.GetFromJsonAsync<AlbumReturnDto>(
-                $"https://localhost:7186/Albums/{Id}");
+            var response = await client.GetFromJsonAsync<AlbumReturnDto>($"/Albums/{Id}");
 
             Album = response != null ? response : null;
         }

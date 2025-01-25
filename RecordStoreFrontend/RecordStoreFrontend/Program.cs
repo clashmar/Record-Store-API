@@ -7,6 +7,9 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+builder.Services.AddHttpClient("RecordStoreAPI", client =>
+    client.BaseAddress = new Uri("https://localhost:7186"));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

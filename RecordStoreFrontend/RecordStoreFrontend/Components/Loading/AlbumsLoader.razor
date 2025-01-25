@@ -1,4 +1,6 @@
-﻿@if(Albums == null) 
+﻿@inject IHttpClientFactory ClientFactory
+
+@if(Albums == null) 
 {
     <Loading />
 }
@@ -20,10 +22,9 @@ else
 
         try
         {
-            var http = new HttpClient();
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await http.GetFromJsonAsync<List<AlbumReturnDto>>(
-                $"https://localhost:7186/Albums");
+            var response = await client.GetFromJsonAsync<List<AlbumReturnDto>>("Albums");
 
             Albums = response != null ? response : [];
         }

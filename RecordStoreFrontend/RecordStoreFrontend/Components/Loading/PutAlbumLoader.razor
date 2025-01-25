@@ -1,12 +1,13 @@
-﻿@page "/Albums/{Id:int}/Edit"
+﻿@inject IHttpClientFactory ClientFactory
+@page "/Albums/{Id:int}/Edit"
 
-@if (AlbumToUpdate == null)
+@if (errorMessage != null)
+{
+    <ErrorMessage Error="@errorMessage" />
+}
+else if (AlbumToUpdate == null)
 {
     <Loading />
-}
-else if (errorMessage != null)
-{
-    <h3>@errorMessage</h3>
 }
 else
 {
@@ -27,24 +28,23 @@ else
     {
         try
         {
-            var http = new HttpClient();
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await http.GetFromJsonAsync<AlbumReturnDto>(
-                $"https://localhost:7186/Albums/{Id}");
+            var response = await client.GetFromJsonAsync<AlbumReturnDto>($"/Albums/{Id}");
 
             AlbumToUpdate = response != null ? response : null;
 
             if (AlbumToUpdate != null)
             {
                 UpdatedAlbum!.AlbumID = AlbumToUpdate.Id;
-                UpdatedAlbum.Name = AlbumToUpdate.Name;
-                UpdatedAlbum.ArtistName = AlbumToUpdate.Artist!;
-                UpdatedAlbum.ArtistID = AlbumToUpdate.ArtistId;
-                UpdatedAlbum.ReleaseYear = AlbumToUpdate.ReleaseYear;
-                UpdatedAlbum.Genres = AlbumToUpdate.Genres;
-                UpdatedAlbum.Information = AlbumToUpdate.Information;
-                UpdatedAlbum.StockQuantity = AlbumToUpdate.StockQuantity;
-                UpdatedAlbum.PriceInPence = AlbumToUpdate.PriceInPence;
+                UpdatedAlbum!.Name = AlbumToUpdate.Name;
+                UpdatedAlbum!.ArtistName = AlbumToUpdate.Artist!;
+                UpdatedAlbum!.ArtistID = AlbumToUpdate.ArtistId;
+                UpdatedAlbum!.ReleaseYear = AlbumToUpdate.ReleaseYear;
+                UpdatedAlbum!.Genres = AlbumToUpdate.Genres;
+                UpdatedAlbum!.Information = AlbumToUpdate.Information;
+                UpdatedAlbum!.StockQuantity = AlbumToUpdate.StockQuantity;
+                UpdatedAlbum!.PriceInPence = AlbumToUpdate.PriceInPence;
             }
         }
         catch (Exception ex)
