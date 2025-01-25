@@ -1,4 +1,7 @@
-﻿<h1 class="is-size-4 has-text-danger has-text-centered mt-4">@Error</h1>
+﻿@if (!string.IsNullOrEmpty(Error))
+{
+    <h1 class="is-size-4 has-text-danger has-text-centered mt-4 mb-4">@Error</h1>
+}
 
 @code {
     [Parameter]

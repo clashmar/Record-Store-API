@@ -1,0 +1,12 @@
+﻿@if (Condition)
+{
+    <p class="is-size-4 has-text-success has-text-centered mt-4 mb-4">@Message</p>
+} 
+
+@code {
+    [CascadingParameter]
+    public bool Condition { get; set; }
+
+    [Parameter]
+    public string? Message { get; set; }
+}

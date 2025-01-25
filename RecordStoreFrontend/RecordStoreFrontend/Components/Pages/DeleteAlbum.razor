@@ -1,6 +1,9 @@
 ﻿@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
 @rendermode InteractiveServer
 @page "/Albums/{Id:int}/Delete"
+
+<ErrorMessage Error="@errorMessage" />
 
 <div class="has-text-centered">
     <h1 class="is-size-2 has-text-light has-text-weight-bold">Are You Sure?</h1>
@@ -15,16 +18,32 @@
 </div>
 
 @code {
-
     [Parameter]
     public int Id { get; set; }
 
-    protected void HandleDelete()
+    protected string? errorMessage;
+
+    protected async Task HandleDelete()
     {
+        try 
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
 
+            var response = await client.DeleteAsync($"Albums/{Id}");
 
-
-        Navigation.NavigateTo($"/Albums");
+            if (response.IsSuccessStatusCode)
+            {
+                Navigation.NavigateTo($"/Albums?deleted=true");
+            }
+            else
+            {
+                errorMessage = $"An error occured: {response.StatusCode}";
+            }
+        }
+        catch(Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
     }
 
     protected void Cancel()

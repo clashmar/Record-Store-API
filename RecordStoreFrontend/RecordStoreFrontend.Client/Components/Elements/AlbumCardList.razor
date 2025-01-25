@@ -6,13 +6,12 @@
 </div>
 
 @code {
-    [Parameter]
+    [CascadingParameter]
     public List<AlbumReturnDto> Albums { get; set; } = [];
+
     // [
-        // new(1, "The Three E.P's", "The Beta Band", 1998, ["Post-Rock"], "Information", 1, 2000),
         // new(2, "What's Going On", "Marvin Gaye", 1971, ["R&B"], "Information", 1, 2000),
         // new(3, "Lo Boob Oscillator", "Stereolab", 1995, ["Alternative", "Indie"], "Information", 1, 2000),
         // new(4, "Slanted & Enchanted", "Pavement", 1992, ["Alternative"], "Information", 1, 2000),
-        // new(5, "Mezzanine", "Massive Attack", 1998, ["Electronic", "Dance"], "Information", 1, 2000)
         // ];
 }

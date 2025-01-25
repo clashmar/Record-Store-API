@@ -22,7 +22,7 @@ else
     [Parameter]
     public int Id { get; set; }
 
-    private string? errorMessage;
+    protected string? errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -45,6 +45,10 @@ else
                 UpdatedAlbum!.Information = AlbumToUpdate.Information;
                 UpdatedAlbum!.StockQuantity = AlbumToUpdate.StockQuantity;
                 UpdatedAlbum!.PriceInPence = AlbumToUpdate.PriceInPence;
+            }
+            else
+            {
+                errorMessage = $"Could not find album.";
             }
         }
         catch (Exception ex)

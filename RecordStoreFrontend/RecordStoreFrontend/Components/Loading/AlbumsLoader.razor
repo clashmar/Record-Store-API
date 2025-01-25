@@ -1,19 +1,28 @@
 ﻿@inject IHttpClientFactory ClientFactory
+@inject NavigationManager Navigation
+@page "/Albums"
 
-@if(Albums == null) 
+@if(errorMessage != null)
+{
+    <ErrorMessage Error="errorMessage" />
+}
+else if(Albums == null) 
 {
     <Loading />
 }
-else if(errorMessage != null)
-{
-    <h3>@errorMessage</h3>
-}
 else
 {
-    <AlbumCardList Albums="Albums"/>
+    <CascadingValue Value="Deleted">
+        <CascadingValue Value="Albums">
+            <Albums/>
+        </CascadingValue>
+    </CascadingValue>
 }
 
 @code {
+    [SupplyParameterFromQuery]
+    public bool Deleted { get; set; }
+
     protected List<AlbumReturnDto> Albums { get; set; } = [];
 
     protected string? errorMessage;

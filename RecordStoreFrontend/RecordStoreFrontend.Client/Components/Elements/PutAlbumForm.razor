@@ -3,10 +3,7 @@
 @rendermode InteractiveAuto
 
 <div>
-    @if(!string.IsNullOrEmpty(errorMessage)) 
-    {
-        <ErrorMessage Error="@errorMessage" />
-    }
+    <ErrorMessage Error="@errorMessage" />
 
     <EditForm FormName="PutAlbumForm" Model="UpdatedAlbum" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
         <DataAnnotationsValidator />
@@ -114,7 +111,7 @@
             }
             else 
             {
-                errorMessage = $"API returned with status code {response.StatusCode}. Check that the artist is correct.";
+                errorMessage = $"An error occured: {response.StatusCode}. Check that the artist is correct.";
             }
         }
         catch (Exception ex)

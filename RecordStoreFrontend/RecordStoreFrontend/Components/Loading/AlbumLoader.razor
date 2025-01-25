@@ -12,7 +12,9 @@ else if (Album == null)
 }
 else
 {
-    <AlbumPage Album="Album" Edited="Edited"/>
+    <CascadingValue Value="Edited">
+        <AlbumPage Album="Album" Edited="Edited"/>
+    </CascadingValue>
 }
 
 @code {
