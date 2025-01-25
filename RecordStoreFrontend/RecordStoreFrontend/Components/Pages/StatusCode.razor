@@ -1,0 +1,16 @@
+﻿@page "/StatusCode/{Status:int}"
+
+<ErrorMessage Message="@Message" />
+
+@code {
+    [Parameter]
+    public int Status { get; set; }
+
+    protected string? Message;
+
+    protected override void OnInitialized()
+    {
+        Message = $"An error has occurred: {Status}";
+    }
+
+}

@@ -1,8 +1,10 @@
-﻿<div class="grid is-gap-5">
-    @foreach(var album in Albums) 
-    {
-        <div class="cell"><AlbumCard Album="album"/></div>
-    }
+﻿<div class="fixed-grid has-5-cols">
+    <div class="grid is-gap-5">
+        @foreach(var album in Albums) 
+        {
+            <div class="cell"><AlbumCard Album="album"/></div>
+        }
+    </div>
 </div>
 
 @code {

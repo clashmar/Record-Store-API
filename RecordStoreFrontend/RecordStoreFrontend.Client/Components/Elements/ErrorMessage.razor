@@ -1,9 +1,9 @@
-﻿@if (!string.IsNullOrEmpty(Error))
+﻿@if (!string.IsNullOrEmpty(Message))
 {
-    <h1 class="is-size-4 has-text-danger has-text-centered mt-4 mb-4">@Error</h1>
+    <h1 class="is-size-4 has-text-danger has-text-centered mt-4 mb-4">@Message</h1>
 }
 
 @code {
     [Parameter]
-    public string? Error { get; set; }
+    public string? Message { get; set; }
 }

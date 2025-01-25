@@ -1,10 +1,10 @@
-﻿@inject IHttpClientFactory ClientFactory
-@inject NavigationManager Navigation
+﻿@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
 @page "/Albums"
 
 @if(errorMessage != null)
 {
-    <ErrorMessage Error="errorMessage" />
+    <ErrorMessage Message="errorMessage" />
 }
 else if(Albums == null) 
 {
@@ -14,7 +14,7 @@ else
 {
     <CascadingValue Value="Deleted">
         <CascadingValue Value="Albums">
-            <Albums/>
+            <AlbumsPage/>
         </CascadingValue>
     </CascadingValue>
 }

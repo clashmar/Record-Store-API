@@ -48,16 +48,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFbGVtZW50c1xQdXRBbGJ1bUZvcm0ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Elements/SuccessMessage.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFbGVtZW50c1xTdWNjZXNzTWVzc2FnZS5yYXpvcg==
+[C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Elements/SuccessMessageCascaded.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFbGVtZW50c1xTdWNjZXNzTWVzc2FnZUNhc2NhZGVkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Pages/AlbumPage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBbGJ1bVBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Pages/Albums.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBbGJ1bXMucmF6b3I=
+[C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Pages/AlbumsPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBbGJ1bXNQYWdlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/_Imports.razor]
