@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RecordStoreFrontend.Client.Interfaces;
+using RecordStoreFrontend.Client.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecordStoreAPI.Entities
 {
-    public class Album
+    public class Album : ISearchable
     {
         [Key]
         public int Id { get; set; }
@@ -26,5 +28,13 @@ namespace RecordStoreAPI.Entities
         public int PriceInPence { get; set; } = 2000;
 
         public string ImageURL { get; set; } = "";
+
+        [NotMapped]
+        public SearchResultType ResultType {  get; set; } = SearchResultType.Album;
+        
+        public string Description()
+        {
+            return $"Album by {Artist!.Name}.";
+        }
     }
 }

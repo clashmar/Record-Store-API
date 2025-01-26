@@ -1,0 +1,49 @@
+﻿@using System.Text.Json
+@inject IHttpClientFactory ClientFactory
+@page "/Search"
+
+@if (errorMessage != null)
+{
+    <ErrorMessage Message="@errorMessage" />
+}
+else if (Results == null)
+{
+    <Loading />
+}
+else
+{
+    <SearchResultsPage Results="Results"/>
+}
+
+@code {
+    [SupplyParameterFromQuery]
+    public string? SearchTerm { get; set; }
+
+    protected List<SearchResult>? Results { get; set; }
+
+    protected string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
+
+            var response = await client.GetAsync($"Albums/Search/{SearchTerm}");
+
+            if(response.IsSuccessStatusCode) 
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                Results = JsonSerializer.Deserialize<List<SearchResult>>(responseBody)!;
+            }
+            else 
+            {
+                Results = [];
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+}

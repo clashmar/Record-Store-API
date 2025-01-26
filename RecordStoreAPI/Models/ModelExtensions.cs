@@ -1,4 +1,5 @@
 ﻿using RecordStoreAPI.Entities;
+using RecordStoreFrontend.Client.Interfaces;
 using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Models
@@ -16,6 +17,18 @@ namespace RecordStoreAPI.Models
                 StockQuantity = albumDetails.StockQuantity,
                 PriceInPence = albumDetails.PriceInPence,
                 ImageURL = albumDetails.ImageURL,
+            };
+        }
+
+        public static SearchResult ToSearchResult(ISearchable searchItem)
+        {
+            return new SearchResult()
+            {
+                Id = searchItem.Id,
+                Name = searchItem.Name,
+                ImageURL = searchItem.ImageURL,
+                ResultType = searchItem.ResultType,
+                Description = searchItem.Description()
             };
         }
 

@@ -6,7 +6,7 @@
 
 <ErrorMessage Message="@errorMessage" />
 
-<AlbumForm UpdatedAlbum="UpdatedAlbum" OnValidSubmit="HandleValidSubmit" />
+<AlbumForm UpdatedAlbum="UpdatedAlbum" OnValidSubmit="HandleValidSubmit" OnCancel="HandleCancel"/>
 
 @code {
     [Parameter]
@@ -35,5 +35,10 @@
         {
             errorMessage = $"An error occured: {ex.Message}";
         }
+    }
+
+    protected void HandleCancel()
+    {
+        Navigation.NavigateTo($"/Albums/{UpdatedAlbum!.AlbumID}");
     }
 }

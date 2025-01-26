@@ -5,12 +5,12 @@
 <div>
     <ErrorMessage Message="@errorMessage" />
 
-    <EditForm FormName="PutAlbumForm" Model="UpdatedAlbum" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+    <EditForm FormName="AlbumForm" Model="UpdatedAlbum" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
         <DataAnnotationsValidator />
         <div class="field">
             <label class="label">Name</label>
             <div class="control" width="20px">
-                <InputText class="input" placeholder="Album Name" @bind-Value="UpdatedAlbum!.Name"></InputText>
+                <InputText class="input" placeholder="Album Name" @bind-Value="UpdatedAlbum!.Name"/>
                 <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.Name)" />
             </div>
         </div>
@@ -18,7 +18,7 @@
         <div class="field">
             <label class="label">Artist</label>
             <div class="control has-icons-right">
-                <InputText class="input" placeholder="Artist Name" @bind-Value="UpdatedAlbum!.ArtistName"></InputText>
+                <InputText class="input" placeholder="Artist Name" @bind-Value="UpdatedAlbum!.ArtistName"/>
                 <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ArtistName)" />
                 <span class="icon is-right">
                     <i class="fas fa-check"></i>
@@ -29,7 +29,7 @@
         <div class="field">
             <label class="label">Release Year</label>
             <div class="control has-icons-right">
-                <InputNumber class="input" placeholder="Release Year" @bind-Value="UpdatedAlbum!.ReleaseYear"></InputNumber>
+                <InputNumber class="input" placeholder="Release Year" @bind-Value="UpdatedAlbum!.ReleaseYear"/>
                 <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ReleaseYear)" />
                 <span class="icon is-right">
                     <i class="fas fa-check"></i>
@@ -62,14 +62,14 @@
         <div class="field pb-3">
             <label class="label">Information</label>
             <div class="control">
-                <InputTextArea class="textarea" placeholder="Album Info" @bind-Value="UpdatedAlbum!.Information"></InputTextArea>
+                <InputTextArea class="textarea" placeholder="Album Info" @bind-Value="UpdatedAlbum!.Information"/>
             </div>
         </div>
 
         <div class="field">
             <label class="label">Image URL</label>
             <div class="control has-icons-right">
-                <InputText class="input" placeholder="URL" @bind-Value="UpdatedAlbum!.ImageURL"></InputText>
+                <InputText class="input" placeholder="URL" @bind-Value="UpdatedAlbum!.ImageURL"/>
                 <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ImageURL)" />
                 <span class="icon is-right">
                     <i class="fas fa-check"></i>
@@ -96,6 +96,9 @@
     [Parameter]
     public EventCallback<AlbumDetails> OnValidSubmit { get; set; }
 
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+
     protected Dictionary<GenreEnum, string>? genres;
 
     protected string genreToAdd = "";
@@ -111,6 +114,11 @@
     protected async Task ValidSubmit()
     {
         await OnValidSubmit.InvokeAsync(UpdatedAlbum);
+    }
+
+    protected async Task Cancel()
+    {
+        await OnCancel.InvokeAsync();
     }
 
     protected void InvalidSubmit()
@@ -129,10 +137,5 @@
     protected void DeleteGenre(GenreEnum genre)
     {
         UpdatedAlbum!.Genres.Remove(genre);      
-    }
-
-    protected void Cancel()
-    {
-        Navigation.NavigateTo($"/Albums/{UpdatedAlbum!.AlbumID}");
     }
 }

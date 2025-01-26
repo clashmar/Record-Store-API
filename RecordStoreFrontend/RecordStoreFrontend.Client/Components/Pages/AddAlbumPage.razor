@@ -1,6 +1,7 @@
 ﻿@using System.Text.Json
 @inject NavigationManager Navigation
 @inject IHttpClientFactory ClientFactory
+@inject IJSRuntime JSRuntime
 @rendermode InteractiveAuto
 @page "/Add"
 
@@ -8,7 +9,7 @@
 
 <ErrorMessage Message="@errorMessage" />
 
-<AlbumForm UpdatedAlbum="@(new AlbumDetails())" OnValidSubmit="HandleValidSubmit"/>
+<AlbumForm UpdatedAlbum="@(new AlbumDetails())" OnValidSubmit="HandleValidSubmit" OnCancel="HandleCancel"/>
 
 @code {
     protected string? errorMessage;
@@ -36,5 +37,10 @@
         {
             errorMessage = $"An error occured: {ex.Message}";
         }
+    }
+
+    protected async Task HandleCancel()
+    {
+        await JSRuntime.InvokeVoidAsync("history.back");
     }
 }

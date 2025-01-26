@@ -6,6 +6,7 @@ namespace RecordStoreFrontend.Client.Models
 {
     public class AlbumDetails
     {
+        public int Id { get; set; }
         [JsonPropertyName("albumID")]
         public int AlbumID { get; set; }
 

@@ -1,4 +1,5 @@
-﻿@rendermode InteractiveServer
+﻿@inject NavigationManager Navigation
+@rendermode InteractiveServer
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
@@ -30,6 +31,18 @@
         </div>
         <div class="navbar-end">
             <div class="navbar-item">
+                @* <EditForm FormName="SearchBar" OnInvalidSubmit="HandleSearch"> *@
+                    <div class="field">
+                        <div class="control" width="20px">
+                            <form @onsubmit="()=>HandleSearch()">
+                                <input type="text" placeholder="Search" class="input has-text-white" @bind="@searchTerm"/>
+                            </form>
+                        </div>
+                    </div>
+                @* </EditForm> *@
+            </div>
+
+            <div class="navbar-item">
                 <div class="buttons">
                     @* <a class="button is-light"> *@
                     @*     <strong>Sign up</strong> *@
@@ -44,7 +57,17 @@
 </nav>
 
 @code {
-    string ToggleActive { get; set; } = "";
+    protected string? searchTerm;
+
+    protected string ToggleActive { get; set; } = "";
+
+    protected void HandleSearch() 
+    {
+        if(!String.IsNullOrEmpty(searchTerm))
+        {
+            Navigation.NavigateTo($"/Search?searchTerm={searchTerm}");
+        }
+    }
 
     private void ToggleHamburger()
     {

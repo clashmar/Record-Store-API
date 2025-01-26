@@ -2,6 +2,7 @@
 using RecordStoreAPI.Data;
 using RecordStoreAPI.Entities;
 using RecordStoreAPI.Models;
+using RecordStoreFrontend.Client.Interfaces;
 using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Repositories
@@ -15,6 +16,7 @@ namespace RecordStoreAPI.Repositories
         bool TryRemoveAlbumById(int id);
         List<Album>? FindAlbumsByReleaseYear(int releaseYear);
         List<Album>? FindAlbumsByGenre(GenreEnum genre);
+        List<SearchResult>? FindSearchResults(string searchTerm);
     }
     public class AlbumsRepository : IAlbumsRepository
     {
@@ -105,6 +107,23 @@ namespace RecordStoreAPI.Repositories
                 .ThenInclude(ag => ag.Genre)
                 .Where(a => a.AlbumGenres!.Any(g => g.GenreID == genre))
                 .ToList();
+        }
+
+        public List<SearchResult>? FindSearchResults(string searchTerm)
+        {
+            List<SearchResult> results = [];
+
+            var albumResults = _db.Albums
+                .Include(a => a.Artist)
+                .Include(a => a.AlbumGenres)!
+                .ThenInclude(ag => ag.Genre)
+                .Where(a => a.Name.ToLower().Contains(searchTerm.ToLower()))
+                .Select(a => ModelExtensions.ToSearchResult(a))
+                .ToList();
+
+            results.AddRange(albumResults);
+
+            return results;
         }
 
         public Artist? CheckArtistExists(string artistName)

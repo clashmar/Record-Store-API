@@ -1,0 +1,22 @@
+﻿<PageHeader Title="Search Results"/>
+
+<div class="columns">
+    <div class="column is-two-fifths">
+        @if (Results != null && Results.Count > 0)
+        {
+            @foreach (var result in Results!)
+            {
+                <SearchResultCard Result="result" />
+            }
+        }
+        else
+        {
+            <p class="subtitle is-size-3">We don't have that.</p>
+        }
+    </div>
+</div>
+
+@code{
+    [Parameter]
+    public List<SearchResult>? Results { get; set; }
+}

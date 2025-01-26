@@ -2,6 +2,7 @@
 using RecordStoreAPI.Models;
 using RecordStoreFrontend.Client.Models;
 using RecordStoreAPI.Repositories;
+using RecordStoreFrontend.Client.Interfaces;
 
 namespace RecordStoreAPI.Services
 {
@@ -15,6 +16,8 @@ namespace RecordStoreAPI.Services
         List<AlbumReturnDto> FindAlbumsByReleaseYear(int releaseYear);
         List<AlbumReturnDto> FindAlbumsByGenre(GenreEnum genre);
         List<AlbumReturnDto> FindAlbumsByName(string name);
+
+        List<SearchResult>? FindSearchResults(string searchTerm);
     }
     public class AlbumsService : IAlbumsService
     {
@@ -73,6 +76,11 @@ namespace RecordStoreAPI.Services
                 .Where(a => a.Name.ToLower().Contains(name.ToLower()))
                 .Select(a => DTOExtensions.ToAlbumReturnDto(a))
                 .ToList() ?? [];
+        }
+
+        public List<SearchResult>? FindSearchResults(string searchTerm)
+        {
+            return _albumsRepository.FindSearchResults(searchTerm);
         }
     }
 }

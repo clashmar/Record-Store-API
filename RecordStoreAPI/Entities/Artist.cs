@@ -1,4 +1,4 @@
-﻿using RecordStoreAPI.Models;
+﻿using RecordStoreFrontend.Client.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
 namespace RecordStoreAPI.Entities
