@@ -1,0 +1,39 @@
+﻿@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
+@rendermode InteractiveAuto
+
+<h1 class="title is-size-2 mt-3 mb-5">Edit Album</h1>
+
+<ErrorMessage Message="@errorMessage" />
+
+<AlbumForm UpdatedAlbum="UpdatedAlbum" OnValidSubmit="HandleValidSubmit" />
+
+@code {
+    [Parameter]
+    public AlbumDetails? UpdatedAlbum { get; set; }
+
+    protected string? errorMessage;
+
+    protected async Task HandleValidSubmit(AlbumDetails albumDetails)
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
+
+            var response = await client.PutAsJsonAsync<AlbumDetails>($"/Albums/{albumDetails.AlbumID}", albumDetails);
+
+            if (response.IsSuccessStatusCode)
+            {
+                Navigation.NavigateTo($"/Albums/{albumDetails.AlbumID}?edited=true");
+            }
+            else
+            {
+                errorMessage = $"An error occured: {response.StatusCode}. Check that the artist is correct.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+}

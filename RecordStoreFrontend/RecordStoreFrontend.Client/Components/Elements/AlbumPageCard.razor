@@ -1,15 +1,10 @@
 ﻿
 <div>
     <div class="card has-background">
-        <div class="card-image">
-            <figure class="image is-square">
-                <img src="Images/high-fidelity.jpg"
-                alt="Placeholder image" />
-            </figure>
-        </div>
+        <CardImage ImageURL="@Album!.ImageURL" />
         <footer class="card-footer">
-            <a href="@($"/Albums/{Album!.Id}/Edit")" class="card-footer-item has-text-warning">Edit</a>
-            <a href="@($"/Albums/{Album!.Id}/Delete")" class="card-footer-item has-text-danger" type="button">Delete</a>
+            <a href="@($"/Albums/{Album!.AlbumID}/Edit")" class="card-footer-item has-text-warning">Edit</a>
+            <a href="@($"/Albums/{Album!.AlbumID}/Delete")" class="card-footer-item has-text-danger" type="button">Delete</a>
         </footer>
     </div>
 </div>

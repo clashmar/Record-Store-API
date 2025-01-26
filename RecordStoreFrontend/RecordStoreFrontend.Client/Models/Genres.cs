@@ -14,7 +14,8 @@
         Post_Rock,
         Soul,
         Dance,
-        R4B
+        R4B,
+        Metal
     }
     
     public class Genres

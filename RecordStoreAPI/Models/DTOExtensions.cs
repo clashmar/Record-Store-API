@@ -16,7 +16,8 @@ namespace RecordStoreAPI.Models
                         album.AlbumGenres?.Select(g => g.GenreID).ToList()!,
                         album.Information,
                         album.StockQuantity,
-                        album.PriceInPence
+                        album.PriceInPence,
+                        album.ImageURL
                         );
         }
 

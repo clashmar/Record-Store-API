@@ -1,7 +1,7 @@
 ﻿namespace RecordStoreFrontend.Client.Models
 {
     public record AlbumReturnDto(
-        int Id,
+        int AlbumID,
         string Name,
         string? Artist,
         int ArtistId,
@@ -9,6 +9,7 @@
         List<GenreEnum> Genres,
         string Information,
         int StockQuantity,
-        int PriceInPence
+        int PriceInPence,
+        string ImageURL
         );
 }

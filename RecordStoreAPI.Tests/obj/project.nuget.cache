@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3LchHYXw6LU=",
+  "dgSpecHash": "r6ukIrDfIqE=",
   "success": true,
   "projectFilePath": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreAPI.Tests\\RecordStoreAPI.Tests.csproj",
   "expectedPackageFiles": [
@@ -117,6 +117,7 @@
     "C:\\Users\\charl\\.nuget\\packages\\system.io.pipelines\\9.0.0\\system.io.pipelines.9.0.0.nupkg.sha512",
     "C:\\Users\\charl\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\charl\\.nuget\\packages\\system.memory.data\\1.0.2\\system.memory.data.1.0.2.nupkg.sha512",
+    "C:\\Users\\charl\\.nuget\\packages\\system.net.http.json\\8.0.0\\system.net.http.json.8.0.0.nupkg.sha512",
     "C:\\Users\\charl\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\charl\\.nuget\\packages\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512",
     "C:\\Users\\charl\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",

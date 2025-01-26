@@ -5,7 +5,7 @@
 <div>
     <ErrorMessage Message="@errorMessage" />
 
-    <EditForm FormName="PutAlbumForm" Model="UpdatedAlbum" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
+    <EditForm FormName="PutAlbumForm" Model="UpdatedAlbum" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
         <DataAnnotationsValidator />
         <div class="field">
             <label class="label">Name</label>
@@ -66,6 +66,17 @@
             </div>
         </div>
 
+        <div class="field">
+            <label class="label">Image URL</label>
+            <div class="control has-icons-right">
+                <InputText class="input" placeholder="URL" @bind-Value="UpdatedAlbum!.ImageURL"></InputText>
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ImageURL)" />
+                <span class="icon is-right">
+                    <i class="fas fa-check"></i>
+                </span>
+            </div>
+        </div>
+
         <div class="field is-grouped pb-6">
             <div class="control">
                 <button class="button is-light" type="submit">Submit</button>
@@ -83,7 +94,7 @@
     public AlbumDetails? UpdatedAlbum { get; set; }
 
     [Parameter]
-    public int Id { get; set; }
+    public EventCallback<AlbumDetails> OnValidSubmit { get; set; }
 
     protected Dictionary<GenreEnum, string>? genres;
 
@@ -97,30 +108,12 @@
         genres = Genres.GenresDictionary() ?? [];
     }
 
-    protected async Task HandleValidSubmit()
+    protected async Task ValidSubmit()
     {
-        try
-        {
-            var client = ClientFactory.CreateClient("RecordStoreAPI");
-
-            var response = await client.PutAsJsonAsync<AlbumDetails>($"/Albums/{Id}", UpdatedAlbum!);
-
-            if (response.IsSuccessStatusCode)
-            {
-                Navigation.NavigateTo($"/Albums/{Id}?edited=true");
-            }
-            else 
-            {
-                errorMessage = $"An error occured: {response.StatusCode}. Check that the artist is correct.";
-            }
-        }
-        catch (Exception ex)
-        {
-            errorMessage = $"An error occured: {ex.Message}";
-        }
+        await OnValidSubmit.InvokeAsync(UpdatedAlbum);
     }
 
-    protected void HandleInvalidSubmit()
+    protected void InvalidSubmit()
     {
         errorMessage = "Make Sure All Fields Have Been Completed";
     }
@@ -140,6 +133,6 @@
 
     protected void Cancel()
     {
-        Navigation.NavigateTo($"/Albums/{Id}");
+        Navigation.NavigateTo($"/Albums/{UpdatedAlbum!.AlbumID}");
     }
 }

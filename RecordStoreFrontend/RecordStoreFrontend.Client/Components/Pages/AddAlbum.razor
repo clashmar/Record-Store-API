@@ -1,0 +1,40 @@
+﻿@using System.Text.Json
+@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
+@rendermode InteractiveAuto
+@page "/Add"
+
+<h1 class="title is-size-2 mt-3 mb-5">Add an Album to the Database</h1>
+
+<ErrorMessage Message="@errorMessage" />
+
+<AlbumForm UpdatedAlbum="@(new AlbumDetails())" OnValidSubmit="HandleValidSubmit"/>
+
+@code {
+    protected string? errorMessage;
+
+    protected async Task HandleValidSubmit(AlbumDetails albumDetails)
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
+
+            var response = await client.PostAsync($"/Albums", JsonContent.Create(albumDetails));
+
+            if (response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                AlbumDetails album = JsonSerializer.Deserialize<AlbumDetails>(responseBody)!;
+                Navigation.NavigateTo($"/Albums/{album.AlbumID}");
+            }
+            else
+            {
+                errorMessage = $"An error occured: {response.StatusCode}.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+}

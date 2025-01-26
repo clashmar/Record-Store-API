@@ -14,7 +14,8 @@ namespace RecordStoreAPI.Models
                 ReleaseYear = albumDetails.ReleaseYear,
                 Information = albumDetails.Information,
                 StockQuantity = albumDetails.StockQuantity,
-                PriceInPence = albumDetails.PriceInPence
+                PriceInPence = albumDetails.PriceInPence,
+                ImageURL = albumDetails.ImageURL,
             };
         }
 
@@ -29,6 +30,7 @@ namespace RecordStoreAPI.Models
             target.Information = source.Information;
             target.StockQuantity = source.StockQuantity;
             target.PriceInPence = source.PriceInPence;
+            target.ImageURL = source.ImageURL;
         }
     }
 }

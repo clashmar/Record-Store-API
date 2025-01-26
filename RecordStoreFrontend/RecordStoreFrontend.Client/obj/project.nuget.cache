@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xfyewzuK6dI=",
+  "dgSpecHash": "oLLzOdTBg3Y=",
   "success": true,
   "projectFilePath": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\RecordStoreFrontend.Client.csproj",
   "expectedPackageFiles": [
@@ -35,6 +35,9 @@
     "C:\\Users\\charl\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.1\\microsoft.net.sdk.webassembly.pack.9.0.1.nupkg.sha512",
     "C:\\Users\\charl\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.0\\system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512",
     "C:\\Users\\charl\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512",
+    "C:\\Users\\charl\\.nuget\\packages\\system.net.http.json\\8.0.0\\system.net.http.json.8.0.0.nupkg.sha512",
+    "C:\\Users\\charl\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
+    "C:\\Users\\charl\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
     "C:\\Users\\charl\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.12\\microsoft.netcore.app.runtime.mono.browser-wasm.8.0.12.nupkg.sha512"
   ],
   "logs": []

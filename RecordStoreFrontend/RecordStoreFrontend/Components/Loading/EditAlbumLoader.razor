@@ -11,7 +11,7 @@ else if (AlbumToUpdate == null)
 }
 else
 {
-    <PutAlbumForm UpdatedAlbum="UpdatedAlbum" Id="Id" />
+    <EditAlbum UpdatedAlbum="UpdatedAlbum"/>
 }
 
 @code {
@@ -36,7 +36,7 @@ else
 
             if (AlbumToUpdate != null)
             {
-                UpdatedAlbum!.AlbumID = AlbumToUpdate.Id;
+                UpdatedAlbum!.AlbumID = AlbumToUpdate.AlbumID;
                 UpdatedAlbum!.Name = AlbumToUpdate.Name;
                 UpdatedAlbum!.ArtistName = AlbumToUpdate.Artist!;
                 UpdatedAlbum!.ArtistID = AlbumToUpdate.ArtistId;
@@ -45,6 +45,7 @@ else
                 UpdatedAlbum!.Information = AlbumToUpdate.Information;
                 UpdatedAlbum!.StockQuantity = AlbumToUpdate.StockQuantity;
                 UpdatedAlbum!.PriceInPence = AlbumToUpdate.PriceInPence;
+                UpdatedAlbum!.ImageURL = AlbumToUpdate.ImageURL;
             }
             else
             {
