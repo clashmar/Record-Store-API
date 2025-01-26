@@ -1,21 +1,21 @@
 ﻿@inject NavigationManager Navigation
 @inject IHttpClientFactory ClientFactory
-@page "/Albums/{Id:int}"
+@page "/Artists/{Id:int}"
 
 @if (errorMessage != null)
 {
     <ErrorMessage Message="@errorMessage" />
 }
-else if (Album == null)
+else if (Artist == null)
 {
     <Loading />
 }
 else
 {
     <CascadingValue Value="Edited">
-        <AlbumPage Album="Album" Edited="Edited"/>
+        <ArtistPage Artist="Artist" Edited="Edited" />
     </CascadingValue>
-}
+}   
 
 @code {
     [Parameter]
@@ -24,7 +24,7 @@ else
     [SupplyParameterFromQuery]
     public bool Edited { get; set; }
 
-    protected AlbumReturnDto? Album { get; set; }
+    protected ArtistReturnDto? Artist { get; set; }
 
     protected string? errorMessage;
 
@@ -34,9 +34,9 @@ else
         {
             var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await client.GetFromJsonAsync<AlbumReturnDto>($"/Albums/{Id}");
+            var response = await client.GetFromJsonAsync<ArtistReturnDto>($"/Artists/{Id}");
 
-            Album = response;
+            Artist = response;
         }
         catch (Exception ex)
         {

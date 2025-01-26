@@ -21,12 +21,15 @@ namespace RecordStoreAPI.Models
                         );
         }
 
-        public static ArtistDto ToArtistDto(Artist artist)
+        public static ArtistReturnDto ToArtistDto(Artist artist)
         {
-            return new ArtistDto(
+            return new ArtistReturnDto(
                 artist.Id,
                 artist.Name!,
-                artist.Albums?.Select(a => ToAlbumReturnDto(a)).ToList()!
+                artist.Albums?.Select(a => ToAlbumReturnDto(a)).ToList()!,
+                artist.ImageURL,
+                artist.PerformerType,
+                artist.Origin
                 );
         }
     }

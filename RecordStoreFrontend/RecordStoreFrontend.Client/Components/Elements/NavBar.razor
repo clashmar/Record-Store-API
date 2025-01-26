@@ -19,27 +19,38 @@
             <a href="/" class="navbar-item">
                 Home
             </a>
-            <a href="/Albums" class="navbar-item">
-                Albums
-            </a>
-            <a href="/Add" class="navbar-item">
-                Add Album
-            </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a href="/Albums" class="navbar-item">
+                    Albums
+                </a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="/Albums/Add"> Add Album </a>
+                </div>
+            </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a href="/Artists" class="navbar-item">
+                    Artists
+                </a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="/Artists/Add"> Add Artist </a>
+                </div>
+            </div>
+
             <a class="navbar-item">
-                This Week's Top Five
+                Meet The Team
             </a>
         </div>
         <div class="navbar-end">
             <div class="navbar-item">
-                @* <EditForm FormName="SearchBar" OnInvalidSubmit="HandleSearch"> *@
-                    <div class="field">
-                        <div class="control" width="20px">
-                            <form @onsubmit="()=>HandleSearch()">
-                                <input type="text" placeholder="Search" class="input has-text-white" @bind="@searchTerm"/>
-                            </form>
-                        </div>
+                <div class="field">
+                    <div class="control" width="20px">
+                        <form @onsubmit="()=>HandleSearch()">
+                            <input type="text" placeholder="Search" class="input has-text-white" @bind="@searchTerm"/>
+                        </form>
                     </div>
-                @* </EditForm> *@
+                </div>
             </div>
 
             <div class="navbar-item">

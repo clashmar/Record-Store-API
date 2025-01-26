@@ -8,6 +8,8 @@ namespace RecordStoreAPI.Repositories
     {
         List<Artist> FindAllArtists();
         List<Album>? FindAlbumsByArtistId(int id);
+
+        Artist? FindArtistById(int id);
     }
     public class ArtistsRepository : IArtistsRepository
     {
@@ -24,7 +26,18 @@ namespace RecordStoreAPI.Repositories
                 .Include(a => a.Albums)!
                 .ThenInclude(a => a.AlbumGenres)!
                 .ThenInclude(ag => ag.Genre)
+                .OrderBy(a => a.Name)
                 .ToList();
+        }
+
+        public Artist? FindArtistById(int id)
+        {
+            return _db.Artists
+                .Include(a => a.Albums)!
+                .ThenInclude(a => a.AlbumGenres)!
+                .ThenInclude(ag => ag.Genre)
+                .Where(a => a.Id == id) 
+                .FirstOrDefault();
         }
 
         public List<Album>? FindAlbumsByArtistId(int id)

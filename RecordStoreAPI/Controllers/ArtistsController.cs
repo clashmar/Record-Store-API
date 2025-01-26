@@ -21,9 +21,9 @@ namespace RecordStoreAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetAlbumsByArtistId(int id)
+        public IActionResult GetArtistById(int id)
         {
-            var result = _artistService.FindAlbumsByArtistId(id);
+            var result = _artistService.FindArtistById(id);
             return result != null ? Ok(result) : BadRequest("No artists were found with that Id.");
         }
     }

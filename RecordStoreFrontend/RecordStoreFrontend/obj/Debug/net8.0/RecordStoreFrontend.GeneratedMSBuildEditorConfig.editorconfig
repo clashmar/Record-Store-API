@@ -32,6 +32,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMb2FkaW5nXEFsYnVtc0xvYWRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend/Components/Loading/ArtistLoader.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMb2FkaW5nXEFydGlzdExvYWRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend/Components/Loading/ArtistsLoader.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMb2FkaW5nXEFydGlzdHNMb2FkZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend/Components/Loading/EditAlbumLoader.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMb2FkaW5nXEVkaXRBbGJ1bUxvYWRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

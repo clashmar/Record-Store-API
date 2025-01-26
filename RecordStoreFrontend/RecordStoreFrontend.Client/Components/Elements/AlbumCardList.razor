@@ -1,21 +1,14 @@
 ﻿@code {
     [CascadingParameter]
     public List<AlbumReturnDto>? Albums { get; set; }
-
-    // [
-        // new(2, "What's Going On", "Marvin Gaye", 1971, ["R&B"], "Information", 1, 2000),
-        // new(3, "Lo Boob Oscillator", "Stereolab", 1995, ["Alternative", "Indie"], "Information", 1, 2000),
-        // new(4, "Slanted & Enchanted", "Pavement", 1992, ["Alternative"], "Information", 1, 2000),
-        // ];
 }
 
-
-    <div class="fixed-grid has-5-cols">
-        <div class="grid is-gap-5">
-            @foreach (var album in Albums!)
-            {
-            <div class="cell"><AlbumCard Album="album" /></div>
-            }
-        </div>
+<div class="fixed-grid has-5-cols">
+    <div class="grid is-gap-5">
+        @foreach (var album in Albums!)
+        {
+        <div class="cell"><AlbumCard Album="album" /></div>
+        }
     </div>
+</div>
 

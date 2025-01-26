@@ -33,6 +33,7 @@ namespace RecordStoreAPI.Repositories
                 .Include(a => a.Artist)
                 .Include(a => a.AlbumGenres)!
                 .ThenInclude(ag => ag.Genre)
+                .OrderBy(a => a.Name)
                 .ToList();
         }
 

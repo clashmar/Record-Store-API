@@ -3,7 +3,7 @@
         <div class="card-content">
             <div class="media">
                 <div class="media-left">
-                    <figure class="image is-96x96">
+                    <figure class="image is-96x96 is-square">
                         <img src="@Result!.ImageURL"
                         alt="Placeholder image" />
                     </figure>
@@ -28,7 +28,7 @@
         Path = Result!.ResultType switch
         {
             SearchResultType.Album => $"Albums/{Result!.Id}",
-            SearchResultType.Artist => "/",
+            SearchResultType.Artist => $"Artists/{Result!.Id}",
             _ => "/",
         };
     }

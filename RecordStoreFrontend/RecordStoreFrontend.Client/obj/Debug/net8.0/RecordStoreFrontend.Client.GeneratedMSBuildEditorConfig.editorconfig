@@ -40,6 +40,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFbGVtZW50c1xBbGJ1bVBhZ2VDYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Elements/ArtistCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFbGVtZW50c1xBcnRpc3RDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Elements/ArtistCardList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFbGVtZW50c1xBcnRpc3RDYXJkTGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Elements/ArtistPageCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFbGVtZW50c1xBcnRpc3RQYWdlQ2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Elements/CardImage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFbGVtZW50c1xDYXJkSW1hZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -74,6 +86,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Pages/AlbumsPage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBbGJ1bXNQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Pages/ArtistPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBcnRpc3RQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Pages/ArtistsPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBcnRpc3RzUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/charl/Documents/Northcoders/Backend/record-store-API/RecordStoreFrontend/RecordStoreFrontend.Client/Components/Pages/DeleteAlbumPage.razor]

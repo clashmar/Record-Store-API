@@ -2,17 +2,16 @@
 
 <div class="columns is-8 mt-5 mb-5">
     <div class="column is-one-quarter">
-        <AlbumPageCard Album="Album"/>
+        <ArtistPageCard Artist="Artist" />
     </div>
     <div class="column">
-        <h1 class="is-size-2 has-text-light has-text-weight-bold">@Album!.Name</h1>
-        <h2 class="is-size-4">@Album!.Artist</h2>
-        <h2 class="is-size-4">@Album!.ReleaseYear</h2>
+        <h1 class="is-size-2 has-text-light has-text-weight-bold">@Artist!.Name</h1>
+        <h2 class="is-size-4">@Artist!.PerformerType</h2>
+        <h2 class="is-size-4">@Artist!.Origin</h2>
         <div>
             <span class="is-size-4">Genres: </span>
-            <span class="is-size-4">@String.Join(", ", Album.Genres.Select(g => genresDictionary![g]).ToList())</span>
+            <span class="is-size-4">@genres</span>
         </div>
-        <p class="is-size-4">@Album.Information</p>
     </div>
 </div>
 
@@ -21,16 +20,24 @@
     public int Id { get; set; }
 
     [Parameter]
-    public AlbumReturnDto? Album { get; set; }
+    public ArtistReturnDto? Artist { get; set; }
 
     [Parameter]
     public bool Edited { get; set; }
 
     public Dictionary<GenreEnum, string>? genresDictionary;
 
+    protected string? genres;
 
     protected override void OnInitialized()
     {
         genresDictionary = Genres.GenresDictionary() ?? [];
+
+         genres = String.Join(", ", Artist!.Albums
+        .Select(a => a.Genres)
+        .SelectMany(g => g)
+        .Distinct()
+        .Select(g => genresDictionary![g])
+        .ToList());
     }
 }

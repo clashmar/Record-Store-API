@@ -1,0 +1,16 @@
+﻿<a href="@($"/Artists/{Artist!.Id}")">
+    <div>
+        <div class="card has-background">
+            <CardImage ImageURL="@Artist!.ImageURL" />
+        </div>
+        <div class="card-header is-justify-content-center mt-3">
+            <p class="is-clickable title is-size-5 has-text-centered">@Artist!.Name</p>
+        </div>
+    </div>
+</a>
+
+@code {
+
+    [Parameter]
+    public ArtistReturnDto? Artist { get; set; }
+}

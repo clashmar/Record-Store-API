@@ -7,8 +7,9 @@ namespace RecordStoreAPI.Services
 {
     public interface IArtistsService
     {
-        List<ArtistDto>? FindAllArtists();
+        List<ArtistReturnDto>? FindAllArtists();
         List<AlbumReturnDto>? FindAlbumsByArtistId(int id);
+        ArtistReturnDto? FindArtistById(int id);
     }
     public class ArtistsService : IArtistsService
     {
@@ -19,16 +20,25 @@ namespace RecordStoreAPI.Services
             _artistsRepository = artistsRepository;
         }
 
-        public List<ArtistDto>? FindAllArtists()
+        public List<ArtistReturnDto>? FindAllArtists()
         {
             return _artistsRepository.FindAllArtists()
                 .Select(a => DTOExtensions.ToArtistDto(a))
                 .ToList();
         }
+
+        public ArtistReturnDto? FindArtistById(int id)
+        {
+            Artist? artist = _artistsRepository.FindArtistById(id);
+            return artist != null ? DTOExtensions.ToArtistDto(artist) : null;
+                
+        }
         public List<AlbumReturnDto>? FindAlbumsByArtistId(int id)
         {
-            List<Album>? albums = _artistsRepository.FindAlbumsByArtistId(id);
-            return albums?.Select(a => DTOExtensions.ToAlbumReturnDto(a)).ToList();
+            return _artistsRepository.FindAlbumsByArtistId(id)!
+                .Where(a => a.ArtistID == id)   
+                .Select(a => DTOExtensions.ToAlbumReturnDto(a))
+                .ToList();  
         }
     }
 }
