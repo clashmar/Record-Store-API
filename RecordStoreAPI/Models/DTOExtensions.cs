@@ -11,7 +11,7 @@ namespace RecordStoreAPI.Models
                         album.Id,
                         album.Name,
                         album.Artist?.Name,
-                        album.Artist!.ArtistID,
+                        album.Artist!.Id,
                         album.ReleaseYear,
                         album.AlbumGenres?.Select(g => g.GenreID).ToList()!,
                         album.Information,
@@ -24,7 +24,7 @@ namespace RecordStoreAPI.Models
         public static ArtistDto ToArtistDto(Artist artist)
         {
             return new ArtistDto(
-                artist.ArtistID,
+                artist.Id,
                 artist.Name!,
                 artist.Albums?.Select(a => ToAlbumReturnDto(a)).ToList()!
                 );

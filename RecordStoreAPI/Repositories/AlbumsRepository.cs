@@ -48,7 +48,7 @@ namespace RecordStoreAPI.Repositories
         public Album? AddNewAlbum(AlbumDetails albumDetails)
         {
             Artist? artist = CheckArtistExists(albumDetails.ArtistName);
-            if (artist == null) return null; albumDetails.ArtistID = artist.ArtistID;
+            if (artist == null) return null; albumDetails.ArtistID = artist.Id;
 
 
             Album album = ModelExtensions.AlbumDetailsToAlbum(albumDetails);
@@ -69,7 +69,7 @@ namespace RecordStoreAPI.Repositories
             if (albumToUpdate == null) return null; 
 
             Artist? artist = CheckArtistExists(albumDetails.ArtistName);
-            if (artist == null) return null; albumDetails.ArtistID = artist.ArtistID;
+            if (artist == null) return null; albumDetails.ArtistID = artist.Id;
 
             ModelExtensions.MapAlbumDetailsProperties(albumToUpdate, albumDetails);
 
@@ -112,6 +112,13 @@ namespace RecordStoreAPI.Repositories
         public List<SearchResult>? FindSearchResults(string searchTerm)
         {
             List<SearchResult> results = [];
+
+            var artistResults = _db.Artists
+                .Where(a => a.Name.ToLower().Contains(searchTerm.ToLower()))
+                .Select(a => ModelExtensions.ToSearchResult(a))
+                .ToList();
+
+            results.AddRange(artistResults);
 
             var albumResults = _db.Albums
                 .Include(a => a.Artist)

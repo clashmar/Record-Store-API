@@ -33,7 +33,7 @@ namespace RecordStoreAPI.Repositories
                 .Include(a => a.Albums)!
                 .ThenInclude(a => a.AlbumGenres)!
                 .ThenInclude(ag => ag.Genre)
-                .FirstOrDefault(a => a.ArtistID == id);
+                .FirstOrDefault(a => a.Id == id);
 
             return artist?.Albums;
         }
