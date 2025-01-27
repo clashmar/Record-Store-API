@@ -1,10 +1,10 @@
 ﻿<SuccessMessageCascaded Message="Changes Were Made Successfully" />
 
-<div class="columns is-8 mt-5 mb-5">
+<div class="columns mt-5 mb-5">
     <div class="column is-one-quarter">
         <ArtistPageCard Artist="Artist" />
     </div>
-    <div class="column">
+    <div class="column is-two-fifths mt-5 ml-5">
         <h1 class="is-size-2 has-text-light has-text-weight-bold">@Artist!.Name</h1>
         <h2 class="is-size-4">@Artist!.PerformerType</h2>
         <h2 class="is-size-4">@Artist!.Origin</h2>
@@ -12,6 +12,14 @@
             <span class="is-size-4">Genres: </span>
             <span class="is-size-4">@genres</span>
         </div>
+    </div>
+
+    <div class="column">
+    <h1 class="is-size-3 has-text-light has-text-weight-bold has-text-right mb-4">Releases</h1>
+        @foreach(var album in Artist.Albums)
+        {
+            <ArtistAlbumCard Album="album"/>
+        }
     </div>
 </div>
 

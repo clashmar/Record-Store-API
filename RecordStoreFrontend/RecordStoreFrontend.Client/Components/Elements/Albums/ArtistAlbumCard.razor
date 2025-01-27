@@ -1,0 +1,22 @@
+﻿<a href="@($"/Albums/{Album!.AlbumID}")">
+    <div class="card has-background mb-5">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-64x64 is-square">
+                        <CardImage ImageURL="@Album!.ImageURL" />
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-6 mb-1">@Album.Name</p>
+                    <p class="subtitle is-6">@Album.ReleaseYear</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>
+@code {
+
+    [Parameter]
+    public AlbumReturnDto? Album { get; set; }
+}
