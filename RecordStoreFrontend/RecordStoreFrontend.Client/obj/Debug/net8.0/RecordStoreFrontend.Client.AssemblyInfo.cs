@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RecordStoreFrontend.Client")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+adec70172d2801ae85349263dd661e7d3778b869")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6191a5652a077ef5c09b1b5184c288c4164c229e")]
 [assembly: System.Reflection.AssemblyProductAttribute("RecordStoreFrontend.Client")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RecordStoreFrontend.Client")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

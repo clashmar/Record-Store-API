@@ -15,10 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Components\Elements\AlbumCardList.razor">
+    <Content Update="Components\Elements\Albums\AlbumCardList.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-    <Content Update="Components\Elements\AlbumPageCard.razor">
+    <Content Update="Components\Elements\Albums\AlbumPageCard.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Components\Pages\Home.razor">
