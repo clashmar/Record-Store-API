@@ -14,13 +14,17 @@
         </div>
     </div>
 
-    <div class="column">
-    <h1 class="is-size-3 has-text-light has-text-weight-bold has-text-right mb-4">Releases</h1>
-        @foreach(var album in Artist.Albums)
-        {
-            <ArtistAlbumCard Album="album"/>
-        }
-    </div>
+    @if(Artist.Albums.Count > 0)
+    {
+        <div class="column">
+
+            <h1 class="is-size-3 has-text-light has-text-weight-bold has-text-right mb-4">Releases</h1>
+            @foreach (var album in Artist.Albums)
+            {
+                <ArtistAlbumCard Album="album" />
+            }
+        </div>
+    }
 </div>
 
 @code {
@@ -28,7 +32,7 @@
     public int Id { get; set; }
 
     [Parameter]
-    public ArtistReturnDto? Artist { get; set; }
+    public ArtistDetails? Artist { get; set; }
 
     [Parameter]
     public bool Edited { get; set; }
@@ -41,7 +45,9 @@
     {
         genresDictionary = Genres.GenresDictionary() ?? [];
 
-         genres = String.Join(", ", Artist!.Albums
+         genres = String
+         .Join(", ", 
+         Artist!.Albums
         .Select(a => a.Genres)
         .SelectMany(g => g)
         .Distinct()

@@ -20,7 +20,9 @@
         {
             var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await client.PutAsJsonAsync<ArtistDetails>($"/Artists/{artistDetails.Id}", artistDetails);
+            var response = await client.PutAsync($"/Artists/{artistDetails.Id}", JsonContent.Create(artistDetails));
+
+            string responseBody = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
             {
@@ -28,7 +30,7 @@
             }
             else
             {
-                errorMessage = $"An error occured: {response.StatusCode}.";
+                errorMessage = $"{response.StatusCode}: {responseBody}";
             }
         }
         catch (Exception ex)

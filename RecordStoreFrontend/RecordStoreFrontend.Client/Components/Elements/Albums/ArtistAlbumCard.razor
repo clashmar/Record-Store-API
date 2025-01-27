@@ -1,4 +1,4 @@
-﻿<a href="@($"/Albums/{Album!.AlbumID}")">
+﻿<a href="@($"/Albums/{Album!.Id}")">
     <div class="card has-background mb-5">
         <div class="card-content">
             <div class="media">
@@ -18,5 +18,5 @@
 @code {
 
     [Parameter]
-    public AlbumReturnDto? Album { get; set; }
+    public AlbumDetails? Album { get; set; }
 }

@@ -6,6 +6,36 @@ namespace RecordStoreAPI.Models
 {
     public class ModelExtensions
     {
+        public static AlbumDetails ToAlbumDetails(Album album)
+        {
+            return new AlbumDetails
+            {
+                Id = album.Id,
+                Name = album.Name,
+                ArtistID = album.Artist!.Id,
+                ArtistName = album.Artist!.Name,
+                ReleaseYear = album.ReleaseYear,
+                Genres = album.AlbumGenres?.Select(g => g.GenreID).ToList()!,
+                Information = album.Information,
+                StockQuantity = album.StockQuantity,
+                PriceInPence = album.PriceInPence,
+                ImageURL = album.ImageURL
+            };
+        }
+
+        public static ArtistDetails ToArtistDetails(Artist artist)
+        {
+            return new ArtistDetails
+            {
+                Id = artist.Id,
+                Name = artist.Name!,
+                Albums = artist.Albums?.Select(a => ToAlbumDetails(a)).ToList()!,
+                ImageURL = artist.ImageURL,
+                PerformerType = artist.PerformerType,
+                Origin = artist.Origin
+            };
+        }
+
         public static Album AlbumDetailsToAlbum(AlbumDetails albumDetails)
         {
             return new Album()

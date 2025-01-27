@@ -31,14 +31,15 @@ else
 
             var response = await client.GetAsync($"Albums/Search/{SearchTerm}");
 
+            string responseBody = await response.Content.ReadAsStringAsync();
+
             if(response.IsSuccessStatusCode) 
             {
-                string responseBody = await response.Content.ReadAsStringAsync();
                 Results = JsonSerializer.Deserialize<List<SearchResult>>(responseBody)!;
             }
             else 
             {
-                Results = [];
+                errorMessage = $"{response.StatusCode}: {responseBody}";
             }
         }
         catch (Exception ex)

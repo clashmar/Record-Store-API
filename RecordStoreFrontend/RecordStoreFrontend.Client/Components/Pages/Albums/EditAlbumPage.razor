@@ -20,15 +20,17 @@
         {
             var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await client.PutAsJsonAsync<AlbumDetails>($"/Albums/{albumDetails.AlbumID}", albumDetails);
+            var response = await client.PutAsync($"/Albums/{albumDetails.Id}", JsonContent.Create(albumDetails));
+
+            string responseBody = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
             {
-                Navigation.NavigateTo($"/Albums/{albumDetails.AlbumID}?edited=true");
+                Navigation.NavigateTo($"/Albums/{albumDetails.Id}?edited=true");
             }
             else
             {
-                errorMessage = $"An error occured: {response.StatusCode}. Check that the artist is correct.";
+                errorMessage = $"{response.StatusCode}: {responseBody}";
             }
         }
         catch (Exception ex)
@@ -39,7 +41,7 @@
 
     protected void HandleCancel()
     {
-        Navigation.NavigateTo($"/Albums/{UpdatedAlbum!.AlbumID}");
+        Navigation.NavigateTo($"/Albums/{UpdatedAlbum!.Id}");
     }
 
     protected void ResetError()

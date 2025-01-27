@@ -1,16 +1,23 @@
-﻿@page "/StatusCode/{Status:int}"
+﻿@rendermode InteractiveServer
+@page "/StatusCode/{Status:int}"
 
-<ErrorMessage Message="@Message" />
+<PageHeader Title="Looks like you've got an error."/>
+
+<ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
 
 @code {
     [Parameter]
     public int Status { get; set; }
 
-    protected string? Message;
+    protected string? errorMessage;
 
     protected override void OnInitialized()
     {
-        Message = $"An error has occurred: {Status}";
+        errorMessage = $"Status Code: {Status}";
     }
 
+    protected void ResetError()
+    {
+        errorMessage = null;
+    }
 }

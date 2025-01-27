@@ -7,11 +7,11 @@ namespace RecordStoreAPI.Services
 {
     public interface IArtistsService
     {
-        List<ArtistReturnDto>? FindAllArtists();
-        List<AlbumReturnDto>? FindAlbumsByArtistId(int id);
-        ArtistReturnDto? FindArtistById(int id);
-        ArtistReturnDto? AddNewArtist(ArtistDetails newArtist);
-        ArtistReturnDto? UpdateArtist(int id, ArtistDetails artist);
+        List<ArtistDetails>? FindAllArtists();
+        List<AlbumDetails>? FindAlbumsByArtistId(int id);
+        ArtistDetails? FindArtistById(int id);
+        ArtistDetails? AddNewArtist(ArtistDetails newArtist);
+        ArtistDetails? UpdateArtist(int id, ArtistDetails artist);
         bool TryRemoveArtistById(int id);
     }
     public class ArtistsService : IArtistsService
@@ -23,36 +23,36 @@ namespace RecordStoreAPI.Services
             _artistsRepository = artistsRepository;
         }
 
-        public List<ArtistReturnDto>? FindAllArtists()
+        public List<ArtistDetails>? FindAllArtists()
         {
             return _artistsRepository.FindAllArtists()
-                .Select(a => DTOExtensions.ToArtistReturnDto(a))
+                .Select(a => ModelExtensions.ToArtistDetails(a))
                 .ToList();
         }
 
-        public ArtistReturnDto? FindArtistById(int id)
+        public ArtistDetails? FindArtistById(int id)
         {
             Artist? artist = _artistsRepository.FindArtistById(id);
-            return artist != null ? DTOExtensions.ToArtistReturnDto(artist) : null;
+            return artist != null ? ModelExtensions.ToArtistDetails(artist) : null;
                 
         }
-        public List<AlbumReturnDto>? FindAlbumsByArtistId(int id)
+        public List<AlbumDetails>? FindAlbumsByArtistId(int id)
         {
             return _artistsRepository.FindAlbumsByArtistId(id)!
                 .Where(a => a.ArtistID == id)   
-                .Select(a => DTOExtensions.ToAlbumReturnDto(a))
+                .Select(a => ModelExtensions.ToAlbumDetails(a))
                 .ToList();  
         }
-        public ArtistReturnDto? AddNewArtist(ArtistDetails newArtist)
+        public ArtistDetails? AddNewArtist(ArtistDetails newArtist)
         {
             Artist? artist = _artistsRepository.AddNewArtist(newArtist);
-            return artist != null ? DTOExtensions.ToArtistReturnDto(artist) : null;
+            return artist != null ? ModelExtensions.ToArtistDetails(artist) : null;
         }
 
-        public ArtistReturnDto? UpdateArtist(int id, ArtistDetails artist)
+        public ArtistDetails? UpdateArtist(int id, ArtistDetails artist)
         {
             Artist? updatedArtist = _artistsRepository.UpdateArtist(id, artist);
-            return updatedArtist != null ? DTOExtensions.ToArtistReturnDto(updatedArtist) : null;
+            return updatedArtist != null ? ModelExtensions.ToArtistDetails(updatedArtist) : null;
         }
         public bool TryRemoveArtistById(int id)
         {

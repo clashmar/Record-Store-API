@@ -6,7 +6,7 @@
     </div>
     <div class="column mt-5">
         <h1 class="is-size-2 has-text-light has-text-weight-bold">@Album!.Name</h1>
-        <a href="@($"/Artists/{Album!.ArtistId}")" class="is-size-4 has-text-white">@Album!.Artist</a>
+        <a href="@($"/Artists/{Album!.ArtistID}")" class="is-size-4 has-text-white">@Album!.ArtistName</a>
         <h2 class="is-size-4">@Album!.ReleaseYear</h2>
         <div>
             <span class="is-size-4">Genres: </span>
@@ -21,7 +21,7 @@
     public int Id { get; set; }
 
     [Parameter]
-    public AlbumReturnDto? Album { get; set; }
+    public AlbumDetails? Album { get; set; }
 
     [Parameter]
     public bool Edited { get; set; }

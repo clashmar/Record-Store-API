@@ -31,14 +31,17 @@
 
             var response = await client.DeleteAsync($"Albums/{Id}");
 
+            string responseBody = await response.Content.ReadAsStringAsync();
+
             if (response.IsSuccessStatusCode)
             {
                 Navigation.NavigateTo($"/Albums?deleted=true");
             }
             else
             {
-                errorMessage = $"An error occured: {response.StatusCode}";
+                errorMessage = $"{response.StatusCode}: {responseBody}";
             }
+
         }
         catch(Exception ex)
         {

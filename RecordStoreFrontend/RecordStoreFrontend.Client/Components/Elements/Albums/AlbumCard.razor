@@ -1,4 +1,4 @@
-﻿<a href="@($"/Albums/{Album!.AlbumID}")">
+﻿<a href="@($"/Albums/{Album!.Id}")">
     <div>
         <div class="card has-background">
             <CardImage ImageURL="@Album!.ImageURL"/>
@@ -7,7 +7,7 @@
             <p class="is-clickable title is-size-5 has-text-centered">@Album!.Name</p>
         </div>
         <div>
-            <p class="has-text-centered has-text-white">@Album!.Artist</p>
+            <p class="has-text-centered has-text-white">@Album!.ArtistName</p>
             <p class="has-text-centered has-text-white">@Album!.ReleaseYear</p>
         </div>
     </div>
@@ -15,5 +15,5 @@
 @code {
     
     [Parameter]
-    public AlbumReturnDto? Album { get; set; }
+    public AlbumDetails? Album { get; set; }
 }

@@ -6,20 +6,19 @@ namespace RecordStoreFrontend.Client.Models
 {
     public class AlbumDetails
     {
+        [JsonPropertyName("id")]
         public int Id { get; set; }
-        [JsonPropertyName("albumID")]
-        public int AlbumID { get; set; }
 
         [JsonPropertyName("name")]
         [Required(ErrorMessage = "Please enter an album name.")]
         public string Name { get; set; } = "";
 
+        [JsonPropertyName("artistID")]
+        public int ArtistID { get; set; } = 0;
+
         [JsonPropertyName("artistName")]
         [Required(ErrorMessage = "Please enter an artist name.")]
         public string ArtistName { get; set; } = "";
-
-        [JsonPropertyName("artistID")]
-        public int ArtistID { get; set; } = 0;
 
         [JsonPropertyName("releaseYear")]
         [Required(ErrorMessage = "Please enter a realease year."), ValidReleaseYear]

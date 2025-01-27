@@ -1,23 +1,22 @@
 ﻿@inject IHttpClientFactory ClientFactory
 @page "/Artists/{Id:int}/Edit"
+@using System.Text.Json
 
 @if (errorMessage != null)
 {
     <ErrorMessage Message="@errorMessage" />
 }
-else if (ArtistToUpdate == null)
+else if (Artist == null)
 {
     <Loading />
 }
 else
 {
-    <EditArtistPage UpdatedArtist="UpdatedArtist" />
+    <EditArtistPage UpdatedArtist="Artist" />
 }
 
 @code {
-    public ArtistReturnDto? ArtistToUpdate { get; set; }
-
-    public ArtistDetails? UpdatedArtist { get; set; } = new();
+    public ArtistDetails? Artist { get; set; }
 
     [Parameter]
     public int Id { get; set; }
@@ -30,21 +29,17 @@ else
         {
             var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await client.GetFromJsonAsync<ArtistReturnDto>($"/Artists/{Id}");
+            var response = await client.GetAsync($"/Artists/{Id}");
 
-            ArtistToUpdate = response;
+            string responseBody = await response.Content.ReadAsStringAsync();
 
-            if (ArtistToUpdate != null)
+            if (response.IsSuccessStatusCode)
             {
-                UpdatedArtist!.Id = ArtistToUpdate.Id;
-                UpdatedArtist!.Name = ArtistToUpdate.Name;
-                UpdatedArtist!.PerformerType = ArtistToUpdate.PerformerType;
-                UpdatedArtist!.Origin = ArtistToUpdate.Origin;
-                UpdatedArtist!.ImageURL = ArtistToUpdate.ImageURL;
+                Artist = JsonSerializer.Deserialize<ArtistDetails>(responseBody)!;
             }
             else
             {
-                errorMessage = $"Could not find album.";
+                errorMessage = $"{response.StatusCode}: {responseBody}";
             }
         }
         catch (Exception ex)

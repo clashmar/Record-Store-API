@@ -1,6 +1,7 @@
 ﻿@inject NavigationManager Navigation
 @inject IHttpClientFactory ClientFactory
 @page "/Artists"
+@using System.Text.Json
 
 @if (errorMessage != null)
 {   
@@ -23,7 +24,7 @@ else
     [SupplyParameterFromQuery]
     public bool Deleted { get; set; }
 
-    protected List<ArtistReturnDto>? Artists { get; set; }
+    protected List<ArtistDetails>? Artists { get; set; }
 
     protected string? errorMessage;
 
@@ -33,9 +34,18 @@ else
         {
             var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await client.GetFromJsonAsync<List<ArtistReturnDto>>("Artists");
+            var response = await client.GetAsync("Artists");
 
-            Artists = response;
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                Artists = JsonSerializer.Deserialize<List<ArtistDetails>>(responseBody)!;
+            }
+            else
+            {
+                errorMessage = $"{response.StatusCode}: {responseBody}";
+            }
         }
         catch (Exception ex)
         {

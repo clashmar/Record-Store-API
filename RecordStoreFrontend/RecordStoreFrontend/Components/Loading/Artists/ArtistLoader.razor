@@ -1,6 +1,7 @@
 ﻿@inject NavigationManager Navigation
 @inject IHttpClientFactory ClientFactory
 @page "/Artists/{Id:int}"
+@using System.Text.Json
 
 @if (errorMessage != null)
 {
@@ -24,7 +25,7 @@ else
     [SupplyParameterFromQuery]
     public bool Edited { get; set; }
 
-    protected ArtistReturnDto? Artist { get; set; }
+    protected ArtistDetails? Artist { get; set; }
 
     protected string? errorMessage;
 
@@ -34,9 +35,18 @@ else
         {
             var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await client.GetFromJsonAsync<ArtistReturnDto>($"/Artists/{Id}");
+            var response = await client.GetAsync($"/Artists/{Id}");
 
-            Artist = response;
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                Artist = JsonSerializer.Deserialize<ArtistDetails>(responseBody)!;
+            }
+            else
+            {
+                errorMessage = $"{response.StatusCode}: {responseBody}";
+            }
         }
         catch (Exception ex)
         {

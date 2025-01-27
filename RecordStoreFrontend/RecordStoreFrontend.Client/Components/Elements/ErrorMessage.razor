@@ -2,7 +2,7 @@
 
 @if (!string.IsNullOrEmpty(Message))
 {
-    <div class="notification is-danger is-fixed-top">
+    <div class="notification is-danger mt-5">
         <button class="delete" @onclick="()=>DeleteNotification()"></button>
         @Message
     </div>

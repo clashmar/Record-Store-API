@@ -12,6 +12,9 @@ namespace RecordStoreFrontend.Client.Models
         [Required(ErrorMessage = "Please enter an artist name.")]
         public string Name { get; set; } = "";
 
+        [JsonPropertyName("albums")]
+        public List<AlbumDetails> Albums { get; set; } = [];
+
         [JsonPropertyName("imageURL")]
         public string ImageURL { get; set; } = "";
 

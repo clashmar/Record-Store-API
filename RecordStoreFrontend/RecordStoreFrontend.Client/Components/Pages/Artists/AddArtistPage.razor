@@ -22,15 +22,16 @@
 
             var response = await client.PostAsync($"/Artists", JsonContent.Create(artistDetails));
 
+            string responseBody = await response.Content.ReadAsStringAsync();
+
             if (response.IsSuccessStatusCode)
             {
-                string responseBody = await response.Content.ReadAsStringAsync();
                 ArtistDetails artist = JsonSerializer.Deserialize<ArtistDetails>(responseBody)!;
                 Navigation.NavigateTo($"/Artists/{artist.Id}");
             }
             else
             {
-                errorMessage = $"An error occured: {response.StatusCode}.";
+                errorMessage = $"{response.StatusCode}: {responseBody}";
             }
         }
         catch (Exception ex)
