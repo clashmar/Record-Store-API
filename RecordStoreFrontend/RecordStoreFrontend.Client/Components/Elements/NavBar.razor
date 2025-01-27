@@ -6,7 +6,7 @@
         <a class="navbar-item" href="/">
             <image src="Images/top-five-logo.png" width="75" height="40" />
         </a>
-        <a role="button" class="navbar-burger @ToggleActive" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @onclick="()=>ToggleHamburger()">
+        <a role="button" class="navbar-burger @IsActive" aria-label="menu" aria-expanded="false" @onclick="()=>ToggleHamburger()">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -14,27 +14,27 @@
         </a>
     </div>
 
-    <div class="navbar-menu @ToggleActive">
+    <div class="navbar-menu @IsActive">
         <div class="navbar-start">
             <a href="/" class="navbar-item">
                 Home
             </a>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a href="/Albums" class="navbar-item">
+            <div class="navbar-item has-dropdown @IsAlbumsHoverable" @onmouseleave="()=>HideAlbumsDropdown()" @onmouseenter="()=>SetAlbumsHoverable()" @onclick="()=>HideAlbumsDropdown()">
+                <a href="/Albums" class="navbar-link is-arrowless">
                     Albums
                 </a>
                 <div class="navbar-dropdown">
-                    <a class="navbar-item" href="/Albums/Add"> Add Album </a>
+                    <a href="/Albums/Add" class="navbar-item" @onclick="()=>HideAlbumsDropdown()"> Add Album </a>
                 </div>
             </div>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a href="/Artists" class="navbar-item">
+            <div class="navbar-item has-dropdown @IsArtistsHoverable" @onmouseleave="(e)=>HideArtistsDropdown()" @onmouseenter="()=>SetArtistsHoverable()" @onclick="()=>HideArtistsDropdown()">
+                <a href="/Artists" class="navbar-link is-arrowless">
                     Artists
                 </a>
                 <div class="navbar-dropdown">
-                    <a class="navbar-item" href="/Artists/Add"> Add Artist </a>
+                    <a href="/Artists/Add" class="navbar-item" @onclick="()=>HideArtistsDropdown()"> Add Artist </a>
                 </div>
             </div>
 
@@ -70,7 +70,17 @@
 @code {
     protected string? searchTerm;
 
-    protected string ToggleActive { get; set; } = "";
+    protected string? IsActive { get; set; }
+
+    protected string? IsAlbumsHoverable { get; set; }
+    protected string? IsArtistsHoverable { get; set; }
+
+    protected override void OnInitialized()
+    {
+        IsActive = "";
+        IsAlbumsHoverable = "is-hoverable";
+        IsArtistsHoverable = "is-hoverable";
+    }
 
     protected void HandleSearch() 
     {
@@ -82,7 +92,27 @@
 
     private void ToggleHamburger()
     {
-        ToggleActive = ToggleActive is "" ? "is-active" : "";
+        IsActive = IsActive is "" ? "is-active" : "";
+    }
+
+    protected void SetAlbumsHoverable()
+    {
+        IsAlbumsHoverable = "is-hoverable";
+    }
+
+    protected void SetArtistsHoverable()
+    {
+        IsArtistsHoverable = "is-hoverable";
+    }
+
+    private void HideAlbumsDropdown()
+    {
+        IsAlbumsHoverable = "";
+    }
+
+    private void HideArtistsDropdown()
+    {
+        IsArtistsHoverable = "";
     }
 }
 

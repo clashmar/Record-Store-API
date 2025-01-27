@@ -1,0 +1,45 @@
+﻿@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
+@rendermode InteractiveAuto
+
+<PageHeader Title="Edit Artist" />
+
+<ErrorMessage Message="@errorMessage" />
+
+<ArtistForm UpdatedArtist="UpdatedArtist" OnValidSubmit="HandleValidSubmit" OnCancel="HandleCancel" />
+
+@code {
+    [Parameter]
+    public ArtistDetails? UpdatedArtist { get; set; }
+
+    protected string? errorMessage;
+
+    protected async Task HandleValidSubmit(ArtistDetails artistDetails)
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
+
+            var response = await client.PutAsJsonAsync<ArtistDetails>($"/Artists/{artistDetails.Id}", artistDetails);
+
+            if (response.IsSuccessStatusCode)
+            {
+                Navigation.NavigateTo($"/Artists/{artistDetails.Id}?edited=true");
+            }
+            else
+            {
+                errorMessage = $"An error occured: {response.StatusCode}.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+
+    protected void HandleCancel()
+    {
+        Navigation.NavigateTo($"/Artists/{UpdatedArtist!.Id}");
+    }
+}
+

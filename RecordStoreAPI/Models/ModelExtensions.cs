@@ -20,6 +20,17 @@ namespace RecordStoreAPI.Models
             };
         }
 
+        public static Artist ArtistDetailsToArtist(ArtistDetails artist)
+        {
+            return new Artist()
+            {
+                Name = artist.Name,
+                PerformerType = artist.PerformerType,
+                Origin = artist.Origin,
+                ImageURL = artist.ImageURL
+            };
+        }
+
         public static SearchResult ToSearchResult(ISearchable searchItem)
         {
             return new SearchResult()
@@ -43,6 +54,14 @@ namespace RecordStoreAPI.Models
             target.Information = source.Information;
             target.StockQuantity = source.StockQuantity;
             target.PriceInPence = source.PriceInPence;
+            target.ImageURL = source.ImageURL;
+        }
+
+        public static void MapArtistDetailsProperties(Artist target, ArtistDetails source)
+        {
+            target.Name = source.Name;
+            target.PerformerType = source.PerformerType;
+            target.Origin = source.Origin;
             target.ImageURL = source.ImageURL;
         }
     }

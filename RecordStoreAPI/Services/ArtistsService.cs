@@ -10,6 +10,9 @@ namespace RecordStoreAPI.Services
         List<ArtistReturnDto>? FindAllArtists();
         List<AlbumReturnDto>? FindAlbumsByArtistId(int id);
         ArtistReturnDto? FindArtistById(int id);
+        ArtistReturnDto? AddNewArtist(ArtistDetails newArtist);
+        ArtistReturnDto? UpdateArtist(int id, ArtistDetails artist);
+        bool TryRemoveArtistById(int id);
     }
     public class ArtistsService : IArtistsService
     {
@@ -23,14 +26,14 @@ namespace RecordStoreAPI.Services
         public List<ArtistReturnDto>? FindAllArtists()
         {
             return _artistsRepository.FindAllArtists()
-                .Select(a => DTOExtensions.ToArtistDto(a))
+                .Select(a => DTOExtensions.ToArtistReturnDto(a))
                 .ToList();
         }
 
         public ArtistReturnDto? FindArtistById(int id)
         {
             Artist? artist = _artistsRepository.FindArtistById(id);
-            return artist != null ? DTOExtensions.ToArtistDto(artist) : null;
+            return artist != null ? DTOExtensions.ToArtistReturnDto(artist) : null;
                 
         }
         public List<AlbumReturnDto>? FindAlbumsByArtistId(int id)
@@ -39,6 +42,21 @@ namespace RecordStoreAPI.Services
                 .Where(a => a.ArtistID == id)   
                 .Select(a => DTOExtensions.ToAlbumReturnDto(a))
                 .ToList();  
+        }
+        public ArtistReturnDto? AddNewArtist(ArtistDetails newArtist)
+        {
+            Artist? artist = _artistsRepository.AddNewArtist(newArtist);
+            return artist != null ? DTOExtensions.ToArtistReturnDto(artist) : null;
+        }
+
+        public ArtistReturnDto? UpdateArtist(int id, ArtistDetails artist)
+        {
+            Artist? updatedArtist = _artistsRepository.UpdateArtist(id, artist);
+            return updatedArtist != null ? DTOExtensions.ToArtistReturnDto(updatedArtist) : null;
+        }
+        public bool TryRemoveArtistById(int id)
+        {
+            return _artistsRepository.TryRemoveArtistById(id);
         }
     }
 }

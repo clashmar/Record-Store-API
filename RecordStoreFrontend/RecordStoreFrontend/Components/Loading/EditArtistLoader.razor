@@ -1,0 +1,56 @@
+﻿@inject IHttpClientFactory ClientFactory
+@page "/Artists/{Id:int}/Edit"
+
+@if (errorMessage != null)
+{
+    <ErrorMessage Message="@errorMessage" />
+}
+else if (ArtistToUpdate == null)
+{
+    <Loading />
+}
+else
+{
+    <EditArtistPage UpdatedArtist="UpdatedArtist" />
+}
+
+@code {
+    public ArtistReturnDto? ArtistToUpdate { get; set; }
+
+    public ArtistDetails? UpdatedArtist { get; set; } = new();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
+
+            var response = await client.GetFromJsonAsync<ArtistReturnDto>($"/Artists/{Id}");
+
+            ArtistToUpdate = response;
+
+            if (ArtistToUpdate != null)
+            {
+                UpdatedArtist!.Id = ArtistToUpdate.Id;
+                UpdatedArtist!.Name = ArtistToUpdate.Name;
+                UpdatedArtist!.PerformerType = ArtistToUpdate.PerformerType;
+                UpdatedArtist!.Origin = ArtistToUpdate.Origin;
+                UpdatedArtist!.ImageURL = ArtistToUpdate.ImageURL;
+            }
+            else
+            {
+                errorMessage = $"Could not find album.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+}
+

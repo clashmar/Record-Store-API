@@ -32,7 +32,7 @@ else
 
             var response = await client.GetFromJsonAsync<AlbumReturnDto>($"/Albums/{Id}");
 
-            AlbumToUpdate = response != null ? response : null;
+            AlbumToUpdate = response;
 
             if (AlbumToUpdate != null)
             {

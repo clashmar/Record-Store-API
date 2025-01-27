@@ -3,30 +3,30 @@
 @inject IHttpClientFactory ClientFactory
 @inject IJSRuntime JSRuntime
 @rendermode InteractiveAuto
-@page "/Albums/Add"
+@page "/Artists/Add"
 
-<PageHeader Title="Add Album to the Database"/>
+<PageHeader Title="Add an Artist to the Database" />
 
 <ErrorMessage Message="@errorMessage" />
 
-<AlbumForm UpdatedAlbum="@(new AlbumDetails())" OnValidSubmit="HandleValidSubmit" OnCancel="HandleCancel"/>
+<ArtistForm UpdatedArtist="@(new ArtistDetails())" OnValidSubmit="HandleValidSubmit" OnCancel="HandleCancel" />
 
 @code {
     protected string? errorMessage;
 
-    protected async Task HandleValidSubmit(AlbumDetails albumDetails)
+    protected async Task HandleValidSubmit(ArtistDetails artistDetails)
     {
         try
         {
             var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await client.PostAsync($"/Albums", JsonContent.Create(albumDetails));
+            var response = await client.PostAsync($"/Artists", JsonContent.Create(artistDetails));
 
             if (response.IsSuccessStatusCode)
             {
                 string responseBody = await response.Content.ReadAsStringAsync();
-                AlbumDetails album = JsonSerializer.Deserialize<AlbumDetails>(responseBody)!;
-                Navigation.NavigateTo($"/Albums/{album.AlbumID}");
+                ArtistDetails artist = JsonSerializer.Deserialize<ArtistDetails>(responseBody)!;
+                Navigation.NavigateTo($"/Artists/{artist.Id}");
             }
             else
             {

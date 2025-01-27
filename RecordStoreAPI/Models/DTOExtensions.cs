@@ -21,7 +21,7 @@ namespace RecordStoreAPI.Models
                         );
         }
 
-        public static ArtistReturnDto ToArtistDto(Artist artist)
+        public static ArtistReturnDto ToArtistReturnDto(Artist artist)
         {
             return new ArtistReturnDto(
                 artist.Id,

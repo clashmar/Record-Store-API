@@ -22,7 +22,7 @@ namespace RecordStoreFrontend.Client.Models
         public int ArtistID { get; set; } = 0;
 
         [JsonPropertyName("releaseYear")]
-        [ValidReleaseYear]
+        [Required(ErrorMessage = "Please enter a realease year."), ValidReleaseYear]
         public int ReleaseYear { get; set; } = 1860;
 
         [JsonPropertyName("genres")]

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RecordStoreAPI.Entities;
 using RecordStoreFrontend.Client.Models;
 using RecordStoreAPI.Services;
 
@@ -49,7 +48,7 @@ namespace RecordStoreAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteAlbumById(int id)
         {
-            return _albumsService.TryRemoveAlbumById(id) ? Ok("Album was removed.") : BadRequest("No album was found with that Id.");
+            return _albumsService.TryRemoveAlbumById(id) ? Ok("Album was removed.") : BadRequest("Either no artist was found with that Id, or the artist has still has albums in the database.");
         }
 
         [HttpGet("Year/{releaseYear}")]

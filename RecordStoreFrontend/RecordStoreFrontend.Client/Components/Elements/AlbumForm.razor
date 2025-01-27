@@ -20,9 +20,6 @@
             <div class="control has-icons-right">
                 <InputText class="input" placeholder="Artist Name" @bind-Value="UpdatedAlbum!.ArtistName"/>
                 <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ArtistName)" />
-                <span class="icon is-right">
-                    <i class="fas fa-check"></i>
-                </span>
             </div>
         </div>
 
@@ -31,9 +28,6 @@
             <div class="control has-icons-right">
                 <InputNumber class="input" placeholder="Release Year" @bind-Value="UpdatedAlbum!.ReleaseYear"/>
                 <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ReleaseYear)" />
-                <span class="icon is-right">
-                    <i class="fas fa-check"></i>
-                </span>
             </div>
         </div>
 
@@ -41,7 +35,6 @@
             <label class="label">Add/Delete Genre</label>
             <div class="control">
                 <div class="select mr-2 is-white">
-
                     <InputSelect @bind-Value="genreToAdd" class="dropdown is-active">
                         <option value="">Add Genre</option>
                         @foreach (string genre in genres!.Values)
@@ -71,9 +64,6 @@
             <div class="control has-icons-right">
                 <InputText class="input" placeholder="URL" @bind-Value="UpdatedAlbum!.ImageURL"/>
                 <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ImageURL)" />
-                <span class="icon is-right">
-                    <i class="fas fa-check"></i>
-                </span>
             </div>
         </div>
 

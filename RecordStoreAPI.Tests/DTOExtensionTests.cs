@@ -103,7 +103,7 @@ namespace RecordStoreAPI.Tests
 
             ArtistDto dto = new(1, "Name1", dtos);
 
-            var result = DTOExtensions.ToArtistDto(artist);
+            var result = DTOExtensions.ToArtistReturnDto(artist);
 
             var jsonResult = JsonSerializer.Serialize(result);
             var jsonDto = JsonSerializer.Serialize(dto);

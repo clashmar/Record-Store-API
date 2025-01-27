@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PrlR/l7u6I38NbQk7mV8LFrG52HZgd2WlHeVBOa73J4=",
+  "Hash": "4M5981S0F7FGvOAw7qBFfHPGCprypV6TcQRiJRNEigs=",
   "Source": "RecordStoreFrontend.Client",
   "BasePath": "/",
   "Mode": "Default",
@@ -23,8 +23,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "vxm4smy6lr",
-      "Integrity": "I6FxnkQLn3EO32OC3nVfZ+o/WKb1vJtrcImRlUdjc6g=",
+      "Fingerprint": "zctkwbdhmu",
+      "Integrity": "ow0cLVeIRw5ywAwY/c7fzR+Rn0BaUFHtcaiJP7xTrcU=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net8.0\\blazor.boot.json"
@@ -968,8 +968,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "x9md5kkhr2",
-      "Integrity": "+9jeR6NOtMqUzH8Iq+hPDDDrHMEJhVeGF3POMr+po/s=",
+      "Fingerprint": "h25uqkyxg6",
+      "Integrity": "1wBdxy9XanT89w+06VSJMB2/nXslJEl36EWUff+u14Q=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net8.0\\RecordStoreFrontend.Client.pdb"
@@ -989,8 +989,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "hm6ltmj373",
-      "Integrity": "N6ZjYM6F27mmpeaAJLVzw7Hnzfhl27hp+bF639qHi6E=",
+      "Fingerprint": "2pmq575iiv",
+      "Integrity": "mpmYRgxuYDqySj64Ie1DKYFuWhQibQE76a/pTDk5jL8=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\webcil\\RecordStoreFrontend.Client.wasm"
@@ -5322,7 +5322,7 @@
       "OriginalItemSpec": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.Win32.Primitives.wasm"
     },
     {
-      "Identity": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\8g99s3amv6-vxm4smy6lr.gz",
+      "Identity": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\8g99s3amv6-zctkwbdhmu.gz",
       "SourceId": "RecordStoreFrontend.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\",
@@ -5336,8 +5336,8 @@
       "RelatedAsset": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "ye602o1mjz",
-      "Integrity": "hq2FPTcw9PefMC7q6xYpqPcXlJIQxp5vax43ceb1A88=",
+      "Fingerprint": "zmmlukq0hr",
+      "Integrity": "27NJLD5WZ7ZcwpCX0+s7RMh+PElnbFdwErWNDHTgYJQ=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json"
@@ -6708,7 +6708,7 @@
       "OriginalItemSpec": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.js"
     },
     {
-      "Identity": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\jrgkqsblu4-hm6ltmj373.gz",
+      "Identity": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\jrgkqsblu4-2pmq575iiv.gz",
       "SourceId": "RecordStoreFrontend.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\",
@@ -6722,8 +6722,8 @@
       "RelatedAsset": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\RecordStoreFrontend.Client.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "n7bqf10awi",
-      "Integrity": "Q05kW6AnuAEjKkogb3IGwwbZ5nkaDm9fv7c5Q3hpC60=",
+      "Fingerprint": "b6cmb37y7a",
+      "Integrity": "I662IYR7wjAd43qSGtNiYWthB0u0C7Q35ONGF5UqvYA=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\RecordStoreFrontend.Client.wasm"
@@ -7359,7 +7359,7 @@
       "OriginalItemSpec": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.IO.FileSystem.wasm"
     },
     {
-      "Identity": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\nkom3m9u4k-x9md5kkhr2.gz",
+      "Identity": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\nkom3m9u4k-h25uqkyxg6.gz",
       "SourceId": "RecordStoreFrontend.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\",
@@ -7373,8 +7373,8 @@
       "RelatedAsset": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\RecordStoreFrontend.Client.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "y9vi26fz2u",
-      "Integrity": "Ksew7Xq64zf69s3k5FQadAVgHfChGFpME3TS/DUubQA=",
+      "Fingerprint": "qiubaacvzk",
+      "Integrity": "QqH0IK3BEHw3wygRTIgfCQkYFAJL89ndJ+FOpjxN4O4=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\RecordStoreFrontend.Client.pdb"
@@ -8807,11 +8807,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"I6FxnkQLn3EO32OC3nVfZ+o/WKb1vJtrcImRlUdjc6g=\""
+          "Value": "\"ow0cLVeIRw5ywAwY/c7fzR+Rn0BaUFHtcaiJP7xTrcU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 26 Jan 2025 22:59:45 GMT"
+          "Value": "Mon, 27 Jan 2025 13:47:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8821,18 +8821,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-I6FxnkQLn3EO32OC3nVfZ+o/WKb1vJtrcImRlUdjc6g="
+          "Value": "sha256-ow0cLVeIRw5ywAwY/c7fzR+Rn0BaUFHtcaiJP7xTrcU="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json",
-      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\8g99s3amv6-vxm4smy6lr.gz",
+      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\8g99s3amv6-zctkwbdhmu.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000110852455"
+          "Quality": "0.000110877037"
         }
       ],
       "ResponseHeaders": [
@@ -8842,15 +8842,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9020"
+          "Value": "9018"
         },
         {
           "Name": "ETag",
-          "Value": "\"hq2FPTcw9PefMC7q6xYpqPcXlJIQxp5vax43ceb1A88=\""
+          "Value": "\"27NJLD5WZ7ZcwpCX0+s7RMh+PElnbFdwErWNDHTgYJQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 26 Jan 2025 22:48:10 GMT"
+          "Value": "Mon, 27 Jan 2025 13:28:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8870,19 +8870,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"I6FxnkQLn3EO32OC3nVfZ+o/WKb1vJtrcImRlUdjc6g=\""
+          "Value": "W/\"ow0cLVeIRw5ywAwY/c7fzR+Rn0BaUFHtcaiJP7xTrcU=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-I6FxnkQLn3EO32OC3nVfZ+o/WKb1vJtrcImRlUdjc6g="
+          "Value": "sha256-ow0cLVeIRw5ywAwY/c7fzR+Rn0BaUFHtcaiJP7xTrcU="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\8g99s3amv6-vxm4smy6lr.gz",
+      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\8g99s3amv6-zctkwbdhmu.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8891,7 +8891,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9020"
+          "Value": "9018"
         },
         {
           "Name": "Content-Type",
@@ -8899,11 +8899,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"hq2FPTcw9PefMC7q6xYpqPcXlJIQxp5vax43ceb1A88=\""
+          "Value": "\"27NJLD5WZ7ZcwpCX0+s7RMh+PElnbFdwErWNDHTgYJQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 26 Jan 2025 22:48:10 GMT"
+          "Value": "Mon, 27 Jan 2025 13:28:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8921,7 +8921,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-hq2FPTcw9PefMC7q6xYpqPcXlJIQxp5vax43ceb1A88="
+          "Value": "sha256-27NJLD5WZ7ZcwpCX0+s7RMh+PElnbFdwErWNDHTgYJQ="
         }
       ]
     },
@@ -14964,7 +14964,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "55512"
+          "Value": "72020"
         },
         {
           "Name": "Content-Type",
@@ -14972,11 +14972,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"+9jeR6NOtMqUzH8Iq+hPDDDrHMEJhVeGF3POMr+po/s=\""
+          "Value": "\"1wBdxy9XanT89w+06VSJMB2/nXslJEl36EWUff+u14Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 26 Jan 2025 22:59:44 GMT"
+          "Value": "Mon, 27 Jan 2025 13:47:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14986,18 +14986,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-+9jeR6NOtMqUzH8Iq+hPDDDrHMEJhVeGF3POMr+po/s="
+          "Value": "sha256-1wBdxy9XanT89w+06VSJMB2/nXslJEl36EWUff+u14Q="
         }
       ]
     },
     {
       "Route": "_framework/RecordStoreFrontend.Client.pdb",
-      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\nkom3m9u4k-x9md5kkhr2.gz",
+      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\nkom3m9u4k-h25uqkyxg6.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000021608073"
+          "Quality": "0.000017708518"
         }
       ],
       "ResponseHeaders": [
@@ -15007,15 +15007,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "46278"
+          "Value": "56469"
         },
         {
           "Name": "ETag",
-          "Value": "\"Ksew7Xq64zf69s3k5FQadAVgHfChGFpME3TS/DUubQA=\""
+          "Value": "\"QqH0IK3BEHw3wygRTIgfCQkYFAJL89ndJ+FOpjxN4O4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 26 Jan 2025 22:48:10 GMT"
+          "Value": "Mon, 27 Jan 2025 13:28:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15035,19 +15035,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"+9jeR6NOtMqUzH8Iq+hPDDDrHMEJhVeGF3POMr+po/s=\""
+          "Value": "W/\"1wBdxy9XanT89w+06VSJMB2/nXslJEl36EWUff+u14Q=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-+9jeR6NOtMqUzH8Iq+hPDDDrHMEJhVeGF3POMr+po/s="
+          "Value": "sha256-1wBdxy9XanT89w+06VSJMB2/nXslJEl36EWUff+u14Q="
         }
       ]
     },
     {
       "Route": "_framework/RecordStoreFrontend.Client.pdb.gz",
-      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\nkom3m9u4k-x9md5kkhr2.gz",
+      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\nkom3m9u4k-h25uqkyxg6.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -15056,7 +15056,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "46278"
+          "Value": "56469"
         },
         {
           "Name": "Content-Type",
@@ -15064,11 +15064,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Ksew7Xq64zf69s3k5FQadAVgHfChGFpME3TS/DUubQA=\""
+          "Value": "\"QqH0IK3BEHw3wygRTIgfCQkYFAJL89ndJ+FOpjxN4O4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 26 Jan 2025 22:48:10 GMT"
+          "Value": "Mon, 27 Jan 2025 13:28:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15086,7 +15086,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Ksew7Xq64zf69s3k5FQadAVgHfChGFpME3TS/DUubQA="
+          "Value": "sha256-QqH0IK3BEHw3wygRTIgfCQkYFAJL89ndJ+FOpjxN4O4="
         }
       ]
     },
@@ -15101,7 +15101,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "61205"
+          "Value": "77589"
         },
         {
           "Name": "Content-Type",
@@ -15109,11 +15109,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"N6ZjYM6F27mmpeaAJLVzw7Hnzfhl27hp+bF639qHi6E=\""
+          "Value": "\"mpmYRgxuYDqySj64Ie1DKYFuWhQibQE76a/pTDk5jL8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 26 Jan 2025 22:59:44 GMT"
+          "Value": "Mon, 27 Jan 2025 13:47:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15123,18 +15123,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-N6ZjYM6F27mmpeaAJLVzw7Hnzfhl27hp+bF639qHi6E="
+          "Value": "sha256-mpmYRgxuYDqySj64Ie1DKYFuWhQibQE76a/pTDk5jL8="
         }
       ]
     },
     {
       "Route": "_framework/RecordStoreFrontend.Client.wasm",
-      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\jrgkqsblu4-hm6ltmj373.gz",
+      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\jrgkqsblu4-2pmq575iiv.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000042633015"
+          "Quality": "0.000036179450"
         }
       ],
       "ResponseHeaders": [
@@ -15144,15 +15144,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "23455"
+          "Value": "27639"
         },
         {
           "Name": "ETag",
-          "Value": "\"Q05kW6AnuAEjKkogb3IGwwbZ5nkaDm9fv7c5Q3hpC60=\""
+          "Value": "\"I662IYR7wjAd43qSGtNiYWthB0u0C7Q35ONGF5UqvYA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 26 Jan 2025 22:48:10 GMT"
+          "Value": "Mon, 27 Jan 2025 13:28:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15172,19 +15172,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"N6ZjYM6F27mmpeaAJLVzw7Hnzfhl27hp+bF639qHi6E=\""
+          "Value": "W/\"mpmYRgxuYDqySj64Ie1DKYFuWhQibQE76a/pTDk5jL8=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-N6ZjYM6F27mmpeaAJLVzw7Hnzfhl27hp+bF639qHi6E="
+          "Value": "sha256-mpmYRgxuYDqySj64Ie1DKYFuWhQibQE76a/pTDk5jL8="
         }
       ]
     },
     {
       "Route": "_framework/RecordStoreFrontend.Client.wasm.gz",
-      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\jrgkqsblu4-hm6ltmj373.gz",
+      "AssetFile": "C:\\Users\\charl\\Documents\\Northcoders\\Backend\\record-store-API\\RecordStoreFrontend\\RecordStoreFrontend.Client\\obj\\Debug\\net8.0\\compressed\\jrgkqsblu4-2pmq575iiv.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -15193,7 +15193,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "23455"
+          "Value": "27639"
         },
         {
           "Name": "Content-Type",
@@ -15201,11 +15201,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Q05kW6AnuAEjKkogb3IGwwbZ5nkaDm9fv7c5Q3hpC60=\""
+          "Value": "\"I662IYR7wjAd43qSGtNiYWthB0u0C7Q35ONGF5UqvYA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 26 Jan 2025 22:48:10 GMT"
+          "Value": "Mon, 27 Jan 2025 13:28:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15223,7 +15223,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Q05kW6AnuAEjKkogb3IGwwbZ5nkaDm9fv7c5Q3hpC60="
+          "Value": "sha256-I662IYR7wjAd43qSGtNiYWthB0u0C7Q35ONGF5UqvYA="
         }
       ]
     },
