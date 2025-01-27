@@ -7,7 +7,7 @@
 
 <PageHeader Title="Add Album to the Database"/>
 
-<ErrorMessage Message="@errorMessage" />
+<ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
 
 <AlbumForm UpdatedAlbum="@(new AlbumDetails())" OnValidSubmit="HandleValidSubmit" OnCancel="HandleCancel"/>
 
@@ -42,5 +42,10 @@
     protected async Task HandleCancel()
     {
         await JSRuntime.InvokeVoidAsync("history.back");
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = null;
     }
 }

@@ -7,7 +7,7 @@
 
 <PageHeader Title="Add an Artist to the Database" />
 
-<ErrorMessage Message="@errorMessage" />
+<ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
 
 <ArtistForm UpdatedArtist="@(new ArtistDetails())" OnValidSubmit="HandleValidSubmit" OnCancel="HandleCancel" />
 
@@ -42,5 +42,10 @@
     protected async Task HandleCancel()
     {
         await JSRuntime.InvokeVoidAsync("history.back");
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = null;
     }
 }

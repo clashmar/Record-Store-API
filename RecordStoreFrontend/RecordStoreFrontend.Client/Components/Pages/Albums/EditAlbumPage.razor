@@ -4,7 +4,7 @@
 
 <PageHeader Title="Edit Album"/>
 
-<ErrorMessage Message="@errorMessage" />
+<ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
 
 <AlbumForm UpdatedAlbum="UpdatedAlbum" OnValidSubmit="HandleValidSubmit" OnCancel="HandleCancel"/>
 
@@ -40,5 +40,10 @@
     protected void HandleCancel()
     {
         Navigation.NavigateTo($"/Albums/{UpdatedAlbum!.AlbumID}");
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = null;
     }
 }

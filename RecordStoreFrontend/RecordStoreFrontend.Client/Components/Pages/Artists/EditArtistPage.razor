@@ -4,7 +4,7 @@
 
 <PageHeader Title="Edit Artist" />
 
-<ErrorMessage Message="@errorMessage" />
+<ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
 
 <ArtistForm UpdatedArtist="UpdatedArtist" OnValidSubmit="HandleValidSubmit" OnCancel="HandleCancel" />
 
@@ -40,6 +40,11 @@
     protected void HandleCancel()
     {
         Navigation.NavigateTo($"/Artists/{UpdatedArtist!.Id}");
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = null;
     }
 }
 

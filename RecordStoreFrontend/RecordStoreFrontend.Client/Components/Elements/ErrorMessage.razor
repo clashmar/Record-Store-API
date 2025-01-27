@@ -1,9 +1,22 @@
-﻿@if (!string.IsNullOrEmpty(Message))
+﻿@rendermode InteractiveAuto
+
+@if (!string.IsNullOrEmpty(Message))
 {
-    <h1 class="is-size-4 has-text-danger has-text-centered mt-4 mb-4">@Message</h1>
+    <div class="notification is-danger is-fixed-top">
+        <button class="delete" @onclick="()=>DeleteNotification()"></button>
+        @Message
+    </div>
 }
 
 @code {
     [Parameter]
     public string? Message { get; set; }
+
+    [Parameter]
+    public EventCallback OnDeleteNotification { get; set; }
+
+    private async Task DeleteNotification()
+    {
+        await OnDeleteNotification.InvokeAsync();
+    }
 }
