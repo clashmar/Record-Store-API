@@ -65,14 +65,7 @@ namespace RecordStoreAPI.Controllers
             return result != null && result.Count > 0 ? Ok(result) : NotFound($"The API could not access any {Genres.ToFriendlyString(genre)} albums.");
         }
 
-        //[HttpGet("Search")]
-        //public IActionResult GetAlbumByName(string name)
-        //{
-        //    var result = _albumsService.FindAlbumsByName(name);
-        //    return result != null && result.Count > 0 ? Ok(result) : NotFound("We couldn't find an album matching your search.");
-        //}
-
-        [HttpGet("Search/{searchTerm}")]
+        [HttpGet("/Search/{searchTerm}")]
         public IActionResult GetSearchResults(string searchTerm)
         {
             var result = _albumsService.FindSearchResults(searchTerm!);

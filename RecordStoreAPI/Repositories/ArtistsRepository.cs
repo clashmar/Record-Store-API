@@ -9,7 +9,6 @@ namespace RecordStoreAPI.Repositories
     public interface IArtistsRepository
     {
         List<Artist> FindAllArtists();
-        List<Album>? FindAlbumsByArtistId(int id);
         Artist? FindArtistById(int id);
         Artist? AddNewArtist(ArtistDetails artistDetails);
         Artist? UpdateArtist(int id, ArtistDetails artistDetails);
@@ -42,17 +41,6 @@ namespace RecordStoreAPI.Repositories
                 .ThenInclude(ag => ag.Genre)
                 .Where(a => a.Id == id) 
                 .FirstOrDefault();
-        }
-
-        public List<Album>? FindAlbumsByArtistId(int id)
-        {
-            Artist? artist = _db.Artists
-                .Include(a => a.Albums)!
-                .ThenInclude(a => a.AlbumGenres)!
-                .ThenInclude(ag => ag.Genre)
-                .FirstOrDefault(a => a.Id == id);
-
-            return artist?.Albums;
         }
 
         public Artist? AddNewArtist(ArtistDetails artistDetails)

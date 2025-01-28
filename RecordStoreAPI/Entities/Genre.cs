@@ -12,6 +12,5 @@ namespace RecordStoreAPI.Entities
         public string? Name { get; set; }
 
         public List<AlbumGenre> Albums { get; set; } = [];
-
     }
 }

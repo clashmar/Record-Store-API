@@ -51,7 +51,6 @@ namespace RecordStoreAPI.Repositories
             Artist? artist = CheckArtistExists(albumDetails.ArtistName);
             if (artist == null) return null; albumDetails.ArtistID = artist.Id;
 
-
             Album album = ModelExtensions.AlbumDetailsToAlbum(albumDetails);
 
             album.AlbumGenres = albumDetails.Genres

@@ -35,7 +35,7 @@ namespace RecordStoreFrontend.Client.Models
         public int StockQuantity { get; set; } = 0;
 
         [JsonPropertyName("priceInPence")]
-        public int PriceInPence { get; set; } = 0;
+        public int PriceInPence { get; set; } = 2000;
 
         [JsonPropertyName("imageURL")]
         [Required(ErrorMessage = "Please enter an image url.")]

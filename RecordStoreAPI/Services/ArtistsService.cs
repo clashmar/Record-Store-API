@@ -8,7 +8,6 @@ namespace RecordStoreAPI.Services
     public interface IArtistsService
     {
         List<ArtistDetails>? FindAllArtists();
-        List<AlbumDetails>? FindAlbumsByArtistId(int id);
         ArtistDetails? FindArtistById(int id);
         ArtistDetails? AddNewArtist(ArtistDetails newArtist);
         ArtistDetails? UpdateArtist(int id, ArtistDetails artist);
@@ -36,13 +35,7 @@ namespace RecordStoreAPI.Services
             return artist != null ? ModelExtensions.ToArtistDetails(artist) : null;
                 
         }
-        public List<AlbumDetails>? FindAlbumsByArtistId(int id)
-        {
-            return _artistsRepository.FindAlbumsByArtistId(id)!
-                .Where(a => a.ArtistID == id)   
-                .Select(a => ModelExtensions.ToAlbumDetails(a))
-                .ToList();  
-        }
+
         public ArtistDetails? AddNewArtist(ArtistDetails newArtist)
         {
             Artist? artist = _artistsRepository.AddNewArtist(newArtist);
