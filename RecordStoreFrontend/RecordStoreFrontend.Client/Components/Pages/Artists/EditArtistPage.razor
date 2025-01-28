@@ -1,6 +1,5 @@
 ﻿@inject NavigationManager Navigation
 @inject IHttpClientFactory ClientFactory
-@rendermode InteractiveAuto
 
 <PageHeader Title="Edit Artist" />
 
@@ -46,7 +45,7 @@
 
     protected void ResetError()
     {
-        errorMessage = null;
+        errorMessage = "";
     }
 }
 

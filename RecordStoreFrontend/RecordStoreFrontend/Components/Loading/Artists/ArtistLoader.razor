@@ -1,11 +1,12 @@
 ﻿@inject NavigationManager Navigation
 @inject IHttpClientFactory ClientFactory
+@rendermode InteractiveAuto
 @page "/Artists/{Id:int}"
 @using System.Text.Json
 
 @if (errorMessage != null)
 {
-    <ErrorMessage Message="@errorMessage" />
+    <ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
 }
 else if (Artist == null)
 {
@@ -52,5 +53,10 @@ else
         {
             errorMessage = $"An error occured: {ex.Message}";
         }
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = "";
     }
 }

@@ -43,22 +43,22 @@
             </a>
         </div>
         <div class="navbar-end">
+            
             <div class="navbar-item">
-                <div class="field">
-                    <div class="control" width="20px">
-                        <form @onsubmit="()=>HandleSearch()">
-                            <input type="text" placeholder="Search" class="input has-text-white" @bind="@searchTerm"/>
-                        </form>
-                    </div>
+                <button class="button is-dark" @onclick="()=>HandleSearch()">
+                    <strong>🔍</strong>
+                </button>
+            </div>  
+            <form @onsubmit="()=>HandleSearch()">
+                <div class="navbar-item">
+                    <input type="text" placeholder="Search" class="input has-text-white" @bind="@searchTerm"/>
                 </div>
-            </div>
+            </form>
 
             <div class="navbar-item">
                 <div class="buttons">
-                    @* <a class="button is-light"> *@
-                    @*     <strong>Sign up</strong> *@
-                    @* </a> *@
-                    <a class="button is-dark">
+                    
+                    <a class="button is-light">
                         Log in
                     </a>
                 </div>
@@ -73,6 +73,7 @@
     protected string? IsActive { get; set; }
 
     protected string? IsAlbumsHoverable { get; set; }
+
     protected string? IsArtistsHoverable { get; set; }
 
     protected override void OnInitialized()

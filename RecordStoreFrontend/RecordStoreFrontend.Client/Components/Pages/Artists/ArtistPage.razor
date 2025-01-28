@@ -1,4 +1,4 @@
-﻿<SuccessMessageCascaded Message="Changes Were Made Successfully" />
+﻿<SuccessMessageCascaded Message="Changes Were Made Successfully"/>
 
 <div class="columns mt-5 mb-5">
     <div class="column is-one-quarter">
@@ -37,21 +37,30 @@
     [Parameter]
     public bool Edited { get; set; }
 
+    [Parameter]
+    public bool Success { get; set; }
+
     public Dictionary<GenreEnum, string>? genresDictionary;
 
     protected string? genres;
+
 
     protected override void OnInitialized()
     {
         genresDictionary = Genres.GenresDictionary() ?? [];
 
-         genres = String
-         .Join(", ", 
-         Artist!.Albums
-        .Select(a => a.Genres)
-        .SelectMany(g => g)
-        .Distinct()
-        .Select(g => genresDictionary![g])
-        .ToList());
+        genres = String
+        .Join(", ", 
+        Artist!.Albums
+       .Select(a => a.Genres)
+       .SelectMany(g => g)
+       .Distinct()
+       .Select(g => genresDictionary![g])
+       .ToList());
+    }
+
+    protected void DeleteNotification()
+    {
+        Success = false;
     }
 }

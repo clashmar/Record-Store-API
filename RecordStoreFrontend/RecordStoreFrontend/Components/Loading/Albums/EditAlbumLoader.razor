@@ -1,10 +1,11 @@
 ﻿@inject IHttpClientFactory ClientFactory
 @page "/Albums/{Id:int}/Edit"
+@rendermode InteractiveAuto
 @using System.Text.Json
 
 @if (errorMessage != null)
 {
-    <ErrorMessage Message="@errorMessage" />
+    <ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
 }
 else if (Album == null)
 {
@@ -46,6 +47,11 @@ else
         {
             errorMessage = $"An error occured: {ex.Message}";
         }
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = "";
     }
 }
 

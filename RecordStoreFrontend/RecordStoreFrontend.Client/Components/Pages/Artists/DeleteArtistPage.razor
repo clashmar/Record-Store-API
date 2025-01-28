@@ -3,7 +3,7 @@
 @rendermode InteractiveServer
 @page "/Artists/{Id:int}/Delete"
 
-<ErrorMessage Message="@errorMessage" />
+<ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
 
 <div class="has-text-centered">
     <h1 class="is-size-2 has-text-light has-text-weight-bold">Are You Sure?</h1>
@@ -51,5 +51,10 @@
     protected void Cancel()
     {
         Navigation.NavigateTo($"/Artists/{Id}");
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = "";
     }
 }
