@@ -30,7 +30,7 @@ else
         {
             var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await client.GetAsync($"Albums/Search/{SearchTerm}");
+            var response = await client.GetAsync($"Search/{SearchTerm}");
 
             string responseBody = await response.Content.ReadAsStringAsync();
 

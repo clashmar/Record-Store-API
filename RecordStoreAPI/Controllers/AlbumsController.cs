@@ -75,7 +75,7 @@ namespace RecordStoreAPI.Controllers
         [HttpGet("TopFive")]
         public IActionResult GetTopFive()
         {
-            var result = _albumsService.FindAllAlbums().GetRange(0, 5);
+            var result = _albumsService.FindAllAlbums()?.GetRange(0, 5);
             return result != null && result.Count > 0 ? Ok(result) : NotFound("The API could not access the database.");
         }
     }

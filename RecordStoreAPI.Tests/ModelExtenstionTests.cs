@@ -64,7 +64,7 @@ namespace RecordStoreAPI.Tests
                 ImageURL = "URL"
             };
 
-            var result = ModelExtensions.AlbumDetailsToAlbum(albumDetails);
+            var result = ModelExtensions.ToAlbum(albumDetails);
 
             var jsonResult = JsonSerializer.Serialize(result);
             var jsonAlbumDetails = JsonSerializer.Serialize(album);
@@ -140,7 +140,7 @@ namespace RecordStoreAPI.Tests
                 ImageURL = "URX"
             };
 
-            ModelExtensions.MapAlbumDetailsProperties(album, albumDetails);
+            ModelExtensions.MapToAlbum(album, albumDetails);
 
             var jsonResult = JsonSerializer.Serialize(album);
             var jsonAlbumDetails = JsonSerializer.Serialize(updatedAlbum);
@@ -181,7 +181,7 @@ namespace RecordStoreAPI.Tests
                 ImageURL = "URX"
             };
 
-            ModelExtensions.MapArtistDetailsProperties(artist, artistDetails);
+            ModelExtensions.MapToArtist(artist, artistDetails);
 
             var jsonResult = JsonSerializer.Serialize(artist);
             var jsonArtistDetails = JsonSerializer.Serialize(updatedArtist);

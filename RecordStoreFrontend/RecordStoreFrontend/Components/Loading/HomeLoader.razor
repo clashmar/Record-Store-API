@@ -8,7 +8,7 @@
 {
     <ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
 }
-else if (Albums == null)
+else if (Albums == null || Albums.Count <= 0)
 {
     <Loading />
 }
@@ -30,19 +30,11 @@ else
         {
             var client = ClientFactory.CreateClient("RecordStoreAPI");
 
-            var response = await client.GetAsync("Albums/TopFive");
+            var response = await client.GetAsync<List<AlbumDetails>?>("Albums/TopFive");
 
-            string responseBody = await response.Content.ReadAsStringAsync();
+            Albums = response.Value;
 
-            if (response.IsSuccessStatusCode)
-            {
-                List<AlbumDetails> albums = JsonSerializer.Deserialize<List<AlbumDetails>>(responseBody)!;
-                Albums = albums;
-            }
-            else
-            {
-                errorMessage = $"{response.StatusCode}: {responseBody}";
-            }
+            errorMessage = response.Error;
         }
         catch(Exception ex)
         {

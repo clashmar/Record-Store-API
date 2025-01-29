@@ -29,6 +29,7 @@ namespace RecordStoreAPI.Repositories
 
         public List<Album> FindAllAlbums()
         {
+            return [];
             return _db.Albums
                 .Include(a => a.Artist)
                 .Include(a => a.AlbumGenres)!
@@ -51,7 +52,7 @@ namespace RecordStoreAPI.Repositories
             Artist? artist = CheckArtistExists(albumDetails.ArtistName);
             if (artist == null) return null; albumDetails.ArtistID = artist.Id;
 
-            Album album = ModelExtensions.AlbumDetailsToAlbum(albumDetails);
+            Album album = albumDetails.ToAlbum();
 
             album.AlbumGenres = albumDetails.Genres
                 .Select(g => new AlbumGenre() { AlbumID = album.Id, GenreID = g })
@@ -71,7 +72,7 @@ namespace RecordStoreAPI.Repositories
             Artist? artist = CheckArtistExists(albumDetails.ArtistName);
             if (artist == null) return null; albumDetails.ArtistID = artist.Id;
 
-            ModelExtensions.MapAlbumDetailsProperties(albumToUpdate, albumDetails);
+            albumToUpdate.MapToAlbum(albumDetails);
 
             _db.AlbumGenre.RemoveRange(_db.AlbumGenre.Where(ag => ag.AlbumID == albumToUpdate.Id));
 
@@ -89,6 +90,7 @@ namespace RecordStoreAPI.Repositories
             _db.SaveChanges();
             return true;
         }
+
         public List<Album>? FindAlbumsByReleaseYear(int releaseYear)
         {
             return _db.Albums
@@ -115,7 +117,7 @@ namespace RecordStoreAPI.Repositories
 
             var artistResults = _db.Artists
                 .Where(a => a.Name.ToLower().Contains(searchTerm.ToLower()))
-                .Select(a => ModelExtensions.ToSearchResult(a))
+                .Select(a => a.ToSearchResult())
                 .ToList();
 
             results.AddRange(artistResults);
@@ -125,7 +127,7 @@ namespace RecordStoreAPI.Repositories
                 .Include(a => a.AlbumGenres)!
                 .ThenInclude(ag => ag.Genre)
                 .Where(a => a.Name.ToLower().Contains(searchTerm.ToLower()))
-                .Select(a => ModelExtensions.ToSearchResult(a))
+                .Select(a => a.ToSearchResult())
                 .ToList();
 
             results.AddRange(albumResults);

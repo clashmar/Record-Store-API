@@ -60,7 +60,7 @@ namespace RecordStoreAPI.Repositories
             var artistToUpdate = _db.Artists.FirstOrDefault(a => a.Id == id);
             if (artistToUpdate == null) return null;
 
-            ModelExtensions.MapArtistDetailsProperties(artistToUpdate, artistDetails);
+            ModelExtensions.MapToArtist(artistToUpdate, artistDetails);
 
             _db.Update(artistToUpdate);
             _db.SaveChanges();

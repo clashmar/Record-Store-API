@@ -36,7 +36,7 @@ namespace RecordStoreAPI.Models
             };
         }
 
-        public static Album AlbumDetailsToAlbum(AlbumDetails albumDetails)
+        public static Album ToAlbum(this AlbumDetails albumDetails)
         {
             return new Album()
             {
@@ -61,7 +61,7 @@ namespace RecordStoreAPI.Models
             };
         }
 
-        public static SearchResult ToSearchResult(ISearchable searchItem)
+        public static SearchResult ToSearchResult(this ISearchable searchItem)
         {
             return new SearchResult()
             {
@@ -73,7 +73,7 @@ namespace RecordStoreAPI.Models
             };
         }
 
-        public static void MapAlbumDetailsProperties(Album target, AlbumDetails source)
+        public static void MapToAlbum(this Album target, AlbumDetails source)
         {
             target.Name = source.Name;
             target.ArtistID = source.ArtistID;
@@ -87,7 +87,7 @@ namespace RecordStoreAPI.Models
             target.ImageURL = source.ImageURL;
         }
 
-        public static void MapArtistDetailsProperties(Artist target, ArtistDetails source)
+        public static void MapToArtist(Artist target, ArtistDetails source)
         {
             target.Name = source.Name;
             target.PerformerType = source.PerformerType;
