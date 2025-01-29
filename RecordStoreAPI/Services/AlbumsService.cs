@@ -30,26 +30,26 @@ namespace RecordStoreAPI.Services
         public List<AlbumDetails> FindAllAlbums()
         {
             return _albumsRepository.FindAllAlbums()
-                .Select(a => ModelExtensions.ToAlbumDetails(a))
+                .Select(a => a.ToAlbumDetails())
                 .ToList() ?? [];
         }
 
         public AlbumDetails? FindAlbumById(int id)
         {
             Album? album = _albumsRepository.FindAlbumById(id);
-            return album != null ? ModelExtensions.ToAlbumDetails(album) : null;
+            return album?.ToAlbumDetails();
         }
 
         public AlbumDetails? AddNewAlbum(AlbumDetails newAlbum)
         {
             Album? album = _albumsRepository.AddNewAlbum(newAlbum);
-            return album != null ? ModelExtensions.ToAlbumDetails(album) : null;
+            return album?.ToAlbumDetails();
         }
 
         public AlbumDetails? UpdateAlbum(int id, AlbumDetails album)
         {
             Album? updatedAlbum = _albumsRepository.UpdateAlbum(id, album);
-            return updatedAlbum != null ? ModelExtensions.ToAlbumDetails(updatedAlbum) : null;
+            return updatedAlbum?.ToAlbumDetails();
         }
 
         public bool TryRemoveAlbumById(int id)
@@ -60,20 +60,20 @@ namespace RecordStoreAPI.Services
         public List<AlbumDetails> FindAlbumsByReleaseYear(int releaseYear)
         {
             List<Album>? albums = _albumsRepository.FindAlbumsByReleaseYear(releaseYear);
-            return albums?.Select(a => ModelExtensions.ToAlbumDetails(a)).ToList() ?? [];
+            return albums?.Select(a => a.ToAlbumDetails()).ToList() ?? [];
         }
 
         public List<AlbumDetails> FindAlbumsByGenre(GenreEnum genre)
         {
             List<Album>? albums = _albumsRepository.FindAlbumsByGenre(genre);
-            return albums?.Select(a => ModelExtensions.ToAlbumDetails(a)).ToList() ?? [];
+            return albums?.Select(a => a.ToAlbumDetails()).ToList() ?? [];
         }
 
         public List<AlbumDetails> FindAlbumsByName(string name)
         {
             return _albumsRepository.FindAllAlbums()
                 .Where(a => a.Name.ToLower().Contains(name.ToLower()))
-                .Select(a => ModelExtensions.ToAlbumDetails(a))
+                .Select(a => a.ToAlbumDetails())
                 .ToList() ?? [];
         }
 

@@ -4,9 +4,9 @@ using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Models
 {
-    public class ModelExtensions
+    public static class ModelExtensions
     {
-        public static AlbumDetails ToAlbumDetails(Album album)
+        public static AlbumDetails ToAlbumDetails(this Album album)
         {
             return new AlbumDetails
             {
