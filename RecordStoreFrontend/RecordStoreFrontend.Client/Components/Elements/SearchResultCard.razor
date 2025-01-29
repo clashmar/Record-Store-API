@@ -1,0 +1,35 @@
+﻿<a href="@Path">
+    <div class="card mb-5 pb-4">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-96x96 is-square">
+                        <img src="@Result!.ImageURL"
+                        alt="Placeholder image" />
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">@Result.Name</p>
+                    <p class="subtitle is-6">@Result.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>
+
+@code {
+    [Parameter]
+    public SearchResult? Result { get; set; }
+
+    protected string? Path { get; set;  }
+
+    protected override void OnInitialized()
+    {
+        Path = Result!.ResultType switch
+        {
+            SearchResultType.Album => $"Albums/{Result!.Id}",
+            SearchResultType.Artist => $"Artists/{Result!.Id}",
+            _ => "/",
+        };
+    }
+}

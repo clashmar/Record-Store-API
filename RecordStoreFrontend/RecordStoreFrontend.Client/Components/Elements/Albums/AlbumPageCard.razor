@@ -1,0 +1,15 @@
+﻿<div>
+    <div class="card has-background">
+        <CardImage ImageURL="@Album!.ImageURL" />
+        <footer class="card-footer">
+            <a href="@($"/Albums/{Album!.Id}/Edit")" class="card-footer-item has-text-warning">Edit</a>
+            <a href="@($"/Albums/{Album!.Id}/Delete")" class="card-footer-item has-text-danger" type="button">Delete</a>
+        </footer>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public AlbumDetails? Album { get; set; }
+}

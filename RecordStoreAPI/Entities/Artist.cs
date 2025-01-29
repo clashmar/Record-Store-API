@@ -1,20 +1,33 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RecordStoreFrontend.Client.Interfaces;
+using RecordStoreFrontend.Client.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecordStoreAPI.Entities
 {
-    public class Artist
+    public class Artist : ISearchable
     {
         [Key]
-        public int ArtistID { get; set; }
+        [Column("ArtistID")]
+        public int Id { get; set; }
 
         [Required]
-        public string? Name { get; set; }
+        public string Name { get; set; } = "";
 
         public List<Album> Albums { get; set; } = [];
+
+        [NotMapped]
+        public SearchResultType ResultType {  get; set; } = SearchResultType.Artist;
+
+        public string ImageURL { get; set; } = "";
+
+        public string PerformerType { get; set; } = "";
+
+        public string Origin { get; set; } = "";
+
+        public string Description()
+        {
+            return $"{PerformerType} from {Origin}.";
+        }
     }
-    public record ArtistDto(
-            int ArtistID,
-            string Name,
-            List<AlbumReturnDto> Albums
-            );
 }

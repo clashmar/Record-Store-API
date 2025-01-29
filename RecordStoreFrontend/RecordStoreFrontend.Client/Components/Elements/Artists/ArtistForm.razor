@@ -1,0 +1,92 @@
+﻿@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
+@inject IJSRuntime JsRuntime
+
+<div>
+    <ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
+
+    <EditForm FormName="ArtistForm" Model="UpdatedArtist" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+        <DataAnnotationsValidator />
+        <div class="field">
+            <label for="name" class="label">Name</label>
+            <div class="control" width="20px">
+                <InputText id="name" class="input" placeholder="Artist Name" @bind-Value="UpdatedArtist!.Name" />
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedArtist!.Name)" />
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="type" class="label">Performer Type</label>
+            <div class="control has-icons-right">
+                <InputText id="type" class="input" placeholder="Performer Type" @bind-Value="UpdatedArtist!.PerformerType" />
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedArtist!.PerformerType)" />
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="origin" class="label">Origin</label>
+            <div class="control has-icons-right">
+                <InputText id="origin" class="input" placeholder="Origin" @bind-Value="UpdatedArtist!.Origin" />
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedArtist!.Origin)" />
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="image" class="label">Image URL</label>
+            <div class="control has-icons-right">
+                <InputText id="image" class="input" placeholder="URL" @bind-Value="UpdatedArtist!.ImageURL" />
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedArtist!.ImageURL)" />
+            </div>
+        </div>
+
+        <div class="field is-grouped pb-6 mt-5">
+            <div class="control">
+                <button class="button is-light" type="submit">Submit</button>
+            </div>
+            <div class="control">
+                <button class="button is-dark" type="button" @onclick="()=>Cancel()">Cancel</button>
+            </div>
+            <p class="help is-danger mt-2">@errorMessage</p>
+        </div>
+    </EditForm>
+    <script>
+        function OnScrollEvent() {
+        document.documentElement.scrollTop = 0;
+        }
+    </script>
+</div>
+
+@code {
+    [Parameter]
+    public ArtistDetails? UpdatedArtist { get; set; }
+
+    [Parameter]
+    public EventCallback<ArtistDetails> OnValidSubmit { get; set; }
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+
+    protected string? errorMessage;
+
+
+    protected async Task ValidSubmit()
+    {
+        await OnValidSubmit.InvokeAsync(UpdatedArtist);
+    }
+
+    protected async Task Cancel()
+    {
+        await OnCancel.InvokeAsync();
+    }
+
+    protected async void InvalidSubmit()
+    {
+        errorMessage = "Make Sure All Fields Have Been Completed";
+        await JsRuntime.InvokeVoidAsync("OnScrollEvent");
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = null;
+    }
+}

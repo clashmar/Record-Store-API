@@ -1,0 +1,14 @@
+﻿<div>
+    <div class="card has-background">
+        <CardImage ImageURL="@Artist!.ImageURL" />
+        <footer class="card-footer">
+            <a href="@($"/Artists/{Artist!.Id}/Edit")" class="card-footer-item has-text-warning">Edit</a>
+            <a href="@($"/Artists/{Artist!.Id}/Delete")" class="card-footer-item has-text-danger" type="button">Delete</a>
+        </footer>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public ArtistDetails? Artist { get; set; }
+}

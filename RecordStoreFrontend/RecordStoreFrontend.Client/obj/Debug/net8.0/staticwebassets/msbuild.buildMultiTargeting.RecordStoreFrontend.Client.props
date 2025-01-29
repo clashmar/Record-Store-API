@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\RecordStoreFrontend.Client.props" />
+</Project>

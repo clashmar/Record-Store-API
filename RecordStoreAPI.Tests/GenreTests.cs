@@ -1,16 +1,17 @@
 ﻿using RecordStoreAPI.Entities;
+using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Tests
 {
     public class GenreTests
     {
-        [TestCase(Genres.Folk, "Folk")]
-        [TestCase(Genres.Hip_Hop, "Hip-Hop")]
-        [TestCase(Genres.Art_Rock, "Art-Rock")]
-        [TestCase(Genres.Alternative, "Alternative")]
-        public void ToString_Test(Genres genre, string expectedOutput)
+        [TestCase(GenreEnum.Folk, "Folk")]
+        [TestCase(GenreEnum.Hip_Hop, "Hip-Hop")]
+        [TestCase(GenreEnum.Art_Rock, "Art-Rock")]
+        [TestCase(GenreEnum.Alternative, "Alternative")]
+        public void ToString_Test(GenreEnum genre, string expectedOutput)
         {
-            var result = Genre.ToString(genre);
+            var result = Genres.ToFriendlyString(genre);
 
             Assert.That(result, Is.EqualTo(expectedOutput));
         }

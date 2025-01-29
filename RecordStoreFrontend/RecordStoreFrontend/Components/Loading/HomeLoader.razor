@@ -1,0 +1,58 @@
+﻿@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
+@rendermode InteractiveAuto
+@using System.Text.Json
+@page "/"
+
+@if (errorMessage != null)
+{
+    <ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
+}
+else if (Albums == null)
+{
+    <Loading />
+}
+else
+{
+    <CascadingValue Value="Albums">
+        <Home />
+    </CascadingValue>
+}
+
+@code {
+    protected List<AlbumDetails>? Albums { get; set; }
+
+    protected string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
+
+            var response = await client.GetAsync("Albums/TopFive");
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                List<AlbumDetails> albums = JsonSerializer.Deserialize<List<AlbumDetails>>(responseBody)!;
+                Albums = albums;
+            }
+            else
+            {
+                errorMessage = $"{response.StatusCode}: {responseBody}";
+            }
+        }
+        catch(Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = "";
+    }
+
+}

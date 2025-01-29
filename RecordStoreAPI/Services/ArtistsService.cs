@@ -1,13 +1,17 @@
 ﻿using RecordStoreAPI.Entities;
+using RecordStoreAPI.Models;
 using RecordStoreAPI.Repositories;
-using static RecordStoreAPI.Entities.Artist;
+using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Services
 {
     public interface IArtistsService
     {
-        List<ArtistDto>? FindAllArtists();
-        List<AlbumReturnDto>? FindAlbumsByArtistId(int id);
+        List<ArtistDetails>? FindAllArtists();
+        ArtistDetails? FindArtistById(int id);
+        ArtistDetails? AddNewArtist(ArtistDetails newArtist);
+        ArtistDetails? UpdateArtist(int id, ArtistDetails artist);
+        bool TryRemoveArtistById(int id);
     }
     public class ArtistsService : IArtistsService
     {
@@ -18,16 +22,34 @@ namespace RecordStoreAPI.Services
             _artistsRepository = artistsRepository;
         }
 
-        public List<ArtistDto>? FindAllArtists()
+        public List<ArtistDetails>? FindAllArtists()
         {
             return _artistsRepository.FindAllArtists()
-                .Select(a => DTOExtensions.ToArtistDto(a))
+                .Select(a => ModelExtensions.ToArtistDetails(a))
                 .ToList();
         }
-        public List<AlbumReturnDto>? FindAlbumsByArtistId(int id)
+
+        public ArtistDetails? FindArtistById(int id)
         {
-            List<Album>? albums = _artistsRepository.FindAlbumsByArtistId(id);
-            return albums?.Select(a => DTOExtensions.ToAlbumReturnDto(a)).ToList();
+            Artist? artist = _artistsRepository.FindArtistById(id);
+            return artist != null ? ModelExtensions.ToArtistDetails(artist) : null;
+                
+        }
+
+        public ArtistDetails? AddNewArtist(ArtistDetails newArtist)
+        {
+            Artist? artist = _artistsRepository.AddNewArtist(newArtist);
+            return artist != null ? ModelExtensions.ToArtistDetails(artist) : null;
+        }
+
+        public ArtistDetails? UpdateArtist(int id, ArtistDetails artist)
+        {
+            Artist? updatedArtist = _artistsRepository.UpdateArtist(id, artist);
+            return updatedArtist != null ? ModelExtensions.ToArtistDetails(updatedArtist) : null;
+        }
+        public bool TryRemoveArtistById(int id)
+        {
+            return _artistsRepository.TryRemoveArtistById(id);
         }
     }
 }

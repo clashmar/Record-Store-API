@@ -1,0 +1,60 @@
+﻿@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
+@rendermode InteractiveServer
+@page "/Artists/{Id:int}/Delete"
+
+<ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
+
+<div class="has-text-centered">
+    <h1 class="is-size-2 has-text-light has-text-weight-bold">Are You Sure?</h1>
+    <div class="field is-grouped pb-6 is-justify-content-center mt-3">
+        <div class="control">
+            <button class="button is-danger is-dark" type="button" @onclick="()=>HandleDelete()">Delete</button>
+        </div>
+        <div class="control">
+            <button class="button is-dark" type="button" @onclick="()=>Cancel()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    protected string? errorMessage;
+
+    protected async Task HandleDelete()
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
+
+            var response = await client.DeleteAsync($"Artists/{Id}");
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                Navigation.NavigateTo($"/Artists?deleted=true");
+            }
+            else
+            {
+                errorMessage = $"{response.StatusCode}: {responseBody}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+
+    protected void Cancel()
+    {
+        Navigation.NavigateTo($"/Artists/{Id}");
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = "";
+    }
+}

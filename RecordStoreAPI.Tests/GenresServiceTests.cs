@@ -2,6 +2,7 @@
 using RecordStoreAPI.Entities;
 using RecordStoreAPI.Repositories;
 using RecordStoreAPI.Services;
+using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Tests
 {
@@ -30,12 +31,12 @@ namespace RecordStoreAPI.Tests
         {
             IEnumerable<Genre> genres =
             [
-                new() { GenreID = Genres.Folk, Name = "Folk" }
+                new() { GenreID = GenreEnum.Folk, Name = "Folk" }
             ];
 
             List<GenreDto> dtos =
             [
-                new(Genres.Folk, "Folk")
+                new(GenreEnum.Folk, "Folk")
             ];
 
             _genresRepositoryMock.Setup(s => s.FindAllGenres()).Returns(genres);

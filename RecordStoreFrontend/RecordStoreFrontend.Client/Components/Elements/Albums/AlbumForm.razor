@@ -1,0 +1,143 @@
+﻿@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
+@inject IJSRuntime JsRuntime
+
+<div>
+    <ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
+
+    <EditForm FormName="AlbumForm" Model="UpdatedAlbum" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+        <DataAnnotationsValidator />
+        <div class="field">
+            <label for="name" class="label">Name</label>
+            <div class="control" width="20px">
+                <InputText id="name" class="input" placeholder="Album Name" @bind-Value="UpdatedAlbum!.Name"/>
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.Name)" />
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="artist" class="label">Artist</label>
+            <div class="control has-icons-right">
+                <InputText id="artist" class="input" placeholder="Artist Name" @bind-Value="UpdatedAlbum!.ArtistName"/>
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ArtistName)" />
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="year" class="label">Release Year</label>
+            <div class="control has-icons-right">
+                <InputNumber id="year" class="input" placeholder="Release Year" @bind-Value="UpdatedAlbum!.ReleaseYear"/>
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ReleaseYear)" />
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="genre" class="label">Add/Delete Genre</label>
+            <div class="control">
+                <div class="select mr-2 is-white">
+                    <InputSelect id="genre" @bind-Value="genreToAdd" class="dropdown is-active">
+                        <option value="">Add Genre</option>
+                        @foreach (string genre in genres!.Values)
+                        {
+                            <option>@genre</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.Genres)" />
+                </div>
+                <button class="button is-outlined ml-2 mr-2 is-success" type="button" @onclick="()=>AddGenre()">Add</button>
+                @foreach (var genre in UpdatedAlbum!.Genres)
+                {
+                    <button class="button is-outlined ml-2 mr-2 is-danger" type="button" @onclick="()=>DeleteGenre(genre)">@genres![genre]</button>
+                }
+            </div>
+        </div>
+
+        <div class="field pb-3">
+            <label for="information" class="label">Information</label>
+            <div class="control">
+                <InputTextArea id="information" class="textarea" placeholder="Album Info" @bind-Value="UpdatedAlbum!.Information"/>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="image" class="label">Image URL</label>
+            <div class="control has-icons-right">
+                <InputText id="image" class="input" placeholder="URL" @bind-Value="UpdatedAlbum!.ImageURL"/>
+                <ValidationMessage class="help is-danger" For="@(() => UpdatedAlbum!.ImageURL)" />
+            </div>
+        </div>
+
+        <div class="field is-grouped pb-6 mt-5">
+            <div class="control">
+                <button class="button is-light" type="submit">Submit</button>
+            </div>
+            <div class="control">
+                <button class="button is-dark" type="button" @onclick="()=>Cancel()">Cancel</button>
+            </div>
+            <p class="help is-danger mt-2">@errorMessage</p>
+        </div>
+    </EditForm>
+    <script>
+        function OnScrollEvent() {
+        document.documentElement.scrollTop = 0;
+        }
+    </script>
+</div>
+
+@code {
+    [Parameter]
+    public AlbumDetails? UpdatedAlbum { get; set; }
+
+    [Parameter]
+    public EventCallback<AlbumDetails> OnValidSubmit { get; set; }
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+
+    protected Dictionary<GenreEnum, string>? genres;
+
+    protected string genreToAdd = "";
+
+    protected string? errorMessage;
+
+
+    protected override void OnInitialized()
+    {
+        genres = Genres.GenresDictionary() ?? [];
+    }
+
+    protected async Task ValidSubmit()
+    {
+
+        await OnValidSubmit.InvokeAsync(UpdatedAlbum);
+    }
+
+    protected async Task Cancel()
+    {
+        await OnCancel.InvokeAsync();
+    }
+
+    protected async void InvalidSubmit()
+    {
+        errorMessage = "Make Sure All Fields Have Been Completed";
+        await JsRuntime.InvokeVoidAsync("OnScrollEvent");
+    }
+
+    protected void ResetError() 
+    {
+        errorMessage = null;
+    }
+
+    protected void AddGenre()
+    {
+        GenreEnum genre = genres!.FirstOrDefault(x => x.Value == genreToAdd).Key;
+
+        if (!UpdatedAlbum!.Genres.Contains(genre)) 
+        UpdatedAlbum!.Genres.Add(genre);
+    }
+
+    protected void DeleteGenre(GenreEnum genre)
+    {
+        UpdatedAlbum!.Genres.Remove(genre);      
+    }
+}

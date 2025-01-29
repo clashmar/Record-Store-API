@@ -1,0 +1,61 @@
+﻿@using System.Text.Json
+@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
+@rendermode InteractiveAuto
+@page "/Albums"
+
+@if(errorMessage != null)
+{
+    <ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
+}
+else if(Albums == null) 
+{
+    <Loading />
+}
+else
+{
+    <CascadingValue Value="Deleted">
+        <CascadingValue Value="Albums">
+            <AlbumsPage/>
+        </CascadingValue>
+    </CascadingValue>
+}
+
+@code {
+    [SupplyParameterFromQuery]
+    public bool Deleted { get; set; }
+
+    protected List<AlbumDetails>? Albums { get; set; }
+
+    protected string? errorMessage;
+
+    protected override async Task OnInitializedAsync() 
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
+
+            var response = await client.GetAsync("Albums");
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                Albums = JsonSerializer.Deserialize<List<AlbumDetails>>(responseBody)!;
+            }
+            else
+            {
+                errorMessage = $"{response.StatusCode}: {responseBody}";
+            }
+        }
+        catch(Exception ex) 
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = "";
+    }
+}

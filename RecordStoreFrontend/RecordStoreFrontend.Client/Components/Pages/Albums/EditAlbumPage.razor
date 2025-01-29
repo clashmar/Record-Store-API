@@ -1,0 +1,50 @@
+﻿@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
+
+<PageHeader Title="Edit Album"/>
+
+<ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
+
+<AlbumForm UpdatedAlbum="UpdatedAlbum" OnValidSubmit="HandleValidSubmit" OnCancel="HandleCancel"/>
+
+@code {
+    [Parameter]
+    public AlbumDetails? UpdatedAlbum { get; set; }
+
+    protected string? errorMessage;
+
+    protected async Task HandleValidSubmit(AlbumDetails albumDetails)
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
+
+            var response = await client.PutAsync($"/Albums/{albumDetails.Id}", JsonContent.Create(albumDetails));
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                Navigation.NavigateTo($"/Albums/{albumDetails.Id}?edited=true");
+            }
+            else
+            {
+                errorMessage = $"{response.StatusCode}: {responseBody}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+
+    protected void HandleCancel()
+    {
+        Navigation.NavigateTo($"/Albums/{UpdatedAlbum!.Id}");
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = null;
+    }
+}

@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecordStoreAPI.Data;
 using RecordStoreAPI.Entities;
+using RecordStoreAPI.Models;
+using RecordStoreFrontend.Client.Interfaces;
+using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Repositories
 {
@@ -8,11 +11,12 @@ namespace RecordStoreAPI.Repositories
     {
         List<Album> FindAllAlbums();
         Album? FindAlbumById(int id);
-        Album? AddNewAlbum(AlbumPutDto albumDto);
-        Album? UpdateAlbum(int id, AlbumPutDto album);
+        Album? AddNewAlbum(AlbumDetails albumDetails);
+        Album? UpdateAlbum(int id, AlbumDetails albumDetails);
         bool TryRemoveAlbumById(int id);
         List<Album>? FindAlbumsByReleaseYear(int releaseYear);
-        List<Album>? FindAlbumsByGenre(Genres genre);
+        List<Album>? FindAlbumsByGenre(GenreEnum genre);
+        List<SearchResult>? FindSearchResults(string searchTerm);
     }
     public class AlbumsRepository : IAlbumsRepository
     {
@@ -29,6 +33,7 @@ namespace RecordStoreAPI.Repositories
                 .Include(a => a.Artist)
                 .Include(a => a.AlbumGenres)!
                 .ThenInclude(ag => ag.Genre)
+                .OrderBy(a => a.Name)
                 .ToList();
         }
 
@@ -41,16 +46,14 @@ namespace RecordStoreAPI.Repositories
                 .FirstOrDefault(a => a.Id == id);
         }
 
-        public Album? AddNewAlbum(AlbumPutDto albumPutDto)
+        public Album? AddNewAlbum(AlbumDetails albumDetails)
         {
-            Artist? artist = CheckArtistExists(albumPutDto.ArtistID);
-            if (artist == null) return null;
+            Artist? artist = CheckArtistExists(albumDetails.ArtistName);
+            if (artist == null) return null; albumDetails.ArtistID = artist.Id;
 
-            Album album = DTOExtensions.PutDtoToAlbum(albumPutDto);
+            Album album = ModelExtensions.AlbumDetailsToAlbum(albumDetails);
 
-            _db.Attach(album);
-
-            album.AlbumGenres = albumPutDto.Genres
+            album.AlbumGenres = albumDetails.Genres
                 .Select(g => new AlbumGenre() { AlbumID = album.Id, GenreID = g })
                 .ToList();
 
@@ -60,17 +63,17 @@ namespace RecordStoreAPI.Repositories
             return album;
         }
 
-        public Album? UpdateAlbum(int id, AlbumPutDto albumPutDto)
+        public Album? UpdateAlbum(int id, AlbumDetails albumDetails)
         {
             var albumToUpdate = _db.Albums.FirstOrDefault(a => a.Id == id);
-            if (albumToUpdate == null) return null;
+            if (albumToUpdate == null) return null; 
 
-            Artist? artist = CheckArtistExists(albumPutDto.ArtistID);
-            if (artist == null) return null;
+            Artist? artist = CheckArtistExists(albumDetails.ArtistName);
+            if (artist == null) return null; albumDetails.ArtistID = artist.Id;
+
+            ModelExtensions.MapAlbumDetailsProperties(albumToUpdate, albumDetails);
 
             _db.AlbumGenre.RemoveRange(_db.AlbumGenre.Where(ag => ag.AlbumID == albumToUpdate.Id));
-
-            DTOExtensions.MapAlbumProperties(albumToUpdate, albumPutDto);
 
             _db.Update(albumToUpdate);
             _db.SaveChanges();
@@ -96,7 +99,7 @@ namespace RecordStoreAPI.Repositories
                 .ToList();
         }
 
-        public List<Album>? FindAlbumsByGenre(Genres genre)
+        public List<Album>? FindAlbumsByGenre(GenreEnum genre)
         {
             return _db.Albums
                 .Include(a => a.Artist)
@@ -106,12 +109,36 @@ namespace RecordStoreAPI.Repositories
                 .ToList();
         }
 
-        public Artist? CheckArtistExists(int artistID)
+        public List<SearchResult>? FindSearchResults(string searchTerm)
         {
-            Artist? artist = _db.Artists.Where(a => a.ArtistID == artistID).FirstOrDefault();
+            List<SearchResult> results = [];
+
+            var artistResults = _db.Artists
+                .Where(a => a.Name.ToLower().Contains(searchTerm.ToLower()))
+                .Select(a => ModelExtensions.ToSearchResult(a))
+                .ToList();
+
+            results.AddRange(artistResults);
+
+            var albumResults = _db.Albums
+                .Include(a => a.Artist)
+                .Include(a => a.AlbumGenres)!
+                .ThenInclude(ag => ag.Genre)
+                .Where(a => a.Name.ToLower().Contains(searchTerm.ToLower()))
+                .Select(a => ModelExtensions.ToSearchResult(a))
+                .ToList();
+
+            results.AddRange(albumResults);
+
+            return results;
+        }
+
+        public Artist? CheckArtistExists(string artistName)
+        {
+            Artist? artist = _db.Artists.Where(a => a.Name.ToLower() == artistName.ToLower()).FirstOrDefault();
             return artist ?? null;
         }
-        public bool CheckGenreExists(Genres genre)
+        public bool CheckGenreExists(GenreEnum genre)
         {
             return _db.Genres.FirstOrDefault(g => g.GenreID == genre) != null;
         }

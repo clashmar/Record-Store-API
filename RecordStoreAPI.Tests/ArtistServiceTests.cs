@@ -2,6 +2,7 @@
 using RecordStoreAPI.Entities;
 using RecordStoreAPI.Repositories;
 using RecordStoreAPI.Services;
+using RecordStoreFrontend.Client.Models;
 using System.Text.Json;
 
 namespace RecordStoreAPI.Tests
@@ -23,7 +24,14 @@ namespace RecordStoreAPI.Tests
         {
             List<Artist> artists =
             [
-                new() { ArtistID = 1, Name = "Artist1", Albums = []}
+                new() 
+                { 
+                    Id = 1, 
+                    Name = "Artist1", 
+                    Albums = [], 
+                    PerformerType = "Type", 
+                    Origin = "Origin"
+                } 
             ];
 
             _artistsRepositoryMock.Setup(s => s.FindAllArtists()).Returns(artists);
@@ -34,16 +42,32 @@ namespace RecordStoreAPI.Tests
         }
 
         [Test]
-        public void FindAllArtists_Returns_All_Artists()
+        public void FindAllArtists_Returns_Artists()
         {
             List<Artist> artists =
-            [
-                new() { ArtistID = 1, Name = "Artist1", Albums = []}
-            ];
+             [
+                 new() 
+                 { 
+                     Id = 1, 
+                     Name = "Name", 
+                     Albums = [], 
+                     PerformerType = "Type", 
+                     Origin = "Origin",
+                     ImageURL = "URL"
+                 }
+             ];
 
-            List<ArtistDto> dtos =
+            List<ArtistDetails> artistDetails =
             [
-                new(1, "Artist1", [])
+                new() 
+                { 
+                    Id = 1,
+                    Name = "Name",
+                    Albums = [],
+                    PerformerType = "Type",
+                    Origin = "Origin",
+                    ImageURL = "URL"
+                }
             ];
 
             _artistsRepositoryMock.Setup(s => s.FindAllArtists()).Returns(artists);
@@ -51,48 +75,52 @@ namespace RecordStoreAPI.Tests
             var result = _artistsService.FindAllArtists();
 
             var jsonResult = JsonSerializer.Serialize(result);
-            var jsonDto = JsonSerializer.Serialize(dtos);
+            var jsonArtistDetails = JsonSerializer.Serialize(artistDetails);
 
-            Assert.That(jsonDto, Is.EqualTo(jsonResult));
+            Assert.That(jsonResult, Is.EqualTo(jsonArtistDetails));
         }
 
         [Test]
-        public void FindAlbumsByArtistId_Calls_Correct_Service_Method()
+        public void FindArtistById_Calls_Correct_Service_Method()
         {
-            _artistsService.FindAlbumsByArtistId(1);
+            _artistsService.FindArtistById(1);
 
-            _artistsRepositoryMock.Verify(s => s.FindAlbumsByArtistId(1), Times.Once());
+            _artistsRepositoryMock.Verify(s => s.FindArtistById(1), Times.Once());
         }
 
         [Test]
-        public void FindAlbumsByArtistId_Returns_Correct_Albums()
+        public void FindArtistById_Returns_Correct_Albums()
         {
-            List<Album> albums =
-            [
-                new() {
-                Id = 1,
-                Name = "Name1",
-                Artist = new() { Name = "Artist1" },
-                ReleaseYear = 2001,
-                AlbumGenres = [],
-                Information = "Information",
-                StockQuantity = 1,
-                PriceInPence = 1 },
-            ];
-
-            List<AlbumReturnDto> dtos = new List<AlbumReturnDto>
+            Artist artist = new()
             {
-                new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1),
+                 
+                Id = 1,
+                Name = "Name",
+                Albums = [],
+                PerformerType = "Type",
+                Origin = "Origin",
+                ImageURL = "URL"
+
             };
 
-            _artistsRepositoryMock.Setup(s => s.FindAlbumsByArtistId(1)).Returns(albums);
+            ArtistDetails artistDetails = new()
+            {
+                Id = 1,
+                Name = "Name",
+                Albums = [],
+                PerformerType = "Type",
+                Origin = "Origin",
+                ImageURL = "URL"
+            };
 
-            var result = _artistsService.FindAlbumsByArtistId(1);
+            _artistsRepositoryMock.Setup(s => s.FindArtistById(1)).Returns(artist);
+
+            var result = _artistsService.FindArtistById(1);
 
             var jsonResult = JsonSerializer.Serialize(result);
-            var jsonDto = JsonSerializer.Serialize(dtos);
+            var jsonAlbumsDetails = JsonSerializer.Serialize(artistDetails);
 
-            Assert.That(jsonDto, Is.EqualTo(jsonResult));
+            Assert.That(jsonResult, Is.EqualTo(jsonAlbumsDetails));
         }
     }
 }

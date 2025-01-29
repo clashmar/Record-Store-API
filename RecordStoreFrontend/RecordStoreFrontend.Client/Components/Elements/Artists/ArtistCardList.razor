@@ -1,0 +1,13 @@
+﻿@code {
+    [CascadingParameter]
+    public List<ArtistDetails>? Artists { get; set; }
+}
+
+<div class="fixed-grid has-5-cols">
+    <div class="grid is-gap-5">
+        @foreach (var artist in Artists!)
+        {
+            <div class="cell"><ArtistCard Artist="artist" /></div>
+        }
+    </div>
+</div>

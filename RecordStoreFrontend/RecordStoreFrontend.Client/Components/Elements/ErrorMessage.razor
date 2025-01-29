@@ -1,0 +1,20 @@
+﻿@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="notification is-danger mt-5">
+        <button class="delete" @onclick="()=>DeleteNotification()"></button>
+        @Message
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string? Message { get; set; }
+
+    [Parameter]
+    public EventCallback OnDeleteNotification { get; set; }
+
+    private async Task DeleteNotification()
+    {
+        await OnDeleteNotification.InvokeAsync();
+    }
+}

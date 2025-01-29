@@ -1,0 +1,19 @@
+﻿<a href="@($"/Albums/{Album!.Id}")">
+    <div>
+        <div class="card has-background">
+            <CardImage ImageURL="@Album!.ImageURL"/>
+        </div>
+        <div class="card-header is-justify-content-center mt-3">
+            <p class="is-clickable title is-size-5 has-text-centered">@Album!.Name</p>
+        </div>
+        <div>
+            <p class="has-text-centered has-text-white">@Album!.ArtistName</p>
+            <p class="has-text-centered has-text-white">@Album!.ReleaseYear</p>
+        </div>
+    </div>
+</a>
+@code {
+    
+    [Parameter]
+    public AlbumDetails? Album { get; set; }
+}

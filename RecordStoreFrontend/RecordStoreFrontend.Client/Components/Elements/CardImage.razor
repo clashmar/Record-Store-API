@@ -1,0 +1,12 @@
+﻿@code {
+    [Parameter]
+    public string? ImageURL { get; set; }
+}
+
+<div class="card-image">
+    <figure class="image is-square">
+        <img src="@ImageURL"
+             alt="Placeholder image" />
+    </figure>
+</div>
+

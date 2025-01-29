@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using RecordStoreAPI.Controllers;
-using RecordStoreAPI.Entities;
 using RecordStoreAPI.Services;
+using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Tests
 {
@@ -31,7 +31,7 @@ namespace RecordStoreAPI.Tests
         {
             List<GenreDto> dtos =
             [
-                new(Genres.Folk, "Folk")
+                new(GenreEnum.Folk, "Folk")
             ];
 
             _genresServiceMock.Setup(s => s.FindAllGenres()).Returns(dtos);

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using RecordStoreAPI.Controllers;
-using RecordStoreAPI.Entities;
 using RecordStoreAPI.Services;
+using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Tests
 {
@@ -27,11 +27,19 @@ namespace RecordStoreAPI.Tests
         }
 
         [Test]
-        public void GetAllArtists_Returns_All_Artists()
+        public void GetAllArtists_Returns_Artists()
         {
-            List<ArtistDto> artists =
+            List<ArtistDetails> artists =
             [
-                new(1, "Artist1", [])
+                new() 
+                { 
+                    Id = 1, 
+                    Name = "Name", 
+                    Albums = [], 
+                    PerformerType = "Type", 
+                    Origin = "Origin", 
+                    ImageURL = "URl"
+                }
             ];
 
             _artistsServiceMock.Setup(s => s.FindAllArtists()).Returns(artists);
@@ -43,7 +51,7 @@ namespace RecordStoreAPI.Tests
         }
 
         [Test]
-        public void GetAllArtists_Returns_Bad_Request_If_Empty()
+        public void GetAllArtists_Returns_Not_Found_If_Empty()
         {
             _artistsServiceMock.Setup(s => s.FindAllArtists()).Returns([]);
 
@@ -54,27 +62,44 @@ namespace RecordStoreAPI.Tests
         }
 
         [Test]
-        public void GetAlbumsByArtistId_Calls_Correct_Service_Method()
+        public void GetArtistById_Calls_Correct_Service_Method()
         {
-            _artistsController.GetAlbumsByArtistId(1);
+            _artistsController.GetArtistById(1);
 
-            _artistsServiceMock.Verify(s => s.FindAlbumsByArtistId(1), Times.Once());
+            _artistsServiceMock.Verify(s => s.FindArtistById(1), Times.Once());
         }
 
         [Test]
-        public void GetAlbumsByArtistId_Returns_Correct_Album()
+        public void GetArtistById_Returns_Correct_Album()
         {
-            List<AlbumReturnDto> albums = new List<AlbumReturnDto>
+            ArtistDetails artist = new()
             {
-                new(1, "Name1", "Artist1", 2001, [], "Information", 1, 1),
-                new(2, "Name2", "Artist1", 2002, [], "Information", 2, 1)
+                Id = 1,
+                Name = "Name",
+                Albums = [],
+                PerformerType = "Type",
+                Origin = "Origin",
+                ImageURL = "URl"
             };
 
-            _artistsServiceMock.Setup(s => s.FindAlbumsByArtistId(1)).Returns(albums);
+            _artistsServiceMock.Setup(s => s.FindArtistById(1)).Returns(artist);
 
-            var result = _artistsController.GetAlbumsByArtistId(1) as ObjectResult;
+            var result = _artistsController.GetArtistById(1) as ObjectResult;
 
-            if (result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(albums));
+            if (result is OkObjectResult okObjectResult) Assert.That(okObjectResult.Value, Is.EqualTo(artist));
+            else Assert.Fail();
+        }
+
+        [Test]
+        public void GetArtistById_Returns_Bad_Request_If_Not_Found()
+        {
+            ArtistDetails? artist = null; 
+
+            _artistsServiceMock.Setup(s => s.FindArtistById(1)).Returns(artist);
+
+            var result = _artistsController.GetArtistById(1) as ObjectResult;
+
+            if (result is BadRequestObjectResult badRequestObjectResult) Assert.Pass();
             else Assert.Fail();
         }
     }

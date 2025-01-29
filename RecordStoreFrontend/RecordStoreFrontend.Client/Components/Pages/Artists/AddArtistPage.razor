@@ -1,0 +1,52 @@
+﻿@using System.Text.Json
+@inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
+@inject IJSRuntime JSRuntime
+@rendermode InteractiveAuto
+@page "/Artists/Add"
+
+<PageHeader Title="Add an Artist to the Database" />
+
+<ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
+
+<ArtistForm UpdatedArtist="@(new ArtistDetails())" OnValidSubmit="HandleValidSubmit" OnCancel="HandleCancel" />
+
+@code {
+    protected string? errorMessage;
+
+    protected async Task HandleValidSubmit(ArtistDetails artistDetails)
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
+
+            var response = await client.PostAsync($"/Artists", JsonContent.Create(artistDetails));
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                ArtistDetails artist = JsonSerializer.Deserialize<ArtistDetails>(responseBody)!;
+                Navigation.NavigateTo($"/Artists/{artist.Id}");
+            }
+            else
+            {
+                errorMessage = $"{response.StatusCode}: {responseBody}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+
+    protected async Task HandleCancel()
+    {
+        await JSRuntime.InvokeVoidAsync("history.back");
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = "";
+    }
+}

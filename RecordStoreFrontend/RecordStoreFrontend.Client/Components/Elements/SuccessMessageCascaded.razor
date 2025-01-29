@@ -1,0 +1,23 @@
+﻿@if (Success)
+{
+    <div class="notification is-success mt-5">
+        <button class="delete" @onclick="()=>DeleteNotification()"></button>
+        @Message
+    </div>
+} 
+
+@code {
+    [CascadingParameter]
+    public bool Success { get; set; }
+
+    [Parameter]
+    public string? Message { get; set; }
+
+    [Parameter]
+    public EventCallback OnDeleteNotification { get; set; }
+
+    protected void DeleteNotification()
+    {
+        Success = false;
+    }
+}

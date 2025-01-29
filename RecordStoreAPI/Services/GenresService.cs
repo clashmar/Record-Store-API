@@ -1,5 +1,5 @@
-﻿using RecordStoreAPI.Entities;
-using RecordStoreAPI.Repositories;
+﻿using RecordStoreAPI.Repositories;
+using RecordStoreFrontend.Client.Models;
 
 namespace RecordStoreAPI.Services
 {
@@ -19,7 +19,7 @@ namespace RecordStoreAPI.Services
         public List<GenreDto> FindAllGenres()
         {
             return _genresRepository.FindAllGenres()
-                .Select(g => new GenreDto(g.GenreID, g.Name = Genre.ToString(g.GenreID)))
+                .Select(g => new GenreDto(g.GenreID, g.Name = Genres.ToFriendlyString(g.GenreID)))
                 .ToList();
         }
     }

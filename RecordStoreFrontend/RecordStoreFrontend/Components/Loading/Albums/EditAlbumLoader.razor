@@ -1,0 +1,57 @@
+﻿@inject IHttpClientFactory ClientFactory
+@page "/Albums/{Id:int}/Edit"
+@rendermode InteractiveAuto
+@using System.Text.Json
+
+@if (errorMessage != null)
+{
+    <ErrorMessage Message="@errorMessage" OnDeleteNotification="ResetError"/>
+}
+else if (Album == null)
+{
+    <Loading />
+}
+else
+{
+    <EditAlbumPage UpdatedAlbum="Album" />
+}
+
+@code {
+    public AlbumDetails? Album { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("RecordStoreAPI");
+
+            var response = await client.GetAsync($"/Albums/{Id}");
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                Album = JsonSerializer.Deserialize<AlbumDetails>(responseBody)!;
+            }
+            else
+            {
+                errorMessage = $"{response.StatusCode}: {responseBody}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured: {ex.Message}";
+        }
+    }
+
+    protected void ResetError()
+    {
+        errorMessage = "";
+    }
+}
+
