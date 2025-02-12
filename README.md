@@ -2,7 +2,11 @@
 This is an ASP.NET web API built using the MVC design pattern. The application contains an embedded SQLite database.
 
 ## Features
-The user can perform all CRUD operations on a 3NF database, and can search for albums or artists in the database to return composite search results. Each endpoint is unit tested with NUnit.
+This applicaion is built in .NET 9, using an MVC pattern, and is comprised of a RESTful ASP.NET web API and a Blazor frontend app within a single solution.
+
+Users can perform all CRUD operations on an embedded 3NF SQLite database.
+
+Each backend layer is comprehensively tested with NUnit and Moq, and the frontend UI was styled primarily using Bulma.
 
 ## Instructions
 * Clone the repo: [https://github.com/clashmar/RecordStoreAPI.git]
